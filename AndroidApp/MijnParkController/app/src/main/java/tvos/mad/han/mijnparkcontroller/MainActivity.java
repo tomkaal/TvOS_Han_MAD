@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         addUserButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                mSocket.emit("Join group", userNameInput.getText().toString());
+                Intent intent = new Intent(MainActivity.this, JoinGroup.class)
+                        .putExtra("name", userNameInput.getText().toString());
+                startActivity(intent);
             }
         });
     }
