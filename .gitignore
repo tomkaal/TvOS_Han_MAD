@@ -3,6 +3,8 @@
 AndroidApp/MijnParkController/local.properties
 /.AndroidApp/MijnParkController/idea/workspace.xml
 /.AndroidApp/MijnParkController/idea/libraries
+/ .NodeServerMAD (Mock)/node_modules
+/ .NodeServerMAD (Mock)/.idea
 .DS_Store
 /build
 /captures

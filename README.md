@@ -1,7 +1,7 @@
 # TvOS_Han_MAD
 <Enter><Enter>
-Starten van Test socket server: in cmd "node index.js"<Enter><Enter>
-Android spreekt voor zoch<Enter><Enter><Enter><Enter>
+Starten van Test socket server: in cmd "node index.js"<Enter><Enter><Enter><Enter>
+Android spreekt voor zich<Enter><Enter><Enter><Enter>
 
 Leden: 
 <Enter><Enter>
