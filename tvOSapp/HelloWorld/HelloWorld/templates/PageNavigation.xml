@@ -1,0 +1,9 @@
+<document>
+    <alertTemplate>
+        <title>Welcome to Page Navigation</title>
+        <description>This app shows how to navigate between TVML pages.</description>
+        <button onselect="getDocument('templates/NextPage.xml')">
+            <text>Next page</text>
+        </button>
+    </alertTemplate>
+</document>

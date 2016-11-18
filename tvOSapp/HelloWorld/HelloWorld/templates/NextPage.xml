@@ -1,0 +1,5 @@
+<document>
+    <alertTemplate>
+        <description>This page has been pushed onto the navigation stack.</description>
+    </alertTemplate>
+</document>
