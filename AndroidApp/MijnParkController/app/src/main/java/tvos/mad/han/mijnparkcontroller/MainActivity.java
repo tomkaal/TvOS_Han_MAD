@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
         mSocket.connect();
         Log.v("connect", "Connect");
 
-        final EditText mEdit   = (EditText)findViewById(R.id.input);
-
-        final Button sortButton = (Button) findViewById(R.id.sendButton);
-        sortButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mSocket.emit("chat message", mEdit.getText().toString());
-            }
-        });
+//        final EditText mEdit   = (EditText)findViewById(R.id.input);
+//
+//        final Button sortButton = (Button) findViewById(R.id.sendButton);
+//        sortButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                mSocket.emit("chat message", mEdit.getText().toString());
+//            }
+//        });
     }
 }
