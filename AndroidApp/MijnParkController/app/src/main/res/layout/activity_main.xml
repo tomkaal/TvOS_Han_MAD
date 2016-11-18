@@ -44,7 +44,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/userName"
+                android:id="@+id/userNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -94,7 +94,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/groupName"
+                android:id="@+id/groupNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
