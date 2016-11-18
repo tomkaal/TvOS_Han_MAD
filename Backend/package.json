@@ -1,0 +1,15 @@
+{
+  "name": "MADtvOSBackend",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node Server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.12.3",
+    "express-session": "^1.14.2",
+    "mongoose": "^4.6.8",
+    "sha1": "^1.1.1"
+  }
+}

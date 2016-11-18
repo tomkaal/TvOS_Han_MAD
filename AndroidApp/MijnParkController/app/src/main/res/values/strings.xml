@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MijnParkController</string>
+    <string name="lbl_groupname">Groepsnaam</string>
+    <string name="lbl_groupowner">Groepsleider</string>
+    <string name="lbl_inrange">In bereik</string>
+    <string name="lbl_ingroup">In groep</string>
 </resources>
