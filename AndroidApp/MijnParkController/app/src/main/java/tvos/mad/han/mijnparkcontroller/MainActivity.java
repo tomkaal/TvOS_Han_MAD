@@ -28,13 +28,23 @@ public class MainActivity extends AppCompatActivity {
         mSocket.connect();
         Log.v("connect", "Connect");
 
-//        final EditText mEdit   = (EditText)findViewById(R.id.input);
-//
-//        final Button sortButton = (Button) findViewById(R.id.sendButton);
-//        sortButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                mSocket.emit("chat message", mEdit.getText().toString());
-//            }
-//        });
+        final EditText groupNameInput   = (EditText)findViewById(R.id.groupNameInput);
+
+        final Button addGroupButton = (Button) findViewById(R.id.addGroupButton);
+        addGroupButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+//                mSocket.emit("Create group", groupNameInput.getText().toString());
+            }
+        });
+
+
+        final EditText userNameInput   = (EditText)findViewById(R.id.userNameInput);
+
+        final Button addUserButton = (Button) findViewById(R.id.addUserButton);
+        addUserButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+//                mSocket.emit("Join group", userNameInput.getText().toString());
+            }
+        });
     }
 }
