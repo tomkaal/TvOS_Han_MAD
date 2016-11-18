@@ -1,0 +1,9 @@
+{
+  "name": "MAD_Socket_Server",
+  "version": "0.0.1",
+  "description": "Socket voor vet gaaf project",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.5.1"
+  }
+}
