@@ -18,8 +18,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".JoinGroup" />
-        <activity android:name=".JoinTeam"></activity>
-        <activity android:name=".CreateGroupActivity"></activity>
+        <activity android:name=".JoinTeam" />
+        <activity android:name=".CreateGroupActivity" />
+        <activity android:name=".CreateTeamActivity"></activity>
     </application>
 
 </manifest>

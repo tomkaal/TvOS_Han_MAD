@@ -20,14 +20,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private SocketSingleton socketSingleton;
-//    private Socket mSocket;
-//
-//    {
-//        try {
-//            mSocket = IO.socket("http://10.0.2.2:3000");
-//        } catch (URISyntaxException e) {
-//        }
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         socketSingleton = SocketSingleton.getInstance();
-
-//        mSocket.connect();
-//        Log.v("connect", "Connect");
 
         final EditText userNameInput = (EditText) findViewById(R.id.userNameInput);
         final EditText groupOwnerInput = (EditText) findViewById(R.id.groupOwnerInput);

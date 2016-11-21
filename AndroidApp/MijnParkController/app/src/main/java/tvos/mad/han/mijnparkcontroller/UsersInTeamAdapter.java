@@ -12,13 +12,13 @@ import java.util.ArrayList;
 /**
  * Created by DDulos on 18-Nov-16.
  */
-public class UsersInRangeAdapter extends BaseAdapter {
+public class UsersInTeamAdapter extends BaseAdapter {
     Context context;
     private LayoutInflater inflater;
 
     ArrayList<User> userList;
 
-    public UsersInRangeAdapter(Context context, ArrayList<User> userList) {
+    public UsersInTeamAdapter(Context context, ArrayList<User> userList) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
         this.userList = userList;

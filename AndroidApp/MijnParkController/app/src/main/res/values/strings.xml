@@ -3,11 +3,22 @@
 
     <string name="lbl_groupname">Groepsnaam</string>
     <string name="lbl_groupowner">Groepsleider</string>
-    <string name="lbl_inrange">In bereik</string>
+    <string name="lbl_userrequests">Aantal aanvragen</string>
     <string name="lbl_ingroup">In groep</string>
+    <string name="lbl_inteam">In team</string>
 
     <string name="missing_username_message">Gebruikersnaam moet ingevuld zijn</string>
     <string name="missing_groupowner_message">Groepsleider moet ingevuld zijn</string>
     <string name="missing_groupname_message">Groepsnaam moet ingevuld zijn</string>
     <string name="misc_error_message">Er is iets misgegaan</string>
+
+    <string name="confirm_group_title">Groep aanmaken voltooien</string>
+    <string name="confirm_group_message">Wilt u verder gaan?</string>
+
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_button_yes">Ja</string>
+    <string name="dialog_button_no">Nee</string>
+    <string name="dialog_button_continue">Doorgaan</string>
+    <string name="dialog_button_cancel">Annuleren</string>
+    <string name="lbl_team">Team:</string>
 </resources>
