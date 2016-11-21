@@ -1,8 +1,10 @@
 package tvos.mad.han.mijnparkcontroller;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,11 +29,13 @@ public class JoinGroup extends AppCompatActivity {
         final String userName = getIntent().getExtras().getString("name");
         Log.v("Username", userName);
 
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("userId", "hetUserId1234");
+        editor.commit();
+
         updateGreetingMessageWithUserName(userName);
-// 1. Instantiate an AlertDialog.Builder with its constructor
 
-
-        // Get ListView object from xml
         listView = (ListView) findViewById(R.id.groupListView);
         ArrayList<String> values = new ArrayList<String>();
         for (int i = 0; i < 15; i++) {
