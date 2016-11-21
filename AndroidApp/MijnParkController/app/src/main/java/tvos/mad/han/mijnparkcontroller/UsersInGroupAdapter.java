@@ -4,12 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by DDulos on 18-Nov-16.
@@ -51,5 +49,15 @@ public class UsersInGroupAdapter extends BaseAdapter {
         userNameText.setText(user.getUsername());
 
         return view;
+    }
+
+    public void removeItem(int position) {
+        userList.remove(position);
+        notifyDataSetChanged();
+    }
+
+    public void addUser(User user) {
+        userList.add(user);
+        notifyDataSetChanged();
     }
 }

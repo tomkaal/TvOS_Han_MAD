@@ -16,19 +16,21 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:paddingTop="@dimen/activity_vertical_margin">
+
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Aanmelden bij groep"
-            android:id="@+id/textView3"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,16 +39,19 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Spelernaam:"
-                android:id="@+id/textView4"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/userNameInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:scrollHorizontally="true"
+                android:singleLine="true" />
         </LinearLayout>
 
         <Button
@@ -56,29 +61,32 @@
             android:text="Doorgaan" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:paddingTop="@dimen/activity_vertical_margin">
+
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Groep aanmaken"
-            android:id="@+id/textView2"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,16 +95,43 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/lbl_groupowner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Groepsleider:"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/groupOwnerInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:scrollHorizontally="true"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbl_groupname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Groepsnaam:"
-                android:id="@+id/textView"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/groupNameInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:scrollHorizontally="true"
+                android:singleLine="true" />
         </LinearLayout>
 
         <Button

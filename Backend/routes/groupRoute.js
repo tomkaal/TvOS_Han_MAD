@@ -3,10 +3,10 @@
 var express = require('express');
 var router = express.Router();
 
-var controller = require('../controllers/team');
+var controller = require('../controllers/groupController');
 
-router.route('/team/validate')
-    .post(controller.validate);
+router.route('/group')
+    .post(controller.createOne);
 
 router.route('/team/accept')
     .post(controller.accept);
