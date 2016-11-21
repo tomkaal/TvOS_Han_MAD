@@ -1,6 +1,5 @@
 /*jslint node: true */
 
-var Team = require('../models/team');
 var express = require('express');
 var router = express.Router();
 
