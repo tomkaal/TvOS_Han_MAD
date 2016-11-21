@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">MijnParkController</string>
+
     <string name="lbl_groupname">Groepsnaam</string>
     <string name="lbl_groupowner">Groepsleider</string>
     <string name="lbl_inrange">In bereik</string>
     <string name="lbl_ingroup">In groep</string>
+
+    <string name="missing_username_message">Gebruikersnaam moet ingevuld zijn</string>
+    <string name="missing_groupowner_message">Groepsleider moet ingevuld zijn</string>
+    <string name="missing_groupname_message">Groepsnaam moet ingevuld zijn</string>
+    <string name="misc_error_message">Er is iets misgegaan</string>
 </resources>
