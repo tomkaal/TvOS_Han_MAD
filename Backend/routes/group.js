@@ -1,10 +1,5 @@
-/**
- * Created by wesle on 18-11-2016.
- */
-
 /*jslint node: true */
 
-var Team = require('../models/group');
 var express = require('express');
 var router = express.Router();
 
