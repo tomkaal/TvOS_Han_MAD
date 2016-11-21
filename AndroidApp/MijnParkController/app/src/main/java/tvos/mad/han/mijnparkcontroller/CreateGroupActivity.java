@@ -46,10 +46,8 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     private void setupUserInfoTexts() {
         inRangeText = (TextView) findViewById(R.id.lbl_inrange);
-        inRangeText.setText(getString(R.string.lbl_inrange) + ": " + usersInRangeAdapter.getCount());
-
         inGroupText = (TextView) findViewById(R.id.lbl_ingroup);
-        inGroupText.setText(getString(R.string.lbl_ingroup) + ": " + usersInGroupAdapter.getCount());
+        updateUserListCount();
     }
 
     private void setupListAdapters() {
@@ -90,7 +88,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                createConfirmationDialog();
             }
         });
     }
@@ -126,11 +124,18 @@ public class CreateGroupActivity extends AppCompatActivity {
     private void addUserInGroup(int position) {
         usersInGroupAdapter.addUser(usersInRangeAdapter.getItem(position));
         usersInRangeAdapter.removeItem(position);
+        updateUserListCount();
     }
 
     private void removeUserFromGroup(int position) {
         usersInRangeAdapter.addUser(usersInGroupAdapter.getItem(position));
         usersInGroupAdapter.removeItem(position);
+        updateUserListCount();
+    }
+
+    private void updateUserListCount() {
+        inRangeText.setText(getString(R.string.lbl_inrange) + ": " + usersInRangeAdapter.getCount());
+        inGroupText.setText(getString(R.string.lbl_ingroup) + ": " + usersInGroupAdapter.getCount());
     }
 
     private void createConfirmationDialog() {

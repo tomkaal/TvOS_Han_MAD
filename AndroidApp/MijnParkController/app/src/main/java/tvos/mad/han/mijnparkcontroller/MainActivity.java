@@ -18,21 +18,26 @@ import java.net.URISyntaxException;
 public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private Socket mSocket;
 
-    {
-        try {
-            mSocket = IO.socket("http://10.0.2.2:3000");
-        } catch (URISyntaxException e) {
-        }
-    }
+    private SocketSingleton socketSingleton;
+//    private Socket mSocket;
+//
+//    {
+//        try {
+//            mSocket = IO.socket("http://10.0.2.2:3000");
+//        } catch (URISyntaxException e) {
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mSocket.connect();
-        Log.v("connect", "Connect");
+
+        socketSingleton = SocketSingleton.getInstance();
+
+//        mSocket.connect();
+//        Log.v("connect", "Connect");
 
         final EditText userNameInput = (EditText) findViewById(R.id.userNameInput);
         final EditText groupOwnerInput = (EditText) findViewById(R.id.groupOwnerInput);
@@ -44,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 String userName = userNameInput.getText().toString();
 
                 if (!userName.equals("")) {
-                    mSocket.emit("Join group", userNameInput.getText().toString());
+//                    socketSingleton.emit("Join group", userNameInput.getText().toString());
                     Intent intent = new Intent(MainActivity.this, JoinGroup.class)
                             .putExtra("name", userNameInput.getText().toString());
                     startActivity(intent);
@@ -63,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
                 if (!groupOwner.equals("")) {
                     if (!groupName.equals("")) {
                         Intent intent = new Intent(MainActivity.this, CreateGroupActivity.class)
-                                .putExtra("name", groupOwner)
+                                .putExtra("groupowner", groupOwner)
                                 .putExtra("groupname", groupName);
                         startActivity(intent);
-//                mSocket.emit("Create group", groupNameInput.getText().toString());
+//                socketSingleton.emit("Create group", groupName.toString());
                     } else {
                         createMissingDataDialog("groupname");
                     }

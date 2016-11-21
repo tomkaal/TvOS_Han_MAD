@@ -11,14 +11,6 @@
         android:textColor="@android:color/black"
         android:id="@+id/txt_username"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_weight="1"/>
-
-    <!-- invisible on default -->
-    <ImageView
-        android:id="@+id/image_grouprequest"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_notification_overlay"/>
+        android:layout_weight="1"/>
 </LinearLayout>
