@@ -3,8 +3,7 @@ var mongoose = require('mongoose'),
 
 var groupSchema = new Schema({
     name: {type: String},
-    score: {type: Number},
-    roundpoints: {type: Number}
+    owner: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 var Group = mongoose.model('Group', groupSchema, 'groups');
