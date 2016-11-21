@@ -2,10 +2,10 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Group = mongoose.model('Group');
+    User = mongoose.model('User');
 
 exports.createOne = function (req, res) {
-    var doc = new Group(req.body);
+    var doc = new User(req.body);
 
     doc.save(function (err) {
         if (err) {
