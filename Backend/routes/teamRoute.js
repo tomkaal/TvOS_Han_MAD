@@ -3,12 +3,12 @@
 var express = require('express');
 var router = express.Router();
 
-var controller = require('../controllers/user');
+var controller = require('../controllers/teamController');
 
-router.route('/user')
+router.route('/team')
     .post(controller.createOne);
 
-router.route('/user/accept')
+router.route('/team/accept')
     .post(controller.accept);
 
 module.exports = router;
