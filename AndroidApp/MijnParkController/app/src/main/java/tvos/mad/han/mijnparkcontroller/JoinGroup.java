@@ -29,11 +29,6 @@ public class JoinGroup extends AppCompatActivity {
         final String userName = getIntent().getExtras().getString("name");
         Log.v("Username", userName);
 
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("userId", "hetUserId1234");
-        editor.commit();
-
         updateGreetingMessageWithUserName(userName);
 
         listView = (ListView) findViewById(R.id.groupListView);
