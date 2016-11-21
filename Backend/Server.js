@@ -7,12 +7,34 @@ var bodyParser = require('body-parser');
 var session = require("express-session");
 var mongoose = require('mongoose');
 
-// Bootstrap models
-// var models_path = __dirname + '/models',
-//     model_files = fs.readdirSync(models_path);
-// model_files.forEach(function (file) {
-//     require(models_path + '/' + file);
-// });
+// Load configuration
+var env = process.env.NODE_ENV || 'development',
+    config = require('./config.js')[env];
+
+// Bootstrap db connection
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
+mongoose.connect(config.db);
+
+mongoose.connection.on('error', function (err) {
+    "use strict";
+    console.error('MongoDB error: %s', err);
+});
+
+// Set debugging on/off
+if (config.debug) {
+    mongoose.set('debug', true);
+} else {
+    mongoose.set('debug', false);
+}
+
+
+//Bootstrap models
+var models_path = __dirname + '/models',
+    model_files = fs.readdirSync(models_path);
+model_files.forEach(function (file) {
+    require(models_path + '/' + file);
+});
 
 // Configure body-parser
 app.use(bodyParser.json());
@@ -20,7 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true }));     // Notice because option
 app.use(cookieParser());
 
 var sessionMiddleware = session({
-    secret:            "De Kaashaas",
+    secret:            "madtvos",
     resave:            true,
     saveUninitialized: true
 });
