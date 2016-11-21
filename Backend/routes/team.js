@@ -5,8 +5,8 @@ var router = express.Router();
 
 var controller = require('../controllers/team');
 
-router.route('/team/validate')
-    .post(controller.validate);
+router.route('/team')
+    .post(controller.createOne);
 
 router.route('/team/accept')
     .post(controller.accept);
