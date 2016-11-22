@@ -1,6 +1,7 @@
 package tvos.mad.han.mijnparkcontroller;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -15,17 +16,19 @@ import java.util.ArrayList;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
-    private ListView usersInRangeListView;
-    private UsersInRangeAdapter usersInRangeAdapter;
+    private ListView userRequestsListView;
+    private UserRequestsAdapter userRequestsAdapter;
 
     private ListView usersInGroupListView;
     private UsersInGroupAdapter usersInGroupAdapter;
 
-    private TextView groupNameText;
+    private String groupOwner;
     private TextView groupOwnerText;
-    private TextView inRangeText;
-    private TextView inGroupText;
+    private String groupName;
+    private TextView groupNameText;
+    private TextView userRequestsText;
 
+    private TextView inGroupText;
     private Button cancelButton;
     private Button continueButton;
 
@@ -45,7 +48,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
     private void setupUserInfoTexts() {
-        inRangeText = (TextView) findViewById(R.id.lbl_inrange);
+        userRequestsText = (TextView) findViewById(R.id.lbl_userrequests);
         inGroupText = (TextView) findViewById(R.id.lbl_ingroup);
         updateUserListCount();
     }
@@ -54,19 +57,19 @@ public class CreateGroupActivity extends AppCompatActivity {
         ArrayList<User> usersInRangeList = setupUsersInRangeList();
         ArrayList<User> usersInGroupList = setupUsersInGroupList();
 
-        usersInRangeAdapter = new UsersInRangeAdapter(this, usersInRangeList);
+        userRequestsAdapter = new UserRequestsAdapter(this, usersInRangeList);
         usersInGroupAdapter = new UsersInGroupAdapter(this, usersInGroupList);
 
-        usersInRangeListView = (ListView) findViewById(R.id.listview_inrange);
-        usersInRangeListView.setAdapter(usersInRangeAdapter);
-        usersInRangeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        userRequestsListView = (ListView) findViewById(R.id.listview_usersrequests);
+        userRequestsListView.setAdapter(userRequestsAdapter);
+        userRequestsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 addUserInGroup(position);
             }
         });
 
-        usersInGroupListView = (ListView) findViewById(R.id.listview_ingroup);
+        usersInGroupListView = (ListView) findViewById(R.id.listview_inGroup);
         usersInGroupListView.setAdapter(usersInGroupAdapter);
         usersInGroupListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,13 +97,13 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
     private void setupGroupInfoText() {
-        final String userName = getIntent().getExtras().getString("groupowner");
-        final String groupName = getIntent().getExtras().getString("groupname");
+        groupOwner = getIntent().getExtras().getString("groupowner");
+        groupName = getIntent().getExtras().getString("groupname");
 
         groupNameText = (TextView) findViewById(R.id.txt_groupname);
         groupNameText.setText(getString(R.string.lbl_groupname) + ": " + groupName);
         groupOwnerText = (TextView) findViewById(R.id.txt_groupowner);
-        groupOwnerText.setText(getString(R.string.lbl_groupowner) + ": " + userName);
+        groupOwnerText.setText(getString(R.string.lbl_groupowner) + ": " + groupOwner);
     }
 
     @NonNull
@@ -122,29 +125,39 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
     private void addUserInGroup(int position) {
-        usersInGroupAdapter.addUser(usersInRangeAdapter.getItem(position));
-        usersInRangeAdapter.removeItem(position);
+        usersInGroupAdapter.addUser(userRequestsAdapter.getItem(position));
+        userRequestsAdapter.removeItem(position);
         updateUserListCount();
     }
 
     private void removeUserFromGroup(int position) {
-        usersInRangeAdapter.addUser(usersInGroupAdapter.getItem(position));
+        userRequestsAdapter.addUser(usersInGroupAdapter.getItem(position));
         usersInGroupAdapter.removeItem(position);
         updateUserListCount();
     }
 
     private void updateUserListCount() {
-        inRangeText.setText(getString(R.string.lbl_inrange) + ": " + usersInRangeAdapter.getCount());
         inGroupText.setText(getString(R.string.lbl_ingroup) + ": " + usersInGroupAdapter.getCount());
+        userRequestsText.setText(getString(R.string.lbl_userrequests) + ": " + userRequestsListView.getCount());
     }
 
     private void createConfirmationDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(CreateGroupActivity.this).create();
-        alertDialog.setTitle("Alert");
+        alertDialog.setTitle(getString(R.string.confirm_group_title));
 
-        alertDialog.setMessage("Option not yet implemented");
+        alertDialog.setMessage(getString(R.string.confirm_group_message));
 
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.dialog_button_yes),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(CreateGroupActivity.this, CreateTeamActivity.class)
+                                .putExtra("groupowner", groupOwner)
+                                .putExtra("groupname", groupName);
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.dialog_button_no),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

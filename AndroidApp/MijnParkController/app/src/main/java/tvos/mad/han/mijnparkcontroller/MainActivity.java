@@ -41,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         socketSingleton = SocketSingleton.getInstance();
 
-//        mSocket.connect();
-//        Log.v("connect", "Connect");
-
         final EditText userNameInput = (EditText) findViewById(R.id.userNameInput);
         final EditText groupOwnerInput = (EditText) findViewById(R.id.groupOwnerInput);
         final EditText groupNameInput = (EditText) findViewById(R.id.groupNameInput);
