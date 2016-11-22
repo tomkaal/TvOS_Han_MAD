@@ -16,18 +16,20 @@ import java.util.ArrayList;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
+    private UserGroupSingleton userGroupSingleton;
+
     private ListView userRequestsListView;
+
     private UserRequestsAdapter userRequestsAdapter;
-
     private ListView usersInGroupListView;
-    private UsersInGroupAdapter usersInGroupAdapter;
 
+    private UsersInGroupAdapter usersInGroupAdapter;
     private String groupOwner;
     private TextView groupOwnerText;
     private String groupName;
     private TextView groupNameText;
-    private TextView userRequestsText;
 
+    private TextView userRequestsText;
     private TextView inGroupText;
     private Button cancelButton;
     private Button continueButton;
@@ -36,6 +38,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group);
+        userGroupSingleton = UserGroupSingleton.getInstance();
 
         setupGroupInfoText();
         setupButtons();
@@ -54,11 +57,15 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
     private void setupListAdapters() {
-        ArrayList<User> usersInRangeList = setupUsersInRangeList();
-        ArrayList<User> usersInGroupList = setupUsersInGroupList();
+        ArrayList<User> usersInRangeList = new ArrayList<>();
+        ArrayList<User> usersInGroupList = new ArrayList<>();
 
         userRequestsAdapter = new UserRequestsAdapter(this, usersInRangeList);
         usersInGroupAdapter = new UsersInGroupAdapter(this, usersInGroupList);
+
+        for (int i = 1; i <= 8; i++) {
+            addUserGroupRequest("User" + i, "u" + i);
+        }
 
         userRequestsListView = (ListView) findViewById(R.id.listview_usersrequests);
         userRequestsListView.setAdapter(userRequestsAdapter);
@@ -106,33 +113,35 @@ public class CreateGroupActivity extends AppCompatActivity {
         groupOwnerText.setText(getString(R.string.lbl_groupowner) + ": " + groupOwner);
     }
 
-    @NonNull
-    private ArrayList<User> setupUsersInGroupList() {
-        ArrayList<User> usersInGroupList = new ArrayList<>();
-        usersInGroupList.add(new User("User5"));
-        usersInGroupList.add(new User("User6"));
-        return usersInGroupList;
+    // Called from Socket
+    private void addUserGroupRequest(String userName, String userId) {
+        User user = new User(userId, userName);
+        userRequestsAdapter.addUser(user);
     }
 
-    @NonNull
-    private ArrayList<User> setupUsersInRangeList() {
-        ArrayList<User> usersInRangeList = new ArrayList<>();
-        usersInRangeList.add(new User("User1"));
-        usersInRangeList.add(new User("User2"));
-        usersInRangeList.add(new User("User3"));
-        usersInRangeList.add(new User("User4"));
-        return usersInRangeList;
+    // Called from Socket
+    private void removeUserGroupRequest(String userId) {
+        int position;
+        for (position = 0; position < usersInGroupAdapter.getCount(); position++) {
+            User user = usersInGroupAdapter.getItem(position);
+            if (user.getUserId().equals(userId))
+                break;
+        }
+        usersInGroupAdapter.removeItem(position);
     }
 
     private void addUserInGroup(int position) {
-        usersInGroupAdapter.addUser(userRequestsAdapter.getItem(position));
+        User user = userRequestsAdapter.getItem(position);
+        usersInGroupAdapter.addUser(user);
         userRequestsAdapter.removeItem(position);
+        userGroupSingleton.getCurrentGroup().addUserToGroup(user);
         updateUserListCount();
     }
 
     private void removeUserFromGroup(int position) {
         userRequestsAdapter.addUser(usersInGroupAdapter.getItem(position));
         usersInGroupAdapter.removeItem(position);
+        userGroupSingleton.getCurrentGroup().removeUserFromGroup(position);
         updateUserListCount();
     }
 

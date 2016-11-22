@@ -6,17 +6,30 @@ package tvos.mad.han.mijnparkcontroller;
 
 public class User {
     private String userId;
-    private String username;
+    private String userName;
 
-    public User(String username) {
-        this.username = username;
+    public User(String userName) {
+        this.userName = userName;
     }
 
-    public String getUsername() {
-        return username;
+    public User(String userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

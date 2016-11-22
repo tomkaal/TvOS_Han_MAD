@@ -38,6 +38,9 @@ public class CreateTeamActivity extends AppCompatActivity {
     private Button addTeamButton;
     private Button removeTeamButton;
 
+    private String groupOwner;
+    private String groupName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,13 +118,25 @@ public class CreateTeamActivity extends AppCompatActivity {
 
     private void removeTeam() {
         if (teamList.size() != 1) {
-            teamList.remove(teamList.size() - 1);
-            usersInTeamAdapterList.remove(teamList.size() - 1);
+            int lastIndex = teamList.size() - 1;
+
+            selectTeam(lastIndex);
+            UsersInTeamAdapter userAdapter = usersInTeamAdapterList.get(lastIndex);
+
+            for (int i = userAdapter.getCount() - 1; i >= 0; i--) {
+                removeUserFromTeam(i);
+                Log.d("ASDF", "user removed from team");
+            }
+
+            teamList.remove(lastIndex);
+            usersInTeamAdapterList.remove(lastIndex);
 
             adapterCharIncrement--;
             if (selectedTeamPosition >= teamList.size())
                 selectedTeamPosition--;
             teamSpinner.setSelection(selectedTeamPosition);
+
+            Log.d("ASDF", "team removed");
         }
     }
 
@@ -171,8 +186,8 @@ public class CreateTeamActivity extends AppCompatActivity {
 
 
     private void setupGroupInfoText() {
-        final String groupOwner = getIntent().getExtras().getString("groupowner");
-        final String groupName = getIntent().getExtras().getString("groupname");
+        groupOwner = getIntent().getExtras().getString("groupowner");
+        groupName = getIntent().getExtras().getString("groupname");
 
         groupOwnerText = (TextView) findViewById(R.id.txt_groupowner);
         groupNameText = (TextView) findViewById(R.id.txt_groupname);
@@ -183,6 +198,7 @@ public class CreateTeamActivity extends AppCompatActivity {
     @NonNull
     private ArrayList<User> setupUsersInGroupList() {
         ArrayList<User> usersInGroupList = new ArrayList<>();
+        usersInGroupList.add(new User(groupOwner));
         usersInGroupList.add(new User("User1"));
         usersInGroupList.add(new User("User2"));
         usersInGroupList.add(new User("User3"));

@@ -46,7 +46,7 @@ public class UserRequestsAdapter extends BaseAdapter {
 
         User user = getItem(position);
         TextView userNameText = (TextView) view.findViewById(R.id.txt_username);
-        userNameText.setText(user.getUsername());
+        userNameText.setText(user.getUserName());
 
         return view;
     }
