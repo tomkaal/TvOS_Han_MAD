@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
     asyncEach = require('async/each');
 
 function sendErr(res, err) {
-    return res.send({
+    return res.json({
         doc: null,
         err: err
     });
@@ -55,7 +55,7 @@ exports.createTeams = function (req, res) {
         function(err) {
             if (err) { return sendErr(res, err); }
             //All teams are added and users are updated, give response
-            return res.send({
+            return res.json({
                 doc: doc,
                 err: err
             });
