@@ -17,8 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 
@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    private SocketSingleton socketSingleton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                 1);
 
-        socketSingleton = SocketSingleton.getInstance();
 
         final EditText userNameInput = (EditText) findViewById(R.id.userNameInput);
         final EditText groupOwnerInput = (EditText) findViewById(R.id.groupOwnerInput);
@@ -52,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!userName.equals("")) {
 //                    socketSingleton.emit("Join group", userNameInput.getText().toString());
+                    // Do http request, returns a userId
+
                     Intent intent = new Intent(MainActivity.this, JoinGroup.class)
                             .putExtra("name", userNameInput.getText().toString());
                     startActivity(intent);
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String groupOwner = groupOwnerInput.getText().toString();
                 String groupName = groupNameInput.getText().toString();
+
 
                 if (!groupOwner.equals("")) {
                     if (!groupName.equals("")) {

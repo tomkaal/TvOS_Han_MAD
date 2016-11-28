@@ -16,6 +16,13 @@
         <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.0_70162fd4baff8480d24f5d5ebebc6427f21d043d\classes.dex" />
     </item>
     <item
+        jar="C:\Users\tommi\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.9.0\f824591a0016efbaeddb8300bee54832a1398cfa\okio-1.9.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.9.0_a916a81c69c1ba6f2bcfa0de7789ea0c42946294\classes.dex" />
+    </item>
+    <item
         jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.0\jars\classes.jar"
         jumboMode="true"
         revision="23.0.3"
@@ -23,67 +30,11 @@
         <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.0_0786549d72e7806977a837e37b9a9148dd55e2be\classes.dex" />
     </item>
     <item
-        jar="C:\Users\tommi\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.0\support-annotations-24.2.0.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="6be858a75633b1f0a2d24cad740db57775cb6871">
-        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.0_0da113c5fbe8b18fb0711cafd455fc8227a763a4\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.estimote\sdk\0.11.1\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="8ff85bb08facfbaa19d529be27738fd354baaab7">
-        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.estimote-sdk-0.11.1_a55805ad1b71c6414490964c65144b86791a35e1\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.0\jars\libs\internal_impl-24.2.0.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
-        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_9b12269f44b06a5938034d111154a1b3aa7ad4ef\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\tommi\.gradle\caches\modules-2\files-2.1\org.java-websocket\Java-WebSocket\1.3.0\db2658f013fb163de4a99274c2eb9e17efe535d2\Java-WebSocket-1.3.0.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="db2658f013fb163de4a99274c2eb9e17efe535d2">
-        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\Java-WebSocket-1.3.0_742e5701f0c6e35da6f342c25ce8c5decdaa426b\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="32e781286802d729cbba4f447ca272efdad35e8b">
-        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_65a5355ed6674a6f4d1906197c877436d9607844\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.0\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
-        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.0_8c1e0685eb22bf8180f3175e9abab001fa43983e\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.0\jars\libs\internal_impl-24.2.0.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
-        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_75cd1c336fcf611f2f3b8fd60d79c65d46b91d11\classes.dex" />
-    </item>
-    <item
         jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.0\jars\classes.jar"
         jumboMode="true"
         revision="23.0.3"
         sha1="f3ee23ef25c9a8fe3d40246d0b7097267963a612">
         <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.0_50c9c45cdf8db9432f23cdc0bd54c732bebf6cb4\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\tommi\.gradle\caches\modules-2\files-2.1\com.github.nkzawa\socket.io-client\0.3.0\8dfd7cf8d1124acb027b3ffd53eafcc518af3ba9\socket.io-client-0.3.0.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="8dfd7cf8d1124acb027b3ffd53eafcc518af3ba9">
-        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\socket.io-client-0.3.0_81d0fff056fd3f89c0aca2aa69cf82508636b5f3\classes.dex" />
     </item>
     <item
         jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.0\jars\libs\internal_impl-24.2.0.jar"
@@ -100,11 +51,39 @@
         <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_f52dc469de519e993068a8eab82c070c7d6c0237\classes.dex" />
     </item>
     <item
+        jar="C:\Users\tommi\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.0\support-annotations-24.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6be858a75633b1f0a2d24cad740db57775cb6871">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.0_0da113c5fbe8b18fb0711cafd455fc8227a763a4\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.estimote\sdk\0.11.1\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="8ff85bb08facfbaa19d529be27738fd354baaab7">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.estimote-sdk-0.11.1_a55805ad1b71c6414490964c65144b86791a35e1\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\tommi\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-ws\3.4.1\8ace66ef7002d98f633377c9e67daeeb196d8c3b\okhttp-ws-3.4.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="8ace66ef7002d98f633377c9e67daeeb196d8c3b">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-ws-3.4.1_2a70766c7cfabddb30d86740c7de4f8c1714645d\classes.dex" />
+    </item>
+    <item
         jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.0\jars\classes.jar"
         jumboMode="true"
         revision="23.0.3"
         sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
         <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.0_b3320877701c4d524f17fe9792bb03d371071272\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\tommi\.gradle\caches\modules-2\files-2.1\io.socket\socket.io-client\0.8.2\96fd0e4a99e71d688b7267e12d2a5a137519d92e\socket.io-client-0.8.2.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="96fd0e4a99e71d688b7267e12d2a5a137519d92e">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\socket.io-client-0.8.2_f7b2e03cbf5aa58359626aa167cfea3ebbeb85e6\classes.dex" />
     </item>
     <item
         jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.0\jars\classes.jar"
@@ -121,6 +100,13 @@
         <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_6cd3aac5dbe48eaf5297b3744ea9deee0932aaf9\classes.dex" />
     </item>
     <item
+        jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_9b12269f44b06a5938034d111154a1b3aa7ad4ef\classes.dex" />
+    </item>
+    <item
         jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.0\jars\classes.jar"
         jumboMode="true"
         revision="23.0.3"
@@ -128,11 +114,25 @@
         <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.0_5aa6ca30a3dee6c4d1ee842b8f09f7a635c4efe5\classes.dex" />
     </item>
     <item
+        jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6a0d28c75f9b01d453ab42e48eaad29510c30a17">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_65a5355ed6674a6f4d1906197c877436d9607844\classes.dex" />
+    </item>
+    <item
         jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="5744a54f831e70c563569e6d47048d0a2d7fd524">
+        sha1="9d954dbaa9cf41e1222f8fe7500964c37019dbfe">
         <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_c956292c7cb60bf7ba3c3d9aab4f8f66673121d4\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\tommi\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.4.1\c7c4f9e35c2fd5900da24f9872e3971801f08ce0\okhttp-3.4.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.4.1_e6a9d5bf91873846f3364e9e86ec5ac2aed44324\classes.dex" />
     </item>
     <item
         jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.0\jars\classes.jar"
@@ -142,11 +142,25 @@
         <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.0_fb4e5280947dd833aea69947fb4a071583a21780\classes.dex" />
     </item>
     <item
-        jar="C:\Users\tommi\.gradle\caches\modules-2\files-2.1\com.github.nkzawa\engine.io-client\0.3.1\3ca9d0d53a27ecb88538ed874be417cfa827db5d\engine.io-client-0.3.1.jar"
+        jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.0\jars\classes.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="3ca9d0d53a27ecb88538ed874be417cfa827db5d">
-        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\engine.io-client-0.3.1_b924f5e0c3d801971052e024992c4b9fb3c78824\classes.dex" />
+        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.0_8c1e0685eb22bf8180f3175e9abab001fa43983e\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.0_75cd1c336fcf611f2f3b8fd60d79c65d46b91d11\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\tommi\.gradle\caches\modules-2\files-2.1\io.socket\engine.io-client\0.8.2\2b23f3e731f21c2009ab0a10da8254a69693767d\engine.io-client-0.8.2.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2b23f3e731f21c2009ab0a10da8254a69693767d">
+        <dex dex="C:\Users\tommi\Documents\GitHub\TvOS_Han_MAD\AndroidApp\MijnParkController\app\build\intermediates\transforms\dex\debug\folders\1000\10\engine.io-client-0.8.2_c81a604f1d2586bafc87b33221477ce70263d558\classes.dex" />
     </item>
 
 </items>
