@@ -6,7 +6,7 @@ var router = express.Router();
 var controller = require('../controllers/teamController');
 
 router.route('/team')
-    .post(controller.createOne);
+    .post(controller.createTeams);
 
 router.route('/team/accept')
     .post(controller.accept);

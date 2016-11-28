@@ -24,6 +24,7 @@
         <activity android:name=".CreateGroupActivity" />
         <activity android:name=".BeaconSearchActivity"/>
         <activity android:name=".CreateTeamActivity"/>
+        <activity android:name=".GroupOverviewActivity"/>
     </application>
 
 </manifest>

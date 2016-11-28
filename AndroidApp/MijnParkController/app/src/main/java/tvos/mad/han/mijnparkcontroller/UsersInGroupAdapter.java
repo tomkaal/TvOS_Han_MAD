@@ -46,13 +46,18 @@ public class UsersInGroupAdapter extends BaseAdapter {
 
         User user = getItem(position);
         TextView userNameText = (TextView) view.findViewById(R.id.txt_username);
-        userNameText.setText(user.getUsername());
+        userNameText.setText(user.getUserName());
 
         return view;
     }
 
     public void removeItem(int position) {
         userList.remove(position);
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(User user) {
+        userList.remove(user);
         notifyDataSetChanged();
     }
 
