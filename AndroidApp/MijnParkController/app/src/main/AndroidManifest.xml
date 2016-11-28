@@ -3,6 +3,8 @@
     package="tvos.mad.han.mijnparkcontroller">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -18,8 +20,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".JoinGroup" />
-        <activity android:name=".JoinTeam"></activity>
-        <activity android:name=".CreateGroupActivity"></activity>
+        <activity android:name=".JoinTeam" />
+        <activity android:name=".CreateGroupActivity" />
+        <activity android:name=".BeaconSearchActivity"/>
+        <activity android:name=".CreateTeamActivity"/>
+        <activity android:name=".GroupOverviewActivity"/>
     </application>
 
 </manifest>

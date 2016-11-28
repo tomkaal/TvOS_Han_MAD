@@ -1,0 +1,109 @@
+package tvos.mad.han.mijnparkcontroller;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by DDulos on 28-Nov-16.
+ */
+
+public class GroupOverviewActivity extends AppCompatActivity {
+    private static final String TEAM_MAP_STRING = "team";
+    private static final String TEAMMEMBER_MAP_STRING = "teammember";
+    private UserGroupSingleton userGroupSingleton;
+    private ListView teamListView;
+    private ArrayList<Map<String, String>> teamList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_group_overview);
+
+        userGroupSingleton = UserGroupSingleton.getInstance();
+
+        setupTextViews();
+        setupListView();
+    }
+
+    private void setupTextViews() {
+        Group group = userGroupSingleton.getCurrentGroup();
+        Team team = userGroupSingleton.getCurrentTeam();
+
+        String username = userGroupSingleton.getCurrentUser().getUserName();
+        String groupname = group.getGroupName();
+        String groupowner = group.getGroupOwner().getUserName();
+        String teamname = team.getTeamName();
+        int points = team.getTeamPoints();
+
+        TextView userTextView = (TextView) findViewById(R.id.txt_username);
+        TextView groupTextView = (TextView) findViewById(R.id.txt_groupname);
+        TextView ownerTextView = (TextView) findViewById(R.id.txt_groupowner);
+        TextView teamTextView = (TextView) findViewById(R.id.txt_teamname);
+        TextView pointsTextView = (TextView) findViewById(R.id.txt_teampoints);
+
+        userTextView.setText("Gebruikersnaam: " + username);
+        groupTextView.setText("Groepsnaam: " + groupname);
+        ownerTextView.setText("Groepsleider: " + groupowner);
+        teamTextView.setText("Team: " + teamname);
+        pointsTextView.setText("Punten: " + points);
+    }
+
+    private void setupListView() {
+        teamListView = (ListView) findViewById(R.id.teamListView);
+//        ArrayList<Team> teams = userGroupSingleton.getCurrentGroup().getTeams();
+        teamList = new ArrayList<>();
+
+        ArrayList<User> users = userGroupSingleton.getCurrentGroup().getTeams().get(0).getTeamMembers();
+        ArrayList<String> userStringList = new ArrayList<>();
+
+        for (User user : users) {
+            userStringList.add(user.getUserName());
+        }
+
+        int usersInTeam = 4;
+
+        for (int i = 1; i <= 3; i++) {
+            String usersString = "";
+
+            for (int j = 0; j < usersInTeam; j++) {
+                usersString += userStringList.get(0) + "\n";
+                userStringList.remove(0);
+            }
+
+            char teamChar = (char) (64 + i);
+            addTeamToList("Team-" + teamChar, usersString);
+        }
+
+//        for (Team team : teams) {
+//            String usersString = "";
+//
+//            for (User user : team.getTeamMembers()) {
+//                usersString += user.getUserName() + "\n";
+//            }
+//
+//            addTeamToList(team.getTeamName(), usersString);
+//        }
+
+        SimpleAdapter adapter = new SimpleAdapter(this, teamList,
+                android.R.layout.simple_list_item_2,
+                new String[]{TEAM_MAP_STRING, TEAMMEMBER_MAP_STRING},
+                new int[]{android.R.id.text1,
+                        android.R.id.text2});
+        teamListView.setAdapter(adapter);
+    }
+
+    private void addTeamToList(String teamName, String usersString) {
+        Map<String, String> teamMap = new HashMap<>(2);
+        teamMap.put(TEAM_MAP_STRING, teamName);
+        teamMap.put(TEAMMEMBER_MAP_STRING, usersString);
+        teamList.add(teamMap);
+    }
+}

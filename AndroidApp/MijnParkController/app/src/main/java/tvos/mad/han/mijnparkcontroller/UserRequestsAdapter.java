@@ -12,13 +12,13 @@ import java.util.ArrayList;
 /**
  * Created by DDulos on 18-Nov-16.
  */
-public class UsersInRangeAdapter extends BaseAdapter {
+public class UserRequestsAdapter extends BaseAdapter {
     Context context;
     private LayoutInflater inflater;
 
     ArrayList<User> userList;
 
-    public UsersInRangeAdapter(Context context, ArrayList<User> userList) {
+    public UserRequestsAdapter(Context context, ArrayList<User> userList) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
         this.userList = userList;
@@ -46,7 +46,7 @@ public class UsersInRangeAdapter extends BaseAdapter {
 
         User user = getItem(position);
         TextView userNameText = (TextView) view.findViewById(R.id.txt_username);
-        userNameText.setText(user.getUsername());
+        userNameText.setText(user.getUserName());
 
         return view;
     }

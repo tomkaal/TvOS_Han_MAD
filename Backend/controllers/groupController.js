@@ -9,13 +9,30 @@ exports.createOne = function (req, res) {
 
     doc.save(function (err) {
         if (err) {
-            return res.send({
+            return res.json({
                 doc: null,
                 err: err
             });
         }
 
-        res.send({
+        return res.json({
+            doc: doc,
+            err: err
+        });
+    });
+};
+
+exports.retrieveAll = function (req, res) {
+    Group.find(function (err, doc) {
+        if (err) {
+            return res.json(
+                {
+                    doc: null,
+                    err: err
+                });
+        }
+
+        return res.json({
             doc: doc,
             err: err
         });
