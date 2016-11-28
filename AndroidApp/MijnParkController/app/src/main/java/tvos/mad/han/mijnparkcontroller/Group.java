@@ -9,16 +9,17 @@ import java.util.ArrayList;
  */
 
 public class Group {
+    public static final String INIT_TEAM_NAME = "0";
     private String groupId;
     private String groupName;
     private User groupOwner;
     private ArrayList<Team> teams;
 
-    public Group(String groupName, User groupOwner){
+    public Group(String groupName, User groupOwner) {
         this.groupName = groupName;
         this.groupOwner = groupOwner;
         teams = new ArrayList<>();
-        teams.add(new Team("0"));
+        teams.add(new Team(INIT_TEAM_NAME));
         Log.v("ASDF", "Connect");
     }
 
@@ -42,6 +43,14 @@ public class Group {
         return teams;
     }
 
+    public void setTeams() {
+        this.teams = teams;
+    }
+
+    public void addTeam(String teamName) {
+        teams.add(new Team(teamName));
+    }
+
     public void addUserToGroup(User user) {
         getTeams().get(0).addTeamMember(user);
     }
@@ -54,4 +63,13 @@ public class Group {
         getTeams().get(0).removeTeamMember(position);
     }
 
+    public void removeInitTeam() {
+        for (int i = 0; i < teams.size(); i++) {
+            Team team = teams.get(i);
+            if (team.getTeamName().equals(INIT_TEAM_NAME)) {
+                teams.remove(i);
+                break;
+            }
+        }
+    }
 }

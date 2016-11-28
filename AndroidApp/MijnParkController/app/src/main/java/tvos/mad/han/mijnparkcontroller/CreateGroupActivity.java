@@ -44,10 +44,6 @@ public class CreateGroupActivity extends AppCompatActivity {
         setupButtons();
         setupListAdapters();
         setupUserInfoTexts();
-
-        /*
-        TODO: refactor methods; onclick user -> switch from listview
-         */
     }
 
     private void setupUserInfoTexts() {

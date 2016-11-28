@@ -21,4 +21,8 @@
     <string name="dialog_button_continue">Doorgaan</string>
     <string name="dialog_button_cancel">Annuleren</string>
     <string name="lbl_team">Team:</string>
+
+    <string name="status_joining_group">Indelen in groep…</string>
+    <string name="status_joining_team">Indelen in team…</string>
+    <string name="status_joined_group">Ingedeeld in groep</string>
 </resources>

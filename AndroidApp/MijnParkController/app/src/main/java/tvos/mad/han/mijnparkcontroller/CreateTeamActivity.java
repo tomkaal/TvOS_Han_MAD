@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class CreateTeamActivity extends AppCompatActivity {
+    private UserGroupSingleton userGroupSingleton;
 
     private ListView usersInTeamListView;
 
@@ -45,6 +46,7 @@ public class CreateTeamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
+        userGroupSingleton = UserGroupSingleton.getInstance();
 
         setupGroupInfoText();
         setupButtons();
@@ -59,7 +61,8 @@ public class CreateTeamActivity extends AppCompatActivity {
     }
 
     private void setupListAdapters() {
-        ArrayList<User> usersInGroupList = setupUsersInGroupList();
+        ArrayList<User> usersInGroupList = userGroupSingleton.getCurrentGroup().getTeams().get(0).getTeamMembers();
+        usersInGroupList.add(userGroupSingleton.getCurrentGroup().getGroupOwner());
 
         usersInTeamListView = (ListView) findViewById(R.id.listview_inTeam);
         usersInTeamListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -110,12 +113,6 @@ public class CreateTeamActivity extends AppCompatActivity {
         updateUserListCount();
     }
 
-    /*
-    for(int i=65;i<=90;i++) {
-            System.out.println((char)i);
-        }
-     */
-
     private void removeTeam() {
         if (teamList.size() != 1) {
             int lastIndex = teamList.size() - 1;
@@ -125,7 +122,6 @@ public class CreateTeamActivity extends AppCompatActivity {
 
             for (int i = userAdapter.getCount() - 1; i >= 0; i--) {
                 removeUserFromTeam(i);
-                Log.d("ASDF", "user removed from team");
             }
 
             teamList.remove(lastIndex);
@@ -135,8 +131,6 @@ public class CreateTeamActivity extends AppCompatActivity {
             if (selectedTeamPosition >= teamList.size())
                 selectedTeamPosition--;
             teamSpinner.setSelection(selectedTeamPosition);
-
-            Log.d("ASDF", "team removed");
         }
     }
 
@@ -184,32 +178,14 @@ public class CreateTeamActivity extends AppCompatActivity {
         });
     }
 
-
     private void setupGroupInfoText() {
-        groupOwner = getIntent().getExtras().getString("groupowner");
-        groupName = getIntent().getExtras().getString("groupname");
+        groupOwner = userGroupSingleton.getCurrentGroup().getGroupOwner().getUserName();
+        groupName = userGroupSingleton.getCurrentGroup().getGroupName();
 
         groupOwnerText = (TextView) findViewById(R.id.txt_groupowner);
         groupNameText = (TextView) findViewById(R.id.txt_groupname);
         groupOwnerText.setText(getString(R.string.lbl_groupowner) + ": " + groupOwner);
         groupNameText.setText(getString(R.string.lbl_groupname) + ": " + groupName);
-    }
-
-    @NonNull
-    private ArrayList<User> setupUsersInGroupList() {
-        ArrayList<User> usersInGroupList = new ArrayList<>();
-        usersInGroupList.add(new User(groupOwner));
-        usersInGroupList.add(new User("User1"));
-        usersInGroupList.add(new User("User2"));
-        usersInGroupList.add(new User("User3"));
-        usersInGroupList.add(new User("User4"));
-        usersInGroupList.add(new User("User5"));
-        usersInGroupList.add(new User("User6"));
-        usersInGroupList.add(new User("User7"));
-        usersInGroupList.add(new User("User8"));
-        usersInGroupList.add(new User("User9"));
-        usersInGroupList.add(new User("User10"));
-        return usersInGroupList;
     }
 
     private void addUserInTeam(int position) {

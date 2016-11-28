@@ -7,13 +7,22 @@ package tvos.mad.han.mijnparkcontroller;
 public class UserGroupSingleton {
     private static UserGroupSingleton instance;
     private Group currentGroup;
+    private Team currentTeam;
     private User currentUser;
 
-    public UserGroupSingleton() {
+    private UserGroupSingleton() {
     }
 
-    static UserGroupSingleton getInstance(){
+    static UserGroupSingleton getInstance() {
         return (instance == null) ? instance = new UserGroupSingleton() : instance;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
     public Group getCurrentGroup() {
@@ -24,11 +33,11 @@ public class UserGroupSingleton {
         this.currentGroup = group;
     }
 
-    public User getCurrentUser() {
-        return currentUser;
+    public Team getCurrentTeam() {
+        return currentTeam;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public void setCurrentTeam(Team currentTeam) {
+        this.currentTeam = currentTeam;
     }
 }

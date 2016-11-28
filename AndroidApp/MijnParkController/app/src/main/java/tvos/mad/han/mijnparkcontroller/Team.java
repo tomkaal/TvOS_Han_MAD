@@ -8,10 +8,13 @@ import java.util.ArrayList;
 public class Team {
     private String teamName;
     private ArrayList<User> teamMembers;
+    private int teamPoints;
 
     public Team(String teamName) {
         this.teamName = teamName;
         teamMembers = new ArrayList<>();
+
+        teamPoints = 0;
     }
 
     public void removeTeamMember(User teamMember) {
@@ -24,5 +27,21 @@ public class Team {
 
     public void addTeamMember(User teamMember) {
         teamMembers.add(teamMember);
+    }
+
+    public ArrayList<User> getTeamMembers() {
+        return teamMembers;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public int getTeamPoints() {
+        return teamPoints;
+    }
+
+    public void setTeamPoints(int teamPoints) {
+        this.teamPoints = teamPoints;
     }
 }
