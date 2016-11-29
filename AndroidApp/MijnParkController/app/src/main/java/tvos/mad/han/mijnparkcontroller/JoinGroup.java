@@ -10,12 +10,24 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+
 public class JoinGroup extends AppCompatActivity {
+    private String group;
+    private String uuid = "aaaaa";
+    Socket socket;
 
     public static final String GROUP_MAP_STRING = "group";
     public static final String OWNER_MAP_STRING = "owner";
@@ -28,9 +40,17 @@ public class JoinGroup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_group);
+//        socketSingleton = SocketSingleton.getInstance();
 
         final String userName = getIntent().getExtras().getString("name");
         Log.v("Username", userName);
+
+        try {
+//            socket = IO.socket("http://10.0.2.2:3000");
+            socket = IO.socket("http://192.168.137.1:3000");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         updateGreetingMessageWithUserName(userName);
 
@@ -46,6 +66,19 @@ public class JoinGroup extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int itemPosition = position;
+//                String itemValue = (String) listView.getItemAtPosition(position);
+//                group =  "a123456";
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("user", "Tommie");
+                    jsonObject.put("groupId", uuid);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+//                socket.emit("add_user_to_group", jsonObject.toString());
+
                 Map itemValue = (Map) listView.getItemAtPosition(position);
                 Intent intent = new Intent(JoinGroup.this, JoinTeam.class);
                 Bundle extras = new Bundle();
@@ -58,6 +91,25 @@ public class JoinGroup extends AppCompatActivity {
             }
 
         });
+        socket.on("group_response", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.v("response", "group response");
+//                    JSONObject obj = (JSONObject) args[0]; wanneer het een object is
+                String message = (String) args[0];
+                Log.v("object", message);
+
+
+            }
+        }).on("conform", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                String message = (String) args[0];
+                Log.v("conformation", "room conformation " + message);
+            }
+        });
+
+        socket.connect();
     }
 
     private void addTestGroupsToList() {

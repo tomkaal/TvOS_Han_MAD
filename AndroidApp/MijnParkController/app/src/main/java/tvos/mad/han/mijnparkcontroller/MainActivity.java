@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    private SocketSingleton socketSingleton;
     private UserGroupSingleton userGroupSingleton;
 
     @Override
@@ -29,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                 1);
 
-        socketSingleton = SocketSingleton.getInstance();
         userGroupSingleton = UserGroupSingleton.getInstance();
 
         final EditText userNameInput = (EditText) findViewById(R.id.userNameInput);
@@ -45,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                     userGroupSingleton.setCurrentUser(new User(userName));
 
 //                    socketSingleton.emit("Join group", userNameInput.getText().toString());
+                    // Do http request, returns a userId
+
                     Intent intent = new Intent(MainActivity.this, JoinGroup.class)
                             .putExtra("name", userName);
                     startActivity(intent);
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String groupOwnerName = groupOwnerInput.getText().toString();
                 String groupName = groupNameInput.getText().toString();
+
 
                 if (!groupOwnerName.equals("")) {
                     if (!groupName.equals("")) {
