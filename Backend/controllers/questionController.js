@@ -10,12 +10,19 @@ var Question = mongoose.model('Question');
 exports.answer = function (req, res) {
     var quizId = req.body.quizId;
     var questionId = req.body.questionId;
+    var answerId = req.params.answerId;
     var userId = req.body.userId;
+    var correct = false;
 
     Quiz.findOne({ _id: quizId}, function(err, quiz){
         Question.findOne($and [{ _id: questionId}, {quiz: quiz}], function (err, question){
-            User.findByIdAndUpdate(userId, { $push: { questions: [question]}}, { new: true }, function () {
-                return res.status(200).send();
+            Answer.findOne($and [{ _id: answerId}, {quiz: quiz}], function (err, answer){
+                if(Question.correctAnswer == answer)
+                    correct = true;
+
+                User.findByIdAndUpdate(userId, { $push: {questions: [question, correct]} }, function () {
+                    return res.status(200).send();
+                });
             });
         });
     });
