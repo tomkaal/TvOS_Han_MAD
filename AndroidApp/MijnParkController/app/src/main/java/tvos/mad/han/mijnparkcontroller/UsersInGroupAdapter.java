@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import tvos.mad.han.mijnparkcontroller.model.User;
+
 /**
  * Created by DDulos on 18-Nov-16.
  */

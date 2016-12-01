@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import tvos.mad.han.mijnparkcontroller.model.Group;
+import tvos.mad.han.mijnparkcontroller.model.User;
+
 public class MainActivity extends AppCompatActivity {
 
 

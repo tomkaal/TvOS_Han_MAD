@@ -3,6 +3,8 @@ package tvos.mad.han.mijnparkcontroller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -10,6 +12,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import tvos.mad.han.mijnparkcontroller.model.Group;
+import tvos.mad.han.mijnparkcontroller.model.Team;
+import tvos.mad.han.mijnparkcontroller.model.User;
 
 /**
  * Created by DDulos on 28-Nov-16.
@@ -31,6 +37,15 @@ public class GroupOverviewActivity extends AppCompatActivity {
 
         setupTextViews();
         setupListView();
+
+        Button button = (Button) findViewById(R.id.btn_continue);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GroupOverviewActivity.this, QuizActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupTextViews() {
@@ -58,39 +73,39 @@ public class GroupOverviewActivity extends AppCompatActivity {
 
     private void setupListView() {
         teamListView = (ListView) findViewById(R.id.teamListView);
-//        ArrayList<Team> teams = userGroupSingleton.getCurrentGroup().getTeams();
+        ArrayList<Team> teams = userGroupSingleton.getCurrentGroup().getTeams();
         teamList = new ArrayList<>();
 
-        ArrayList<User> users = userGroupSingleton.getCurrentGroup().getTeams().get(0).getTeamMembers();
-        ArrayList<String> userStringList = new ArrayList<>();
-
-        for (User user : users) {
-            userStringList.add(user.getUserName());
-        }
-
-        int usersInTeam = 4;
-
-        for (int i = 1; i <= 3; i++) {
-            String usersString = "";
-
-            for (int j = 0; j < usersInTeam; j++) {
-                usersString += userStringList.get(0) + "\n";
-                userStringList.remove(0);
-            }
-
-            char teamChar = (char) (64 + i);
-            addTeamToList("Team-" + teamChar, usersString);
-        }
-
-//        for (Team team : teams) {
+//        ArrayList<User> users = userGroupSingleton.getCurrentGroup().getTeams().get(0).getTeamMembers();
+//        ArrayList<String> userStringList = new ArrayList<>();
+//
+//        for (User user : users) {
+//            userStringList.add(user.getUserName());
+//        }
+//
+//        int usersInTeam = 4;
+//
+//        for (int i = 1; i <= 3; i++) {
 //            String usersString = "";
 //
-//            for (User user : team.getTeamMembers()) {
-//                usersString += user.getUserName() + "\n";
+//            for (int j = 0; j < usersInTeam; j++) {
+//                usersString += userStringList.get(0) + "\n";
+//                userStringList.remove(0);
 //            }
 //
-//            addTeamToList(team.getTeamName(), usersString);
+//            char teamChar = (char) (64 + i);
+//            addTeamToList("Team-" + teamChar, 0, usersString);
 //        }
+//        TODO implement when sockets work and teams can be implemented
+        for (Team team : teams) {
+            String usersString = "";
+
+            for (User user : team.getTeamMembers()) {
+                usersString += user.getUserName() + "\n";
+            }
+
+            addTeamToList(team.getTeamName(), team.getTeamPoints(), usersString);
+        }
 
         SimpleAdapter adapter = new SimpleAdapter(this, teamList,
                 android.R.layout.simple_list_item_2,
@@ -100,9 +115,9 @@ public class GroupOverviewActivity extends AppCompatActivity {
         teamListView.setAdapter(adapter);
     }
 
-    private void addTeamToList(String teamName, String usersString) {
+    private void addTeamToList(String teamName, int teamPoints, String usersString) {
         Map<String, String> teamMap = new HashMap<>(2);
-        teamMap.put(TEAM_MAP_STRING, teamName);
+        teamMap.put(TEAM_MAP_STRING, teamName + " - " + teamPoints + " " + getString(R.string.points));
         teamMap.put(TEAMMEMBER_MAP_STRING, usersString);
         teamList.add(teamMap);
     }
