@@ -20,3 +20,21 @@ exports.retrieveOne = function (req, res) {
         });
     });
 };
+
+exports.createOne = function (req, res) {
+    var doc = new Tv(req.body);
+
+    doc.save(function (err) {
+        if (err) {
+            return res.json({
+                doc: null,
+                err: err
+            });
+        }
+
+        return res.json({
+            doc: doc,
+            err: err
+        });
+    });
+};
