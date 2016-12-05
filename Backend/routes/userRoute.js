@@ -8,7 +8,7 @@ var controller = require('../controllers/userController');
 router.route('/user')
     .post(controller.createOne);
 
-router.route('/user/:userId')
-    .put(controller.updateOne);
+/*router.route('/user/:userId')
+    .put(controller.updateOne);*/
 
 module.exports = router;
