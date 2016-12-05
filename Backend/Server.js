@@ -16,6 +16,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 mongoose.connect(config.db);
 
+var userSocketMap = []
+
 mongoose.connection.on('error', function (err) {
     "use strict";
     console.error('MongoDB error: %s', err);
