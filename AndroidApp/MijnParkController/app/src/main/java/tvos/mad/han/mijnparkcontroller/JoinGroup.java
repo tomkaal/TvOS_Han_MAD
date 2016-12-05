@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -57,6 +59,7 @@ public class JoinGroup extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.groupListView);
         groupList = new ArrayList<>();
         addTestGroupsToList();
+        socket.emit("get_groups");
 
 
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -78,16 +81,17 @@ public class JoinGroup extends AppCompatActivity {
                 }
 
 //                socket.emit("add_user_to_group", jsonObject.toString());
+                socket.emit("create_group", jsonObject.toString());
 
-                Map itemValue = (Map) listView.getItemAtPosition(position);
-                Intent intent = new Intent(JoinGroup.this, JoinTeam.class);
-                Bundle extras = new Bundle();
-                extras.putString("name", userName);
-                extras.putString(GROUP_MAP_STRING, (String) itemValue.get(GROUP_MAP_STRING));
-                extras.putString(OWNER_MAP_STRING, (String) itemValue.get(OWNER_MAP_STRING));
-                intent.putExtras(extras);
-
-                startActivity(intent);
+//                Map itemValue = (Map) listView.getItemAtPosition(position);
+//                Intent intent = new Intent(JoinGroup.this, JoinTeam.class);
+//                Bundle extras = new Bundle();
+//                extras.putString("name", userName);
+//                extras.putString(GROUP_MAP_STRING, (String) itemValue.get(GROUP_MAP_STRING));
+//                extras.putString(OWNER_MAP_STRING, (String) itemValue.get(OWNER_MAP_STRING));
+//                intent.putExtras(extras);
+//
+//                startActivity(intent);
             }
 
         });
@@ -107,17 +111,54 @@ public class JoinGroup extends AppCompatActivity {
                 String message = (String) args[0];
                 Log.v("conformation", "room conformation " + message);
             }
+        }).on("update_groups", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.v("response", "Update group");
+
+                JSONArray groupList = (JSONArray) args[0];
+                setGroupsFromServer(groupList);
+            }
         });
 
         socket.connect();
     }
 
+    private void setGroupsFromServer(JSONArray groupList){
+        groupMapList.clear();
+
+        Log.v("response", "setting groups");
+
+        for (int i = 0; i < groupList.length(); i++){
+            try {
+                JSONObject curObj = groupList.getJSONObject(i);
+                String groupName = (String) curObj.get("groupName");
+                String userName = (String) curObj.get("userName");
+                Log.v("response", groupName);
+
+                addGroupToList(groupName, userName);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        Log.v("response", groupMapList.toString());
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
     private void addTestGroupsToList() {
         groupMapList = new ArrayList<>();
-        for (int i = 1; i < 14; i++) {
-            char teamChar = (char) (64+i);
-            addGroupToList("Group-" + teamChar, "owner-" + i);
-        }
+//        for (int i = 1; i < 14; i++) {
+//            char teamChar = (char) (64+i);
+//            addGroupToList("Group-" + teamChar, "owner-" + i);
+//        }
+
         adapter = new SimpleAdapter(this, groupMapList,
                 android.R.layout.simple_list_item_2,
                 new String[]{GROUP_MAP_STRING, OWNER_MAP_STRING},

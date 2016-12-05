@@ -8,7 +8,23 @@ var groups = [
     {
         groupId: "aaaaa",
         groupName: "Klas 4",
-        users: []
+        userId: "tomkaal",
+        userName: "Tom Kaal",
+        users: ["tomkaal"]
+    },
+    {
+        groupId: "bbbbb",
+        groupName: "Klas 8",
+        userId: "wesleyEgberts",
+        userName: "Wesley Egberts",
+        users: ["wesleyEgberts"]
+    },
+    {
+        groupId: "ccccc",
+        groupName: "De tijgers",
+        userId: "dennisDulos",
+        userName: "Dennis Dulos",
+        users: ["dennisDulos"]
     }
 ]
 
@@ -18,32 +34,25 @@ app.get('/', function (req, res) {
 
 
 io.on('connection', function (socket) {
-    socket.on('chat message', function (msg) {
-        console.log('message: ' + msg);
+
+    socket.on('get_groups', function (userObjectString) {
+        console.log("get_groups");
+        socket.emit("update_groups", groups);
     });
-    // userObject --> {userId, groupId)
 
-    //socket.on('add_user_to_group', function(userObjectString) {
-    //    var userObject = JSON.parse(userObjectString);
-    //
-    //    var userId = userObject.userId;
-    //    var groupId = userObject.groupId;
-    //    var groupName = "a123456"; // deze moet opgehaald worden uit de db dmv van de groupId
-    //
-    //    groups.push(
-    //        {
-    //            groupId: groupId,
-    //            groupName: groupName,
-    //            users: [userId]
-    //        }
-    //    )
-    //    //socket.join(groupId)
-    //
-    //});
+    socket.on('create_group', function (userObjectString) {
 
+        groups.push({
+            groupId: guid(),
+            groupName: guid(),
+            userId: "dennisDulos",
+            userName: "Dennis Dulos",
+            users: ["dennisDulos"]
+        })
+        console.log("create_groups");
+        console.log(groups);
 
-    socket.on('add_user_to_group', function (userObjectString) {
-        
+        io.emit("update_groups", groups);
     });
 
     socket.on('add_user_to_group', function (userObjectString) {
