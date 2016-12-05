@@ -1,4 +1,4 @@
-package tvos.mad.han.mijnparkcontroller;
+package tvos.mad.han.mijnparkcontroller.model;
 
 import java.util.ArrayList;
 

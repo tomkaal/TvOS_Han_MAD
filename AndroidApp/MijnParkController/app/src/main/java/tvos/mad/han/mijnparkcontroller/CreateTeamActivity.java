@@ -1,7 +1,7 @@
 package tvos.mad.han.mijnparkcontroller;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import tvos.mad.han.mijnparkcontroller.model.Team;
+import tvos.mad.han.mijnparkcontroller.model.User;
+
 public class CreateTeamActivity extends AppCompatActivity {
     private UserGroupSingleton userGroupSingleton;
 
@@ -23,6 +26,7 @@ public class CreateTeamActivity extends AppCompatActivity {
     private ArrayList<String> teamList;
     private ArrayList<UsersInTeamAdapter> usersInTeamAdapterList;
 
+    private Team selectedTeam;
     private int selectedTeamPosition = 0;
     private int adapterCharIncrement = 65;
 
@@ -62,7 +66,6 @@ public class CreateTeamActivity extends AppCompatActivity {
 
     private void setupListAdapters() {
         ArrayList<User> usersInGroupList = userGroupSingleton.getCurrentGroup().getTeams().get(0).getTeamMembers();
-        usersInGroupList.add(userGroupSingleton.getCurrentGroup().getGroupOwner());
 
         usersInTeamListView = (ListView) findViewById(R.id.listview_inTeam);
         usersInTeamListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -105,6 +108,11 @@ public class CreateTeamActivity extends AppCompatActivity {
     }
 
     private void selectTeam(int position) {
+        if (userGroupSingleton.getCurrentGroup().getTeams().size() == position + 1) {
+            selectedTeam = userGroupSingleton.getCurrentGroup().getTeams().get(position);
+        } else {
+            selectedTeam = userGroupSingleton.getCurrentGroup().getTeams().get(position + 1);
+        }
         selectedTeamPosition = position;
         if (selectedTeamPosition >= usersInTeamAdapterList.size()) {
             selectedTeamPosition = 0;
@@ -116,8 +124,8 @@ public class CreateTeamActivity extends AppCompatActivity {
     private void removeTeam() {
         if (teamList.size() != 1) {
             int lastIndex = teamList.size() - 1;
-
             selectTeam(lastIndex);
+
             UsersInTeamAdapter userAdapter = usersInTeamAdapterList.get(lastIndex);
 
             for (int i = userAdapter.getCount() - 1; i >= 0; i--) {
@@ -131,13 +139,21 @@ public class CreateTeamActivity extends AppCompatActivity {
             if (selectedTeamPosition >= teamList.size())
                 selectedTeamPosition--;
             teamSpinner.setSelection(selectedTeamPosition);
+            selectTeam(selectedTeamPosition);
         }
     }
 
     private void addTeam() {
         if (adapterCharIncrement <= 90) {
+            String teamName = String.valueOf((char) adapterCharIncrement);
+
+            Team team = new Team(teamName);
+
+            userGroupSingleton.getCurrentGroup().addTeam(team);
+            selectedTeam = team;
+
             usersInTeamAdapterList.add(new UsersInTeamAdapter(this, new ArrayList<User>()));
-            teamList.add(String.valueOf((char) adapterCharIncrement));
+            teamList.add(team.getTeamName());
 
             adapterCharIncrement++;
             selectedTeamPosition++;
@@ -159,6 +175,10 @@ public class CreateTeamActivity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                userGroupSingleton.setCurrentTeam(locateGroupOwnerTeam());
+                userGroupSingleton.getCurrentGroup().removeInitTeam();
+                Intent intent = new Intent(CreateTeamActivity.this, GroupOverviewActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -178,6 +198,10 @@ public class CreateTeamActivity extends AppCompatActivity {
         });
     }
 
+//    private Team locateGroupOwnerTeam() {
+//        return null;
+//    }
+
     private void setupGroupInfoText() {
         groupOwner = userGroupSingleton.getCurrentGroup().getGroupOwner().getUserName();
         groupName = userGroupSingleton.getCurrentGroup().getGroupName();
@@ -189,14 +213,22 @@ public class CreateTeamActivity extends AppCompatActivity {
     }
 
     private void addUserInTeam(int position) {
+        if (userGroupSingleton.getCurrentUser().getUserName().equals(usersInGroupAdapter.getItem(position).getUserName()))
+            userGroupSingleton.setCurrentTeam(selectedTeam);
         usersInTeamAdapterList.get(selectedTeamPosition).addUser(usersInGroupAdapter.getItem(position));
+        selectedTeam.addTeamMember(usersInGroupAdapter.getItem(position));
         usersInGroupAdapter.removeItem(position);
+        Log.d("ASDF", "team: " + selectedTeam.getTeamName() + " size: " + selectedTeam.getTeamMembers().size());
         updateUserListCount();
     }
 
     private void removeUserFromTeam(int position) {
+        if (userGroupSingleton.getCurrentUser().getUserName().equals(usersInTeamAdapterList.get(selectedTeamPosition).getItem(position)))
+            userGroupSingleton.setCurrentTeam(null);
         usersInGroupAdapter.addUser(usersInTeamAdapterList.get(selectedTeamPosition).getItem(position));
+        selectedTeam.removeTeamMember(position);
         usersInTeamAdapterList.get(selectedTeamPosition).removeItem(position);
+        Log.d("ASDF", "team: " + selectedTeam.getTeamName() + " size: " + selectedTeam.getTeamMembers().size());
         updateUserListCount();
     }
 

@@ -22,9 +22,10 @@
         <activity android:name=".JoinGroup" />
         <activity android:name=".JoinTeam" />
         <activity android:name=".CreateGroupActivity" />
-        <activity android:name=".BeaconSearchActivity"/>
-        <activity android:name=".CreateTeamActivity"/>
-        <activity android:name=".GroupOverviewActivity"/>
+        <activity android:name=".BeaconSearchActivity" />
+        <activity android:name=".CreateTeamActivity" />
+        <activity android:name=".GroupOverviewActivity" />
+        <activity android:name=".QuizActivity" />
     </application>
 
 </manifest>

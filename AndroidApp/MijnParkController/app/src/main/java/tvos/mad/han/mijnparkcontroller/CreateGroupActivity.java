@@ -3,7 +3,6 @@ package tvos.mad.han.mijnparkcontroller;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,6 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import tvos.mad.han.mijnparkcontroller.model.User;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
@@ -155,6 +156,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.dialog_button_yes),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        userGroupSingleton.getCurrentGroup().addUserToGroup(userGroupSingleton.getCurrentUser());
                         Intent intent = new Intent(CreateGroupActivity.this, CreateTeamActivity.class)
                                 .putExtra("groupowner", groupOwner)
                                 .putExtra("groupname", groupName);

@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import tvos.mad.han.mijnparkcontroller.model.Group;
+import tvos.mad.han.mijnparkcontroller.model.Team;
+import tvos.mad.han.mijnparkcontroller.model.User;
+
 public class JoinTeam extends AppCompatActivity {
 
     private static final String TEAM_MAP_STRING = "team";

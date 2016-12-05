@@ -1,4 +1,4 @@
-package tvos.mad.han.mijnparkcontroller;
+package tvos.mad.han.mijnparkcontroller.model;
 
 import android.util.Log;
 
@@ -47,9 +47,11 @@ public class Group {
         this.teams = teams;
     }
 
-    public void addTeam(String teamName) {
-        teams.add(new Team(teamName));
+    public void addTeam(Team team) {
+        teams.add(team);
     }
+
+
 
     public void addUserToGroup(User user) {
         getTeams().get(0).addTeamMember(user);

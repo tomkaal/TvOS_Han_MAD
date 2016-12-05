@@ -1,4 +1,4 @@
-package tvos.mad.han.mijnparkcontroller;
+package tvos.mad.han.mijnparkcontroller.model;
 
 /**
  * Created by tommi on 21-11-2016.

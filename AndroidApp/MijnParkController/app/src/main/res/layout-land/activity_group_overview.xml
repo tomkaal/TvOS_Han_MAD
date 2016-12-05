@@ -50,6 +50,12 @@
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_button_continue"
+            android:id="@+id/btn_continue"/>
+
     </LinearLayout>
     <View
         android:layout_width="1dp"

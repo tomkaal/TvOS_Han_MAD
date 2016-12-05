@@ -25,4 +25,5 @@
     <string name="status_joining_group">Indelen in groep…</string>
     <string name="status_joining_team">Indelen in team…</string>
     <string name="status_joined_group">Ingedeeld in groep</string>
+    <string name="points">punten</string>
 </resources>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="tvos.mad.han.mijnparkcontroller.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aanmelden bij groep"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spelernaam:"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/userNameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:scrollHorizontally="true"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addUserButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Doorgaan" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Groep aanmaken"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbl_groupowner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Groepsleider:"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/groupOwnerInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:scrollHorizontally="true"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbl_groupname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Groepsnaam:"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/groupNameInput"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:scrollHorizontally="true"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addGroupButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Doorgaan" />
+        <Button
+            android:id="@+id/beaconTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Beacon test" />
+
+    </LinearLayout>
+</LinearLayout>

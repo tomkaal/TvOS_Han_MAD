@@ -1,5 +1,9 @@
 package tvos.mad.han.mijnparkcontroller;
 
+import tvos.mad.han.mijnparkcontroller.model.Group;
+import tvos.mad.han.mijnparkcontroller.model.Team;
+import tvos.mad.han.mijnparkcontroller.model.User;
+
 /**
  * Created by DDulos on 22-Nov-16.
  */

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_quiz"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="tvos.mad.han.mijnparkcontroller.QuizActivity">
+
+    <RelativeLayout
+        android:id="@+id/answer_layout"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/txt_quizanswer_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Antwoord van quiz 1"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/txt_youranswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Uw antwoord: A"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginTop="89dp"
+            android:layout_below="@+id/txt_quizanswer_title"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/txt_correctanswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Het antwoord was: D"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginTop="19dp"
+            android:layout_below="@+id/txt_youranswer"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/quiz_layout"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_answer_a"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@android:color/holo_blue_dark"
+                android:text="A"
+                android:textColor="@android:color/black"
+                android:textSize="40dp" />
+
+            <Button
+                android:id="@+id/btn_answer_b"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@android:color/holo_red_light"
+                android:text="B"
+                android:textColor="@android:color/black"
+                android:textSize="40dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_answer_c"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@android:color/holo_orange_light"
+                android:text="C"
+                android:textColor="@android:color/black"
+                android:textSize="40dp" />
+
+            <Button
+                android:id="@+id/btn_answer_d"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@android:color/holo_green_light"
+                android:text="D"
+                android:textColor="@android:color/black"
+                android:textSize="40dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
