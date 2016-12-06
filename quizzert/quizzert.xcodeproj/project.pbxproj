@@ -1,0 +1,716 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		42DA3E7A1DF6BCB500F55D73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DA3E791DF6BCB500F55D73 /* AppDelegate.swift */; };
+		42DA3E7C1DF6BCB500F55D73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DA3E7B1DF6BCB500F55D73 /* ViewController.swift */; };
+		42DA3E7F1DF6BCB500F55D73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42DA3E7D1DF6BCB500F55D73 /* Main.storyboard */; };
+		42DA3E811DF6BCB500F55D73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42DA3E801DF6BCB500F55D73 /* Assets.xcassets */; };
+		42DA3E8C1DF6BCB500F55D73 /* quizzertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DA3E8B1DF6BCB500F55D73 /* quizzertTests.swift */; };
+		42DA3E971DF6BCB500F55D73 /* quizzertUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DA3E961DF6BCB500F55D73 /* quizzertUITests.swift */; };
+		42DA3EA51DF6BF8800F55D73 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42DA3EA41DF6BF8800F55D73 /* SocketIO.framework */; };
+		899EC7FB079AFE0A0EA22CD9 /* Pods_quizzertUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EAF1C525513DDA7213CE9EB /* Pods_quizzertUITests.framework */; };
+		97A284A38BC46E16DEE8180B /* Pods_quizzert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E62DAE3FAB5F67963B689A /* Pods_quizzert.framework */; };
+		F99313A48724D32E55A1D1E8 /* Pods_quizzertTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722482ED7E035178E9B6303B /* Pods_quizzertTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		42DA3E881DF6BCB500F55D73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42DA3E6E1DF6BCB400F55D73 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42DA3E751DF6BCB400F55D73;
+			remoteInfo = quizzert;
+		};
+		42DA3E931DF6BCB500F55D73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42DA3E6E1DF6BCB400F55D73 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42DA3E751DF6BCB400F55D73;
+			remoteInfo = quizzert;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0DA58971A0F97B27BAB88A20 /* Pods-quizzertTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-quizzertTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-quizzertTests/Pods-quizzertTests.release.xcconfig"; sourceTree = "<group>"; };
+		42DA3E761DF6BCB500F55D73 /* quizzert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quizzert.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		42DA3E791DF6BCB500F55D73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		42DA3E7B1DF6BCB500F55D73 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		42DA3E7E1DF6BCB500F55D73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		42DA3E801DF6BCB500F55D73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		42DA3E821DF6BCB500F55D73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42DA3E871DF6BCB500F55D73 /* quizzertTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = quizzertTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		42DA3E8B1DF6BCB500F55D73 /* quizzertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quizzertTests.swift; sourceTree = "<group>"; };
+		42DA3E8D1DF6BCB500F55D73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42DA3E921DF6BCB500F55D73 /* quizzertUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = quizzertUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		42DA3E961DF6BCB500F55D73 /* quizzertUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quizzertUITests.swift; sourceTree = "<group>"; };
+		42DA3E981DF6BCB500F55D73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42DA3EA41DF6BF8800F55D73 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = "../../Library/Developer/Xcode/DerivedData/quizzert-bpuzjmwfipvoeedvayyqkjobxgao/Build/Products/Debug-appletvsimulator/Socket.IO-Client-Swift/SocketIO.framework"; sourceTree = "<group>"; };
+		4550230C761CDE002CEF359B /* Pods-quizzertTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-quizzertTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-quizzertTests/Pods-quizzertTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6E66D7D61AA8802041FA6AF0 /* Pods-quizzertUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-quizzertUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-quizzertUITests/Pods-quizzertUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		722482ED7E035178E9B6303B /* Pods_quizzertTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_quizzertTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EAF1C525513DDA7213CE9EB /* Pods_quizzertUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_quizzertUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		94CE08E4F41735125341724A /* Pods-quizzert.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-quizzert.release.xcconfig"; path = "Pods/Target Support Files/Pods-quizzert/Pods-quizzert.release.xcconfig"; sourceTree = "<group>"; };
+		A32446613C20DB20F08D2982 /* Pods-quizzert.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-quizzert.debug.xcconfig"; path = "Pods/Target Support Files/Pods-quizzert/Pods-quizzert.debug.xcconfig"; sourceTree = "<group>"; };
+		EA4FDB94CF8827892BD41672 /* Pods-quizzertUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-quizzertUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-quizzertUITests/Pods-quizzertUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F2E62DAE3FAB5F67963B689A /* Pods_quizzert.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_quizzert.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		42DA3E731DF6BCB400F55D73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42DA3EA51DF6BF8800F55D73 /* SocketIO.framework in Frameworks */,
+				97A284A38BC46E16DEE8180B /* Pods_quizzert.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42DA3E841DF6BCB500F55D73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F99313A48724D32E55A1D1E8 /* Pods_quizzertTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42DA3E8F1DF6BCB500F55D73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				899EC7FB079AFE0A0EA22CD9 /* Pods_quizzertUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		42DA3E6D1DF6BCB400F55D73 = {
+			isa = PBXGroup;
+			children = (
+				42DA3E781DF6BCB500F55D73 /* quizzert */,
+				42DA3E8A1DF6BCB500F55D73 /* quizzertTests */,
+				42DA3E951DF6BCB500F55D73 /* quizzertUITests */,
+				42DA3E771DF6BCB500F55D73 /* Products */,
+				C4E2919BF5F008F7F541FD47 /* Pods */,
+				EA964E1F17A10F4E41EE501F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		42DA3E771DF6BCB500F55D73 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				42DA3E761DF6BCB500F55D73 /* quizzert.app */,
+				42DA3E871DF6BCB500F55D73 /* quizzertTests.xctest */,
+				42DA3E921DF6BCB500F55D73 /* quizzertUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		42DA3E781DF6BCB500F55D73 /* quizzert */ = {
+			isa = PBXGroup;
+			children = (
+				42DA3E791DF6BCB500F55D73 /* AppDelegate.swift */,
+				42DA3E7B1DF6BCB500F55D73 /* ViewController.swift */,
+				42DA3E7D1DF6BCB500F55D73 /* Main.storyboard */,
+				42DA3E801DF6BCB500F55D73 /* Assets.xcassets */,
+				42DA3E821DF6BCB500F55D73 /* Info.plist */,
+			);
+			path = quizzert;
+			sourceTree = "<group>";
+		};
+		42DA3E8A1DF6BCB500F55D73 /* quizzertTests */ = {
+			isa = PBXGroup;
+			children = (
+				42DA3E8B1DF6BCB500F55D73 /* quizzertTests.swift */,
+				42DA3E8D1DF6BCB500F55D73 /* Info.plist */,
+			);
+			path = quizzertTests;
+			sourceTree = "<group>";
+		};
+		42DA3E951DF6BCB500F55D73 /* quizzertUITests */ = {
+			isa = PBXGroup;
+			children = (
+				42DA3E961DF6BCB500F55D73 /* quizzertUITests.swift */,
+				42DA3E981DF6BCB500F55D73 /* Info.plist */,
+			);
+			path = quizzertUITests;
+			sourceTree = "<group>";
+		};
+		C4E2919BF5F008F7F541FD47 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A32446613C20DB20F08D2982 /* Pods-quizzert.debug.xcconfig */,
+				94CE08E4F41735125341724A /* Pods-quizzert.release.xcconfig */,
+				4550230C761CDE002CEF359B /* Pods-quizzertTests.debug.xcconfig */,
+				0DA58971A0F97B27BAB88A20 /* Pods-quizzertTests.release.xcconfig */,
+				6E66D7D61AA8802041FA6AF0 /* Pods-quizzertUITests.debug.xcconfig */,
+				EA4FDB94CF8827892BD41672 /* Pods-quizzertUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EA964E1F17A10F4E41EE501F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42DA3EA41DF6BF8800F55D73 /* SocketIO.framework */,
+				F2E62DAE3FAB5F67963B689A /* Pods_quizzert.framework */,
+				722482ED7E035178E9B6303B /* Pods_quizzertTests.framework */,
+				8EAF1C525513DDA7213CE9EB /* Pods_quizzertUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		42DA3E751DF6BCB400F55D73 /* quizzert */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42DA3E9B1DF6BCB500F55D73 /* Build configuration list for PBXNativeTarget "quizzert" */;
+			buildPhases = (
+				9AC1E6FE435E43D9D6A68A19 /* [CP] Check Pods Manifest.lock */,
+				42DA3E721DF6BCB400F55D73 /* Sources */,
+				42DA3E731DF6BCB400F55D73 /* Frameworks */,
+				42DA3E741DF6BCB400F55D73 /* Resources */,
+				C35526F4414E62440733D988 /* [CP] Embed Pods Frameworks */,
+				F14B5B18C0A7BBE736BA0CE4 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = quizzert;
+			productName = quizzert;
+			productReference = 42DA3E761DF6BCB500F55D73 /* quizzert.app */;
+			productType = "com.apple.product-type.application";
+		};
+		42DA3E861DF6BCB500F55D73 /* quizzertTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42DA3E9E1DF6BCB500F55D73 /* Build configuration list for PBXNativeTarget "quizzertTests" */;
+			buildPhases = (
+				CCB302AABBB3A7C8B4C6A7BE /* [CP] Check Pods Manifest.lock */,
+				42DA3E831DF6BCB500F55D73 /* Sources */,
+				42DA3E841DF6BCB500F55D73 /* Frameworks */,
+				42DA3E851DF6BCB500F55D73 /* Resources */,
+				9C25B35BA5E029325381FC6F /* [CP] Embed Pods Frameworks */,
+				9E93D1ED580843D424F1D4BA /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				42DA3E891DF6BCB500F55D73 /* PBXTargetDependency */,
+			);
+			name = quizzertTests;
+			productName = quizzertTests;
+			productReference = 42DA3E871DF6BCB500F55D73 /* quizzertTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		42DA3E911DF6BCB500F55D73 /* quizzertUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42DA3EA11DF6BCB500F55D73 /* Build configuration list for PBXNativeTarget "quizzertUITests" */;
+			buildPhases = (
+				CF2CC691B2F2EA414A9769D6 /* [CP] Check Pods Manifest.lock */,
+				42DA3E8E1DF6BCB500F55D73 /* Sources */,
+				42DA3E8F1DF6BCB500F55D73 /* Frameworks */,
+				42DA3E901DF6BCB500F55D73 /* Resources */,
+				CC1256920D78042E54DCD2E3 /* [CP] Embed Pods Frameworks */,
+				D1F3237E563E6AFB6DACAA7C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				42DA3E941DF6BCB500F55D73 /* PBXTargetDependency */,
+			);
+			name = quizzertUITests;
+			productName = quizzertUITests;
+			productReference = 42DA3E921DF6BCB500F55D73 /* quizzertUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		42DA3E6E1DF6BCB400F55D73 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "HAN IVS";
+				TargetAttributes = {
+					42DA3E751DF6BCB400F55D73 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+					42DA3E861DF6BCB500F55D73 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 42DA3E751DF6BCB400F55D73;
+					};
+					42DA3E911DF6BCB500F55D73 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 42DA3E751DF6BCB400F55D73;
+					};
+				};
+			};
+			buildConfigurationList = 42DA3E711DF6BCB400F55D73 /* Build configuration list for PBXProject "quizzert" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 42DA3E6D1DF6BCB400F55D73;
+			productRefGroup = 42DA3E771DF6BCB500F55D73 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				42DA3E751DF6BCB400F55D73 /* quizzert */,
+				42DA3E861DF6BCB500F55D73 /* quizzertTests */,
+				42DA3E911DF6BCB500F55D73 /* quizzertUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		42DA3E741DF6BCB400F55D73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42DA3E811DF6BCB500F55D73 /* Assets.xcassets in Resources */,
+				42DA3E7F1DF6BCB500F55D73 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42DA3E851DF6BCB500F55D73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42DA3E901DF6BCB500F55D73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9AC1E6FE435E43D9D6A68A19 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9C25B35BA5E029325381FC6F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-quizzertTests/Pods-quizzertTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E93D1ED580843D424F1D4BA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-quizzertTests/Pods-quizzertTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C35526F4414E62440733D988 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-quizzert/Pods-quizzert-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC1256920D78042E54DCD2E3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-quizzertUITests/Pods-quizzertUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CCB302AABBB3A7C8B4C6A7BE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CF2CC691B2F2EA414A9769D6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D1F3237E563E6AFB6DACAA7C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-quizzertUITests/Pods-quizzertUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F14B5B18C0A7BBE736BA0CE4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-quizzert/Pods-quizzert-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		42DA3E721DF6BCB400F55D73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42DA3E7C1DF6BCB500F55D73 /* ViewController.swift in Sources */,
+				42DA3E7A1DF6BCB500F55D73 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42DA3E831DF6BCB500F55D73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42DA3E8C1DF6BCB500F55D73 /* quizzertTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42DA3E8E1DF6BCB500F55D73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42DA3E971DF6BCB500F55D73 /* quizzertUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		42DA3E891DF6BCB500F55D73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42DA3E751DF6BCB400F55D73 /* quizzert */;
+			targetProxy = 42DA3E881DF6BCB500F55D73 /* PBXContainerItemProxy */;
+		};
+		42DA3E941DF6BCB500F55D73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42DA3E751DF6BCB400F55D73 /* quizzert */;
+			targetProxy = 42DA3E931DF6BCB500F55D73 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		42DA3E7D1DF6BCB500F55D73 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				42DA3E7E1DF6BCB500F55D73 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		42DA3E991DF6BCB500F55D73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		42DA3E9A1DF6BCB500F55D73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		42DA3E9C1DF6BCB500F55D73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A32446613C20DB20F08D2982 /* Pods-quizzert.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = quizzert/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.quizzert;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		42DA3E9D1DF6BCB500F55D73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94CE08E4F41735125341724A /* Pods-quizzert.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = quizzert/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.quizzert;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		42DA3E9F1DF6BCB500F55D73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4550230C761CDE002CEF359B /* Pods-quizzertTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = quizzertTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.quizzertTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/quizzert.app/quizzert";
+			};
+			name = Debug;
+		};
+		42DA3EA01DF6BCB500F55D73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0DA58971A0F97B27BAB88A20 /* Pods-quizzertTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = quizzertTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.quizzertTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/quizzert.app/quizzert";
+			};
+			name = Release;
+		};
+		42DA3EA21DF6BCB500F55D73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E66D7D61AA8802041FA6AF0 /* Pods-quizzertUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = quizzertUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.quizzertUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = quizzert;
+			};
+			name = Debug;
+		};
+		42DA3EA31DF6BCB500F55D73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA4FDB94CF8827892BD41672 /* Pods-quizzertUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = quizzertUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.quizzertUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = quizzert;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		42DA3E711DF6BCB400F55D73 /* Build configuration list for PBXProject "quizzert" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42DA3E991DF6BCB500F55D73 /* Debug */,
+				42DA3E9A1DF6BCB500F55D73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42DA3E9B1DF6BCB500F55D73 /* Build configuration list for PBXNativeTarget "quizzert" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42DA3E9C1DF6BCB500F55D73 /* Debug */,
+				42DA3E9D1DF6BCB500F55D73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42DA3E9E1DF6BCB500F55D73 /* Build configuration list for PBXNativeTarget "quizzertTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42DA3E9F1DF6BCB500F55D73 /* Debug */,
+				42DA3EA01DF6BCB500F55D73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42DA3EA11DF6BCB500F55D73 /* Build configuration list for PBXNativeTarget "quizzertUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42DA3EA21DF6BCB500F55D73 /* Debug */,
+				42DA3EA31DF6BCB500F55D73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 42DA3E6E1DF6BCB400F55D73 /* Project object */;
+}
