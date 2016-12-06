@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                 1);
 
+        // TODO implement HTTP requester
+        final HttpRequestHelper requestHelper = new HttpRequestHelper();
+
+
         userGroupSingleton = UserGroupSingleton.getInstance();
 
         final EditText userNameInput = (EditText) findViewById(R.id.userNameInput);
@@ -61,29 +65,31 @@ public class MainActivity extends AppCompatActivity {
         final Button addGroupButton = (Button) findViewById(R.id.addGroupButton);
         addGroupButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String groupOwnerName = groupOwnerInput.getText().toString();
-                String groupName = groupNameInput.getText().toString();
 
-
-                if (!groupOwnerName.equals("")) {
-                    if (!groupName.equals("")) {
-                        User groupOwner = new User(groupOwnerName);
-                        userGroupSingleton.setCurrentUser(groupOwner);
-                        userGroupSingleton.setCurrentGroup(new Group(groupName, groupOwner));
-
-                        Intent intent = new Intent(MainActivity.this, CreateGroupActivity.class)
-                                .putExtra("groupowner", groupOwnerName)
-                                .putExtra("groupname", groupName);
-                        startActivity(intent);
-//                socketSingleton.emit("Create group", groupName.toString());
-                        // TODO Create group -- groupId, userId
-
-                    } else {
-                        createMissingDataDialog("groupname");
-                    }
-                } else {
-                    createMissingDataDialog("groupowner");
-                }
+                requestHelper.sendRequest(MainActivity.this, null);
+//                String groupOwnerName = groupOwnerInput.getText().toString();
+//                String groupName = groupNameInput.getText().toString();
+//
+//
+//                if (!groupOwnerName.equals("")) {
+//                    if (!groupName.equals("")) {
+//                        User groupOwner = new User(groupOwnerName);
+//                        userGroupSingleton.setCurrentUser(groupOwner);
+//                        userGroupSingleton.setCurrentGroup(new Group(groupName, groupOwner));
+//
+//                        Intent intent = new Intent(MainActivity.this, CreateGroupActivity.class)
+//                                .putExtra("groupowner", groupOwnerName)
+//                                .putExtra("groupname", groupName);
+//                        startActivity(intent);
+////                socketSingleton.emit("Create group", groupName.toString());
+//                        // TODO Create group -- groupId, userId
+//
+//                    } else {
+//                        createMissingDataDialog("groupname");
+//                    }
+//                } else {
+//                    createMissingDataDialog("groupowner");
+//                }
             }
         });
 
