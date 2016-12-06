@@ -52,9 +52,9 @@ public class Group {
     }
 
 
-
     public void addUserToGroup(User user) {
-        getTeams().get(0).addTeamMember(user);
+        if (!getTeams().get(0).getTeamMembers().contains(user))
+            getTeams().get(0).addTeamMember(user);
     }
 
     public void removeUserFromGroup(User user) {

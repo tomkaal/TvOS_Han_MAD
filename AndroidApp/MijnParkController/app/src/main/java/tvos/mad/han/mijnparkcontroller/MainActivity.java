@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!userName.equals("")) {
                     userGroupSingleton.setCurrentUser(new User(userName));
+                    // TODO Create user -- userId
 
 //                    socketSingleton.emit("Join group", userNameInput.getText().toString());
                     // Do http request, returns a userId
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                                 .putExtra("groupname", groupName);
                         startActivity(intent);
 //                socketSingleton.emit("Create group", groupName.toString());
+                        // TODO Create group -- groupId, userId
+
                     } else {
                         createMissingDataDialog("groupname");
                     }
