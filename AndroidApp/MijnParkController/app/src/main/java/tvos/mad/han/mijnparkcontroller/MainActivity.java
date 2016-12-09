@@ -60,10 +60,9 @@ public class MainActivity extends AppCompatActivity {
         final Button addGroupButton = (Button) findViewById(R.id.addGroupButton);
         addGroupButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-//                HttpRequestHelper.testTeamsForGroup(MainActivity.this);
                 String groupOwnerName = groupOwnerInput.getText().toString();
                 String groupName = groupNameInput.getText().toString();
+
 
                 if (!groupOwnerName.equals("")) {
                     if (!groupName.equals("")) {
@@ -73,13 +72,14 @@ public class MainActivity extends AppCompatActivity {
                         userGroupSingleton.setCurrentUser(groupOwner);
                         userGroupSingleton.setCurrentGroup(new Group(groupName, groupOwner));
 
+                        String groupId = "aaaaa";
+                        String userId = "u1";
                         Intent intent = new Intent(MainActivity.this, CreateGroupActivity.class)
+                                .putExtra("groupId", groupId)
+                                .putExtra("userId", userId)
                                 .putExtra("groupowner", groupOwnerName)
                                 .putExtra("groupname", groupName);
                         startActivity(intent);
-//                socketSingleton.emit("Create group", groupName.toString());
-                        // TODO Create group -- groupId, userId
-
                     } else {
                         createMissingDataDialog("groupname");
                     }

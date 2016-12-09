@@ -12,8 +12,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import tvos.mad.han.mijnparkcontroller.model.Group;
 import tvos.mad.han.mijnparkcontroller.model.Team;
 import tvos.mad.han.mijnparkcontroller.model.User;
 
@@ -25,6 +30,7 @@ public class CreateTeamActivity extends AppCompatActivity {
     private Spinner teamSpinner;
     private ArrayList<String> teamList;
     private ArrayList<UsersInTeamAdapter> usersInTeamAdapterList;
+    private SocketSingleton socketSingleton;
 
     private Team selectedTeam;
     private int selectedTeamPosition = 0;
@@ -51,6 +57,7 @@ public class CreateTeamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
         userGroupSingleton = UserGroupSingleton.getInstance();
+        socketSingleton = SocketSingleton.getInstance();
 
         setupGroupInfoText();
         setupButtons();
@@ -177,6 +184,10 @@ public class CreateTeamActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                userGroupSingleton.setCurrentTeam(locateGroupOwnerTeam());
                 userGroupSingleton.getCurrentGroup().removeInitTeam();
+
+                Log.v("teams", generateTeamJSONObject().toString());
+                socketSingleton.emit("teams_created_from_owner", generateTeamJSONObject().toString());
+
                 Intent intent = new Intent(CreateTeamActivity.this, GroupOverviewActivity.class);
                 startActivity(intent);
             }
@@ -197,6 +208,40 @@ public class CreateTeamActivity extends AppCompatActivity {
             }
         });
     }
+
+    private JSONObject generateTeamJSONObject() {
+        JSONObject teamsJSONObject = new JSONObject();
+
+        ArrayList<Team> team = userGroupSingleton.getCurrentGroup().getTeams();
+
+        try {
+            teamsJSONObject.put("groupId", userGroupSingleton.getCurrentGroup().getGroupId());
+            Log.v("teams", userGroupSingleton.getCurrentGroup().getGroupId());
+            JSONArray teamArray = new JSONArray();
+
+            for (int i = 0; i < team.size(); i++) {
+                JSONObject teamObject = new JSONObject();
+                JSONArray userArray = new JSONArray();
+                teamObject.put("name", team.get(i).getTeamName());
+                for (int j = 0; j < team.get(i).getTeamMembers().size(); j ++){
+                    JSONObject userIdObject = new JSONObject();
+                    String userId = team.get(i).getTeamMembers().get(j).getUserId();
+                    userIdObject.put("id", userId);
+                    userArray.put(userIdObject);
+
+                }
+                teamObject.put("users", userArray);
+                teamArray.put(teamObject);
+            }
+            teamsJSONObject.put("teams", teamArray);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return teamsJSONObject;
+    }
+
 
 //    private Team locateGroupOwnerTeam() {
 //        return null;

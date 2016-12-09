@@ -5,19 +5,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import tvos.mad.han.mijnparkcontroller.model.User;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
     private UserGroupSingleton userGroupSingleton;
+    private SocketSingleton socketSingleton;
 
     private ListView userRequestsListView;
 
@@ -30,21 +40,47 @@ public class CreateGroupActivity extends AppCompatActivity {
     private String groupName;
     private TextView groupNameText;
 
+    private String userId;
+    private String groupId;
+
     private TextView userRequestsText;
     private TextView inGroupText;
     private Button cancelButton;
     private Button continueButton;
+
+
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group);
         userGroupSingleton = UserGroupSingleton.getInstance();
+        socketSingleton = SocketSingleton.getInstance();
 
         setupGroupInfoText();
         setupButtons();
         setupListAdapters();
         setupUserInfoTexts();
+        createSocketConnection();
+        addSocketListeners();
+
+    }
+
+    private void createSocketConnection(){
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userId", userId);
+            jsonObject.put("groupId", groupId);
+            jsonObject.put("userName", groupOwner);
+            jsonObject.put("groupName", groupName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        socketSingleton.emit("add_user_to_group", jsonObject.toString());
+
     }
 
     private void setupUserInfoTexts() {
@@ -60,9 +96,9 @@ public class CreateGroupActivity extends AppCompatActivity {
         userRequestsAdapter = new UserRequestsAdapter(this, usersInRangeList);
         usersInGroupAdapter = new UsersInGroupAdapter(this, usersInGroupList);
 
-        for (int i = 1; i <= 8; i++) {
-            addUserGroupRequest("User" + i, "u" + i);
-        }
+//        for (int i = 1; i <= 8; i++) { // generate users for list
+//            addUserGroupRequest("User" + i, "u" + i);
+//        }
 
         userRequestsListView = (ListView) findViewById(R.id.listview_usersrequests);
         userRequestsListView.setAdapter(userRequestsAdapter);
@@ -81,6 +117,49 @@ public class CreateGroupActivity extends AppCompatActivity {
                 removeUserFromGroup(position);
             }
         });
+    }
+
+    private void addSocketListeners(){
+        socketSingleton.on("user_list_changed", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.v("response", "updatedUsers");
+                JSONObject jsonObject = (JSONObject) args[0];// wanneer het een object is
+
+                try {
+                    String receivedUserName = (String) jsonObject.get("userName");
+                    String receivedUserId = (String) jsonObject.get("userId");
+                    user = new User(receivedUserId, receivedUserName);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(!userRequestsAdapter.containsUser(user) && !usersInGroupAdapter.containsUser(user)){
+                                userRequestsAdapter.addUser(user);
+                            }
+                        }
+                    });
+
+                    Log.v("usernameresponse", receivedUserName);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    private JSONObject createJsonUserObject(String userId, String groupId){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userId", userId);
+            jsonObject.put("groupId", groupId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject;
+
     }
 
     private void setupButtons() {
@@ -103,11 +182,15 @@ public class CreateGroupActivity extends AppCompatActivity {
     private void setupGroupInfoText() {
         groupOwner = getIntent().getExtras().getString("groupowner");
         groupName = getIntent().getExtras().getString("groupname");
+        groupId = getIntent().getExtras().getString("groupId");
+        userId = getIntent().getExtras().getString("userId");
 
         groupNameText = (TextView) findViewById(R.id.txt_groupname);
         groupNameText.setText(getString(R.string.lbl_groupname) + ": " + groupName);
         groupOwnerText = (TextView) findViewById(R.id.txt_groupowner);
         groupOwnerText.setText(getString(R.string.lbl_groupowner) + ": " + groupOwner);
+
+        userGroupSingleton.getCurrentGroup().setGroupId(groupId);
     }
 
     // Called from Socket
@@ -133,13 +216,21 @@ public class CreateGroupActivity extends AppCompatActivity {
         userRequestsAdapter.removeItem(position);
         userGroupSingleton.getCurrentGroup().addUserToGroup(user);
         updateUserListCount();
+        JSONObject userObject = createJsonUserObject(user.getUserId(), groupId);
+        socketSingleton.emit("join_user_in_acceptance_group", userObject.toString());
+
     }
 
+
+
     private void removeUserFromGroup(int position) {
-        userRequestsAdapter.addUser(usersInGroupAdapter.getItem(position));
+        User user = usersInGroupAdapter.getItem(position);
+        userRequestsAdapter.addUser(user);
         usersInGroupAdapter.removeItem(position);
         userGroupSingleton.getCurrentGroup().removeUserFromGroup(position);
         updateUserListCount();
+        JSONObject userObject = createJsonUserObject(user.getUserId(), groupId);
+        socketSingleton.emit("remove_user_in_acceptance_group", userObject.toString());
     }
 
     private void updateUserListCount() {
@@ -156,6 +247,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.dialog_button_yes),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        socketSingleton.emit("accept_group_organizing", groupId);
                         userGroupSingleton.getCurrentGroup().addUserToGroup(userGroupSingleton.getCurrentUser());
                         Intent intent = new Intent(CreateGroupActivity.this, CreateTeamActivity.class)
                                 .putExtra("groupowner", groupOwner)
