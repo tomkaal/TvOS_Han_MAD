@@ -42,41 +42,22 @@ public class QuizActivity extends AppCompatActivity {
         quizLayout.setVisibility(View.VISIBLE);
         answerLayout.setVisibility(View.GONE);
 
-
-//        answerLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
-
         Button buttonA = (Button) findViewById(R.id.btn_answer_a);
         Button buttonB = (Button) findViewById(R.id.btn_answer_b);
         Button buttonC = (Button) findViewById(R.id.btn_answer_c);
         Button buttonD = (Button) findViewById(R.id.btn_answer_d);
 
-        buttonA.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 answerQuiz(String.valueOf(((Button) v).getText()));
             }
-        });
-        buttonB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                answerQuiz(String.valueOf(((Button) v).getText()));
-            }
-        });
-        buttonC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                answerQuiz(String.valueOf(((Button) v).getText()));
-            }
-        });
-        buttonD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                answerQuiz(String.valueOf(((Button) v).getText()));
-            }
-        });
+        };
 
-
-//        buttonA.setBackground(Integer.parseInt(ContextCompat.getColor(this, android.R.color.holo_red_light)));
+        buttonA.setOnClickListener(clickListener);
+        buttonB.setOnClickListener(clickListener);
+        buttonC.setOnClickListener(clickListener);
+        buttonD.setOnClickListener(clickListener);
     }
 
     private void answerQuiz(final String answer) {

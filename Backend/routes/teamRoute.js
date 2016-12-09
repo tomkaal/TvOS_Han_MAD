@@ -8,6 +8,9 @@ var controller = require('../controllers/teamController');
 router.route('/team')
     .post(controller.createTeams);
 
+router.route('/team/getScore')
+    .get(controller.getScore);
+
 /*router.route('/team/accept')
     .post(controller.accept);*/
 

@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                 1);
 
+        // TODO implement HTTP requester
+        final HttpRequestHelper requestHelper = new HttpRequestHelper();
+
+
         userGroupSingleton = UserGroupSingleton.getInstance();
 
         final EditText userNameInput = (EditText) findViewById(R.id.userNameInput);
@@ -44,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!userName.equals("")) {
                     userGroupSingleton.setCurrentUser(new User(userName));
+                    // TODO Create user -- userId
 
 //                    socketSingleton.emit("Join group", userNameInput.getText().toString());
                     // Do http request, returns a userId and group id

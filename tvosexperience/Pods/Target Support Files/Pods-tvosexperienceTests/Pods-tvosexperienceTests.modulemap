@@ -1,0 +1,6 @@
+framework module Pods_tvosexperienceTests {
+  umbrella header "Pods-tvosexperienceTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
