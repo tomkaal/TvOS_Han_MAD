@@ -61,11 +61,10 @@ exports.createTeams = function (req, res) {
             });
         });
 };
-// Check if all answers are asked
-exports.getScore = function (req, res) {
-    var teamId = req.body.teamId;
-    var correctCount = 0;
-    var wrongCount = 0;
+
+exports.totalscore = function (req, res) {
+    var teamId = req.params.teamId;
+    var totalScore = 0;
 
     Team.find({ _id: teamId}).
     populate('users').
@@ -76,17 +75,9 @@ exports.getScore = function (req, res) {
                 if(answeredQuestion == null) {
                     return;
                 }
-                if(answeredQuestion.correct == true) {
-                    correctCount += 1;
-                } else if(answeredQuestion.correct == false) {
-                    wrongCount += 1;
-                }
+                totalScore += answeredQuestion.score;
             });
-            if(correctCount >= wrongCount) {
-                return res.status(200)
-            } else if(wrongCount < correctCount){
-                return res.status(400)
-            }
+            return(res.json({doc: totalScore}))
         });
     });
 };
