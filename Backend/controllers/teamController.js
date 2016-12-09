@@ -66,18 +66,16 @@ exports.totalscore = function (req, res) {
     var teamId = req.params.teamId;
     var totalScore = 0;
 
-    Team.find({ _id: teamId}).
-    populate('users').
-    exec(function (err, team) {
-        team.users.forEach(function(teamUser) {
-            teamUser.populate('questions');
-            teamUser.questions.forEach(function(answeredQuestion) {
-                if(answeredQuestion == null) {
-                    return;
-                }
-                totalScore += answeredQuestion.score;
-            });
-            return(res.json({doc: totalScore}))
+    Team.findOne({ _id: teamId}, function(err, team) {
+        team.populate('questions');
+        team.questions.forEach(function(question) {
+            if(question == null) {
+                return;
+            }
+            if(question.correct == true) {
+                totalScore += question.score;
+            }
         });
+        return(res.json({doc: totalScore}));
     });
 };
