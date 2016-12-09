@@ -1,0 +1,732 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4217174C1DFAA7E200430495 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217174B1DFAA7E200430495 /* AppDelegate.swift */; };
+		4217174E1DFAA7E200430495 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217174D1DFAA7E200430495 /* DescriptionViewController.swift */; };
+		421717511DFAA7E200430495 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4217174F1DFAA7E200430495 /* Main.storyboard */; };
+		421717531DFAA7E200430495 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 421717521DFAA7E200430495 /* Assets.xcassets */; };
+		4217175E1DFAA7E200430495 /* tvosexperienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4217175D1DFAA7E200430495 /* tvosexperienceTests.swift */; };
+		421717691DFAA7E200430495 /* tvosexperienceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421717681DFAA7E200430495 /* tvosexperienceUITests.swift */; };
+		4244694F1DFAA9FF00C7F748 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244694E1DFAA9FF00C7F748 /* SwiftyJSON.swift */; };
+		424469511DFAB7AF00C7F748 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424469501DFAB7AF00C7F748 /* SocketIOManager.swift */; };
+		424469531DFABD7600C7F748 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424469521DFABD7600C7F748 /* QuestionViewController.swift */; };
+		68E24199DFD6E342F4C4A726 /* Pods_tvosexperienceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AC40ECF1DBC643291454BC /* Pods_tvosexperienceUITests.framework */; };
+		81B5AF66800A308EDD94882B /* Pods_tvosexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F7AF147B1243110FE2ABF1C /* Pods_tvosexperience.framework */; };
+		C2D74159EB413B2F01107BBD /* Pods_tvosexperienceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F7FB396668FD9685CFA0F /* Pods_tvosexperienceTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4217175A1DFAA7E200430495 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 421717401DFAA7E200430495 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 421717471DFAA7E200430495;
+			remoteInfo = tvosexperience;
+		};
+		421717651DFAA7E200430495 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 421717401DFAA7E200430495 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 421717471DFAA7E200430495;
+			remoteInfo = tvosexperience;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		070F7FB396668FD9685CFA0F /* Pods_tvosexperienceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvosexperienceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		36F776DB6BB914C6E8CAA9A8 /* Pods-tvosexperienceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvosexperienceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tvosexperienceUITests/Pods-tvosexperienceUITests.release.xcconfig"; sourceTree = "<group>"; };
+		421717481DFAA7E200430495 /* tvosexperience.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tvosexperience.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4217174B1DFAA7E200430495 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4217174D1DFAA7E200430495 /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
+		421717501DFAA7E200430495 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		421717521DFAA7E200430495 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		421717541DFAA7E200430495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		421717591DFAA7E200430495 /* tvosexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tvosexperienceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4217175D1DFAA7E200430495 /* tvosexperienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tvosexperienceTests.swift; sourceTree = "<group>"; };
+		4217175F1DFAA7E200430495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		421717641DFAA7E200430495 /* tvosexperienceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tvosexperienceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		421717681DFAA7E200430495 /* tvosexperienceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tvosexperienceUITests.swift; sourceTree = "<group>"; };
+		4217176A1DFAA7E200430495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4244694E1DFAA9FF00C7F748 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		424469501DFAB7AF00C7F748 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		424469521DFABD7600C7F748 /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		6C83D7BBBDF96EBF6B1F4151 /* Pods-tvosexperienceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvosexperienceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tvosexperienceTests/Pods-tvosexperienceTests.release.xcconfig"; sourceTree = "<group>"; };
+		7F7AF147B1243110FE2ABF1C /* Pods_tvosexperience.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvosexperience.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3AC40ECF1DBC643291454BC /* Pods_tvosexperienceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvosexperienceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4DA703842980D25E18D1EDF /* Pods-tvosexperience.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvosexperience.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tvosexperience/Pods-tvosexperience.debug.xcconfig"; sourceTree = "<group>"; };
+		C7F6605FF8D6FD3CB78D4E10 /* Pods-tvosexperienceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvosexperienceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tvosexperienceTests/Pods-tvosexperienceTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CB5C5F5D29DDEA6A3F55A156 /* Pods-tvosexperience.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvosexperience.release.xcconfig"; path = "Pods/Target Support Files/Pods-tvosexperience/Pods-tvosexperience.release.xcconfig"; sourceTree = "<group>"; };
+		FA1CE06EFC332723D15C552B /* Pods-tvosexperienceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvosexperienceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tvosexperienceUITests/Pods-tvosexperienceUITests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		421717451DFAA7E200430495 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81B5AF66800A308EDD94882B /* Pods_tvosexperience.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		421717561DFAA7E200430495 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2D74159EB413B2F01107BBD /* Pods_tvosexperienceTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		421717611DFAA7E200430495 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68E24199DFD6E342F4C4A726 /* Pods_tvosexperienceUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2DE8E29C6E67581929249A1C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B4DA703842980D25E18D1EDF /* Pods-tvosexperience.debug.xcconfig */,
+				CB5C5F5D29DDEA6A3F55A156 /* Pods-tvosexperience.release.xcconfig */,
+				C7F6605FF8D6FD3CB78D4E10 /* Pods-tvosexperienceTests.debug.xcconfig */,
+				6C83D7BBBDF96EBF6B1F4151 /* Pods-tvosexperienceTests.release.xcconfig */,
+				FA1CE06EFC332723D15C552B /* Pods-tvosexperienceUITests.debug.xcconfig */,
+				36F776DB6BB914C6E8CAA9A8 /* Pods-tvosexperienceUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4217173F1DFAA7E200430495 = {
+			isa = PBXGroup;
+			children = (
+				4217174A1DFAA7E200430495 /* tvosexperience */,
+				4217175C1DFAA7E200430495 /* tvosexperienceTests */,
+				421717671DFAA7E200430495 /* tvosexperienceUITests */,
+				421717491DFAA7E200430495 /* Products */,
+				2DE8E29C6E67581929249A1C /* Pods */,
+				429A947E0850C23CB67B6399 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		421717491DFAA7E200430495 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				421717481DFAA7E200430495 /* tvosexperience.app */,
+				421717591DFAA7E200430495 /* tvosexperienceTests.xctest */,
+				421717641DFAA7E200430495 /* tvosexperienceUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4217174A1DFAA7E200430495 /* tvosexperience */ = {
+			isa = PBXGroup;
+			children = (
+				4244694D1DFAA9F400C7F748 /* JSON */,
+				4217174B1DFAA7E200430495 /* AppDelegate.swift */,
+				4217174D1DFAA7E200430495 /* DescriptionViewController.swift */,
+				424469521DFABD7600C7F748 /* QuestionViewController.swift */,
+				424469501DFAB7AF00C7F748 /* SocketIOManager.swift */,
+				4217174F1DFAA7E200430495 /* Main.storyboard */,
+				421717521DFAA7E200430495 /* Assets.xcassets */,
+				421717541DFAA7E200430495 /* Info.plist */,
+			);
+			path = tvosexperience;
+			sourceTree = "<group>";
+		};
+		4217175C1DFAA7E200430495 /* tvosexperienceTests */ = {
+			isa = PBXGroup;
+			children = (
+				4217175D1DFAA7E200430495 /* tvosexperienceTests.swift */,
+				4217175F1DFAA7E200430495 /* Info.plist */,
+			);
+			path = tvosexperienceTests;
+			sourceTree = "<group>";
+		};
+		421717671DFAA7E200430495 /* tvosexperienceUITests */ = {
+			isa = PBXGroup;
+			children = (
+				421717681DFAA7E200430495 /* tvosexperienceUITests.swift */,
+				4217176A1DFAA7E200430495 /* Info.plist */,
+			);
+			path = tvosexperienceUITests;
+			sourceTree = "<group>";
+		};
+		4244694D1DFAA9F400C7F748 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				4244694E1DFAA9FF00C7F748 /* SwiftyJSON.swift */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
+		429A947E0850C23CB67B6399 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7F7AF147B1243110FE2ABF1C /* Pods_tvosexperience.framework */,
+				070F7FB396668FD9685CFA0F /* Pods_tvosexperienceTests.framework */,
+				A3AC40ECF1DBC643291454BC /* Pods_tvosexperienceUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		421717471DFAA7E200430495 /* tvosexperience */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4217176D1DFAA7E200430495 /* Build configuration list for PBXNativeTarget "tvosexperience" */;
+			buildPhases = (
+				C30F0AC7A422F8203733E38F /* [CP] Check Pods Manifest.lock */,
+				421717441DFAA7E200430495 /* Sources */,
+				421717451DFAA7E200430495 /* Frameworks */,
+				421717461DFAA7E200430495 /* Resources */,
+				46548FD87573EDECA7395797 /* [CP] Embed Pods Frameworks */,
+				0E01543E8A29948734D84BD2 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tvosexperience;
+			productName = tvosexperience;
+			productReference = 421717481DFAA7E200430495 /* tvosexperience.app */;
+			productType = "com.apple.product-type.application";
+		};
+		421717581DFAA7E200430495 /* tvosexperienceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 421717701DFAA7E200430495 /* Build configuration list for PBXNativeTarget "tvosexperienceTests" */;
+			buildPhases = (
+				FE08012089396BBF496801E2 /* [CP] Check Pods Manifest.lock */,
+				421717551DFAA7E200430495 /* Sources */,
+				421717561DFAA7E200430495 /* Frameworks */,
+				421717571DFAA7E200430495 /* Resources */,
+				EB5E594083CCE35ECBF43D54 /* [CP] Embed Pods Frameworks */,
+				452E271446C8AC7CD8982367 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4217175B1DFAA7E200430495 /* PBXTargetDependency */,
+			);
+			name = tvosexperienceTests;
+			productName = tvosexperienceTests;
+			productReference = 421717591DFAA7E200430495 /* tvosexperienceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		421717631DFAA7E200430495 /* tvosexperienceUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 421717731DFAA7E200430495 /* Build configuration list for PBXNativeTarget "tvosexperienceUITests" */;
+			buildPhases = (
+				6AA7AC66503B8FEC24A1D57F /* [CP] Check Pods Manifest.lock */,
+				421717601DFAA7E200430495 /* Sources */,
+				421717611DFAA7E200430495 /* Frameworks */,
+				421717621DFAA7E200430495 /* Resources */,
+				A1CB9958EABB73BC725E7F40 /* [CP] Embed Pods Frameworks */,
+				672082C7689DA446093073A5 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				421717661DFAA7E200430495 /* PBXTargetDependency */,
+			);
+			name = tvosexperienceUITests;
+			productName = tvosexperienceUITests;
+			productReference = 421717641DFAA7E200430495 /* tvosexperienceUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		421717401DFAA7E200430495 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "HAN IVS";
+				TargetAttributes = {
+					421717471DFAA7E200430495 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+					421717581DFAA7E200430495 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 421717471DFAA7E200430495;
+					};
+					421717631DFAA7E200430495 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 421717471DFAA7E200430495;
+					};
+				};
+			};
+			buildConfigurationList = 421717431DFAA7E200430495 /* Build configuration list for PBXProject "tvosexperience" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4217173F1DFAA7E200430495;
+			productRefGroup = 421717491DFAA7E200430495 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				421717471DFAA7E200430495 /* tvosexperience */,
+				421717581DFAA7E200430495 /* tvosexperienceTests */,
+				421717631DFAA7E200430495 /* tvosexperienceUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		421717461DFAA7E200430495 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				421717531DFAA7E200430495 /* Assets.xcassets in Resources */,
+				421717511DFAA7E200430495 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		421717571DFAA7E200430495 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		421717621DFAA7E200430495 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0E01543E8A29948734D84BD2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tvosexperience/Pods-tvosexperience-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		452E271446C8AC7CD8982367 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tvosexperienceTests/Pods-tvosexperienceTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		46548FD87573EDECA7395797 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tvosexperience/Pods-tvosexperience-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		672082C7689DA446093073A5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tvosexperienceUITests/Pods-tvosexperienceUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6AA7AC66503B8FEC24A1D57F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A1CB9958EABB73BC725E7F40 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tvosexperienceUITests/Pods-tvosexperienceUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C30F0AC7A422F8203733E38F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EB5E594083CCE35ECBF43D54 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tvosexperienceTests/Pods-tvosexperienceTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE08012089396BBF496801E2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		421717441DFAA7E200430495 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				424469511DFAB7AF00C7F748 /* SocketIOManager.swift in Sources */,
+				424469531DFABD7600C7F748 /* QuestionViewController.swift in Sources */,
+				4244694F1DFAA9FF00C7F748 /* SwiftyJSON.swift in Sources */,
+				4217174E1DFAA7E200430495 /* DescriptionViewController.swift in Sources */,
+				4217174C1DFAA7E200430495 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		421717551DFAA7E200430495 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4217175E1DFAA7E200430495 /* tvosexperienceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		421717601DFAA7E200430495 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				421717691DFAA7E200430495 /* tvosexperienceUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4217175B1DFAA7E200430495 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 421717471DFAA7E200430495 /* tvosexperience */;
+			targetProxy = 4217175A1DFAA7E200430495 /* PBXContainerItemProxy */;
+		};
+		421717661DFAA7E200430495 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 421717471DFAA7E200430495 /* tvosexperience */;
+			targetProxy = 421717651DFAA7E200430495 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4217174F1DFAA7E200430495 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				421717501DFAA7E200430495 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4217176B1DFAA7E200430495 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		4217176C1DFAA7E200430495 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4217176E1DFAA7E200430495 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4DA703842980D25E18D1EDF /* Pods-tvosexperience.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = tvosexperience/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.tvosexperience;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4217176F1DFAA7E200430495 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB5C5F5D29DDEA6A3F55A156 /* Pods-tvosexperience.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = tvosexperience/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.tvosexperience;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		421717711DFAA7E200430495 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7F6605FF8D6FD3CB78D4E10 /* Pods-tvosexperienceTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = tvosexperienceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.tvosexperienceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tvosexperience.app/tvosexperience";
+			};
+			name = Debug;
+		};
+		421717721DFAA7E200430495 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C83D7BBBDF96EBF6B1F4151 /* Pods-tvosexperienceTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = tvosexperienceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.tvosexperienceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tvosexperience.app/tvosexperience";
+			};
+			name = Release;
+		};
+		421717741DFAA7E200430495 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1CE06EFC332723D15C552B /* Pods-tvosexperienceUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = tvosexperienceUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.tvosexperienceUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = tvosexperience;
+			};
+			name = Debug;
+		};
+		421717751DFAA7E200430495 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36F776DB6BB914C6E8CAA9A8 /* Pods-tvosexperienceUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = tvosexperienceUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.han.mad.tvosexperienceUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = tvosexperience;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		421717431DFAA7E200430495 /* Build configuration list for PBXProject "tvosexperience" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4217176B1DFAA7E200430495 /* Debug */,
+				4217176C1DFAA7E200430495 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4217176D1DFAA7E200430495 /* Build configuration list for PBXNativeTarget "tvosexperience" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4217176E1DFAA7E200430495 /* Debug */,
+				4217176F1DFAA7E200430495 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		421717701DFAA7E200430495 /* Build configuration list for PBXNativeTarget "tvosexperienceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				421717711DFAA7E200430495 /* Debug */,
+				421717721DFAA7E200430495 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		421717731DFAA7E200430495 /* Build configuration list for PBXNativeTarget "tvosexperienceUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				421717741DFAA7E200430495 /* Debug */,
+				421717751DFAA7E200430495 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 421717401DFAA7E200430495 /* Project object */;
+}

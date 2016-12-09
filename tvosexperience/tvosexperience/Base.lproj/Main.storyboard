@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DPH-RD-53j">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Description View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="DescriptionViewController" customModule="tvosexperience" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHz-Nj-znd">
+                                <rect key="frame" x="20" y="364" width="1880" height="353"/>
+                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis enim eget felis tempus consequat. Proin ac rutrum eros. Cras quis ligula sem. Vestibulum ultricies malesuada pharetra. Vivamus commodo sem diam, nec faucibus neque dignissim et. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras a sagittis nisl. Vestibulum consectetur vulputate leo ut laoreet. Donec ut placerat justo. Vestibulum eu orci vitae magna pharetra porta vitae vitae metus.</string>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="GHz-Nj-znd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="BYp-nL-hFk"/>
+                            <constraint firstItem="GHz-Nj-znd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="219" id="cb5-8C-1mI"/>
+                            <constraint firstItem="GHz-Nj-znd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="i41-y0-svb"/>
+                            <constraint firstItem="GHz-Nj-znd" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="o9n-et-Di5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="D8P-AT-cll">
+                        <nil key="title"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="labelDescription" destination="GHz-Nj-znd" id="niB-Uq-0vc"/>
+                        <segue destination="fXb-5Q-07d" kind="show" identifier="Show question" id="cGe-io-yHx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2713" y="-1176"/>
+        </scene>
+        <!--Question View Controller-->
+        <scene sceneID="pN8-df-zB0">
+            <objects>
+                <viewController id="fXb-5Q-07d" customClass="QuestionViewController" customModule="tvosexperience" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6sp-1I-DmM"/>
+                        <viewControllerLayoutGuide type="bottom" id="YBg-Pj-Gz6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a0c-TX-x2b">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What animal makes a meow sound?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGH-7F-KqA">
+                                <rect key="frame" x="20" y="46" width="1880" height="198"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="labelQuestion" destination="bGH-7F-KqA" id="qaz-Y6-uKb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uR6-Yt-vDk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5123" y="-1176"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SLP-R4-THv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DPH-RD-53j" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l5c-J9-exO">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="szW-RU-udx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Fg-hj-bi1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="77" y="-1176"/>
+        </scene>
+    </scenes>
+</document>
