@@ -46,10 +46,11 @@ public class MainActivity extends AppCompatActivity {
                     userGroupSingleton.setCurrentUser(new User(userName));
 
 //                    socketSingleton.emit("Join group", userNameInput.getText().toString());
-                    // Do http request, returns a userId
+                    // Do http request, returns a userId and group id
 
                     Intent intent = new Intent(MainActivity.this, JoinGroup.class)
-                            .putExtra("name", userName);
+                            .putExtra("userName", userName)
+                            .putExtra("userId", "u22");
                     startActivity(intent);
                 } else {
                     createMissingDataDialog("username");
@@ -70,7 +71,12 @@ public class MainActivity extends AppCompatActivity {
                         userGroupSingleton.setCurrentUser(groupOwner);
                         userGroupSingleton.setCurrentGroup(new Group(groupName, groupOwner));
 
+
+                        String groupId = "aaaaa";
+                        String userId = "u1";
                         Intent intent = new Intent(MainActivity.this, CreateGroupActivity.class)
+                                .putExtra("groupId", groupId)
+                                .putExtra("userId", userId)
                                 .putExtra("groupowner", groupOwnerName)
                                 .putExtra("groupname", groupName);
                         startActivity(intent);

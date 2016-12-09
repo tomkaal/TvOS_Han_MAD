@@ -58,8 +58,17 @@ public class UserRequestsAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void removeItem(User user) {
+        userList.remove(user);
+        notifyDataSetChanged();
+    }
+
     public void addUser(User user) {
         userList.add(user);
         notifyDataSetChanged();
+    }
+
+    public boolean containsUser(User user){
+        return userList.contains(user);
     }
 }

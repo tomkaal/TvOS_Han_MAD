@@ -27,9 +27,10 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
 public class JoinGroup extends AppCompatActivity {
-    private String group;
-    private String uuid = "aaaaa";
-    Socket socket;
+//    private String group;
+//    private String uuid = "aaaaa";
+
+    private SocketSingleton socketSingleton;
 
     public static final String GROUP_MAP_STRING = "group";
     public static final String OWNER_MAP_STRING = "owner";
@@ -37,29 +38,24 @@ public class JoinGroup extends AppCompatActivity {
     private ArrayList<String> groupList;
     private List<Map<String, String>> groupMapList;
     private SimpleAdapter adapter;
+    private ArrayList<String> groupIdArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_group);
-//        socketSingleton = SocketSingleton.getInstance();
+        socketSingleton = SocketSingleton.getInstance();
 
-        final String userName = getIntent().getExtras().getString("name");
-        Log.v("Username", userName);
-
-        try {
-//            socket = IO.socket("http://10.0.2.2:3000");
-            socket = IO.socket("http://192.168.137.1:3000");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        final String userName = getIntent().getExtras().getString("userName");
+        final String userId = getIntent().getExtras().getString("userId");
 
         updateGreetingMessageWithUserName(userName);
 
         listView = (ListView) findViewById(R.id.groupListView);
         groupList = new ArrayList<>();
+        groupIdArray = new ArrayList<>();
         addTestGroupsToList();
-        socket.emit("get_groups");
+        socketSingleton.emit("get_groups");
 
 
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -71,31 +67,24 @@ public class JoinGroup extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int itemPosition = position;
 //                String itemValue = (String) listView.getItemAtPosition(position);
-//                group =  "a123456";
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("user", "Tommie");
-                    jsonObject.put("groupId", uuid);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
-//                socket.emit("add_user_to_group", jsonObject.toString());
-                socket.emit("create_group", jsonObject.toString());
+                Map itemValue = (Map) listView.getItemAtPosition(position);
+                Intent intent = new Intent(JoinGroup.this, JoinTeam.class);
+                Bundle extras = new Bundle();
+                extras.putString("userName", userName);
+                extras.putString("userId", userId);
+                extras.putString(GROUP_MAP_STRING, (String) itemValue.get(GROUP_MAP_STRING));
+                extras.putString(OWNER_MAP_STRING, (String) itemValue.get(OWNER_MAP_STRING));
+                extras.putString("groupId", groupIdArray.get(itemPosition));
+                intent.putExtras(extras);
 
-//                Map itemValue = (Map) listView.getItemAtPosition(position);
-//                Intent intent = new Intent(JoinGroup.this, JoinTeam.class);
-//                Bundle extras = new Bundle();
-//                extras.putString("name", userName);
-//                extras.putString(GROUP_MAP_STRING, (String) itemValue.get(GROUP_MAP_STRING));
-//                extras.putString(OWNER_MAP_STRING, (String) itemValue.get(OWNER_MAP_STRING));
-//                intent.putExtras(extras);
-//
-//                startActivity(intent);
+                startActivity(intent);
             }
 
         });
-        socket.on("group_response", new Emitter.Listener() {
+
+
+        socketSingleton.on("group_response", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
                 Log.v("response", "group response");
@@ -105,13 +94,16 @@ public class JoinGroup extends AppCompatActivity {
 
 
             }
-        }).on("conform", new Emitter.Listener() {
+        });
+
+        socketSingleton.on("conform", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
                 String message = (String) args[0];
                 Log.v("conformation", "room conformation " + message);
             }
-        }).on("update_groups", new Emitter.Listener() {
+        });
+        socketSingleton.on("update_groups", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
                 Log.v("response", "Update group");
@@ -120,12 +112,11 @@ public class JoinGroup extends AppCompatActivity {
                 setGroupsFromServer(groupList);
             }
         });
-
-        socket.connect();
     }
 
     private void setGroupsFromServer(JSONArray groupList){
         groupMapList.clear();
+        groupIdArray.clear();
 
         Log.v("response", "setting groups");
 
@@ -134,8 +125,9 @@ public class JoinGroup extends AppCompatActivity {
                 JSONObject curObj = groupList.getJSONObject(i);
                 String groupName = (String) curObj.get("groupName");
                 String userName = (String) curObj.get("userName");
+                String groupId = (String) curObj.get("groupId");
                 Log.v("response", groupName);
-
+                groupIdArray.add(groupId);
                 addGroupToList(groupName, userName);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -143,6 +135,7 @@ public class JoinGroup extends AppCompatActivity {
 
         }
         Log.v("response", groupMapList.toString());
+        Log.v("response", groupIdArray.toString());
 
         runOnUiThread(new Runnable() {
             @Override
