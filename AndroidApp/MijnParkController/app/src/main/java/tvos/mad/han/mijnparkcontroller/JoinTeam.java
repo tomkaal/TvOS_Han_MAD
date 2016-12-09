@@ -3,7 +3,9 @@ package tvos.mad.han.mijnparkcontroller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,10 +14,15 @@ import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.socket.emitter.Emitter;
 import tvos.mad.han.mijnparkcontroller.model.Group;
 import tvos.mad.han.mijnparkcontroller.model.Team;
 import tvos.mad.han.mijnparkcontroller.model.User;
@@ -25,6 +32,7 @@ public class JoinTeam extends AppCompatActivity {
     private static final String TEAM_MAP_STRING = "team";
     private static final String TEAMMEMBER_MAP_STRING = "teammember";
     private UserGroupSingleton userGroupSingleton;
+    private SocketSingleton socketSingleton;
 
     private ProgressBar progressBar;
     private ListView teamListView;
@@ -35,6 +43,15 @@ public class JoinTeam extends AppCompatActivity {
     private TextView joinedTeamTextView;
 
     private ArrayList<Map<String, String>> teamList;
+    private ArrayList<String> userList = new ArrayList<String>();
+
+//    private SimpleAdapter adapter;
+    private ArrayAdapter<String> adapter;
+
+    private String userName;
+    private String userId;
+    private Boolean isAcceptedInGroup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +60,17 @@ public class JoinTeam extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        String userName = extras.getString("name");
+        userName = extras.getString("userName");
+        userId = extras.getString("userId");
+        String groupId = extras.getString("groupId");
         String group = extras.getString("group");
         String owner = extras.getString("owner");
+
+        teamList = new ArrayList<>();
+
+        isAcceptedInGroup = false;
+
+        socketSingleton = SocketSingleton.getInstance();
 
         statusTextView = (TextView) findViewById(R.id.status_text);
         statusTextView.setText(getString(R.string.status_joining_group));
@@ -59,19 +84,128 @@ public class JoinTeam extends AppCompatActivity {
 
         groupListView = (ListView) findViewById(R.id.groupListView);
         teamListView = (ListView) findViewById(R.id.teamListView);
+        addUserToGroup(userName, userId, groupId, group);
+        socketSingleton.emit("get_users_in_group", getIntent().getExtras().getString("groupId") );
 
-        // TODO remove when sockets are implemented
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                // Actions to do after 10 seconds
-                updateScreenGroupJoined();
+        setUserListScreen();
+
+        socketSingleton.on("users_in_group", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.v("response", "updatedUsers");
+                JSONArray jsonArray = (JSONArray) args[0];// wanneer het een object is
+                updateScreenWithUsers(jsonArray);
             }
-        }, 3000);
+        });
+
+        socketSingleton.on("group_accepted", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.v("response", "group accepted");
+                isAcceptedInGroup = true;
+            }
+        });
+
+        socketSingleton.on("teams_created", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.v("response", "teams created");
+                JSONObject teamObject = (JSONObject) args[0];
+                setCreatedTeams(teamObject);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateScreenTeamJoined();
+                    }
+                });
+            }
+        });
+
+        socketSingleton.on("group_denied", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.v("response", "group denied");
+                if(!isAcceptedInGroup){
+                    Intent intent = new Intent(JoinTeam.this, JoinGroup.class)
+                            .putExtra("userName", userName)
+                            .putExtra("userId", userId);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    private void setCreatedTeams(JSONObject teamObject){
+        try {
+            String groupId = (String) teamObject.get("groupId");
+            String groupName = userGroupSingleton.getCurrentGroup().getGroupName();
+//            ArrayList<Team> teamsArray = (ArrayList<Team>) teamObject.get("teams");
+            JSONArray teamsArray = (JSONArray) teamObject.get("teams");
+
+            for (int i = 0; i < teamsArray.length(); i++) {
+
+                String teamName = teamsArray.getJSONObject(i).getString("name");
+                JSONArray usersJSONArray = teamsArray.getJSONObject(i).getJSONArray("users");
+
+                String usersString = "";
+                Team team = new Team(teamName);
+
+                for (int j = 0; j < usersJSONArray.length(); j ++){
+//                    String userName = team.getTeamMembers().get(i).getUserName();
+//                    String userId = team.getTeamMembers().get(i).getUserId();
+//                    User user = new User(userId, userName);
+//                    team.addTeamMember(user);
+                    String userName = usersJSONArray.getJSONObject(j).getString("id");
+
+                    usersString += userName + "\n";
+
+                }
+                addTeamToList(teamName, usersString);
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        userGroupSingleton.setCurrentTeam(new Team("A"));
+    }
+
+    private void addUserToGroup(String userName, String userId, String groupId, String groupName){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userId", userId);
+            jsonObject.put("groupId", groupId);
+            jsonObject.put("groupName", groupName);
+            jsonObject.put("userName", userName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        socketSingleton.emit("add_user_to_group", jsonObject.toString());
+
+    }
+
+    private void updateScreenWithUsers(JSONArray listOfUsers){
+        userList.clear();
+        for (int i = 0; i < listOfUsers.length(); i++){
+            try {
+                JSONObject curObj = listOfUsers.getJSONObject(i);
+                String receivedUserName = (String) curObj.get("userName");
+//                String receivedUserId = (String) curObj.get("userId");
+                userList.add(receivedUserName);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     // Use with sockets
-    public void updateScreenGroupJoined() {
+    public void setUserListScreen() {
         statusTextView.setText(getString(R.string.status_joining_team));
 
         String groupName = String.valueOf(getIntent().getExtras().getString("group"));
@@ -81,25 +215,25 @@ public class JoinTeam extends AppCompatActivity {
         Group group = new Group(groupName, owner);
         userGroupSingleton.setCurrentGroup(group);
 
-        ArrayList<String> values = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-            String username = "User " + i;
-            group.addUserToGroup(new User(username));
-            values.add(username);
-        }
+//        ArrayList<String> values = new ArrayList<>();
+//        for (int i = 1; i <= 12; i++) {
+//            String username = "User " + i;
+//            group.addUserToGroup(new User(username));
+//            values.add(username);
+//        }
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, userList);
         groupListView.setAdapter(adapter);
 
         // TODO remove when sockets are implemented
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                // Actions to do after 10 seconds
-                updateScreenTeamJoined();
-            }
-        }, 3000);
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                // Actions to do after 10 seconds
+//                updateScreenTeamJoined();
+//            }
+//        }, 3000);
     }
 
     // Use with sockets
@@ -113,31 +247,29 @@ public class JoinTeam extends AppCompatActivity {
         teamListView.setVisibility(View.VISIBLE);
         groupListView.setVisibility(View.GONE);
 
-        teamList = new ArrayList<>();
-        ArrayList<String> userStringList = new ArrayList<>();
-        userStringList.add(userGroupSingleton.getCurrentUser().getUserName());
+//        ArrayList<String> userStringList = new ArrayList<>();
+//        userStringList.add(userGroupSingleton.getCurrentUser().getUserName());
 
-        ArrayList<User> users = userGroupSingleton.getCurrentGroup().getTeams().get(0).getTeamMembers();
+//        ArrayList<User> users = userGroupSingleton.getCurrentGroup().getTeams().get(0).getTeamMembers();
 
-        for (User user : users) {
-            userStringList.add(user.getUserName());
-        }
+//        for (User user : users) {
+//            userStringList.add(user.getUserName());
+//        }
+//
+//        int usersInTeam = 4;
+//
+//        for (int i = 1; i <= 3; i++) {
+//            String usersString = "";
+//
+//            for (int j = 0; j < usersInTeam; j++) {
+//                usersString += userStringList.get(0) + "\n";
+//                userStringList.remove(0);
+//            }
+//
+//            char teamChar = (char) (64 + i);
+//            addTeamToList("Team-" + teamChar, usersString);
+//        }
 
-        int usersInTeam = 4;
-
-        for (int i = 1; i <= 3; i++) {
-            String usersString = "";
-
-            for (int j = 0; j < usersInTeam; j++) {
-                usersString += userStringList.get(0) + "\n";
-                userStringList.remove(0);
-            }
-
-            char teamChar = (char) (64 + i);
-            addTeamToList("Team-" + teamChar, usersString);
-        }
-
-        userGroupSingleton.setCurrentTeam(new Team("A"));
 
         SimpleAdapter adapter = new SimpleAdapter(this, teamList,
                 android.R.layout.simple_list_item_2,

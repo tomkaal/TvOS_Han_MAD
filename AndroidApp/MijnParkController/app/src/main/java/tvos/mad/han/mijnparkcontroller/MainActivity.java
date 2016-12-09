@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import tvos.mad.han.mijnparkcontroller.json_model.CreateGroupResponseJSON;
 import tvos.mad.han.mijnparkcontroller.model.Group;
 import tvos.mad.han.mijnparkcontroller.model.User;
 
@@ -31,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                 1);
 
-        // TODO implement HTTP requester
-        final HttpRequestHelper requestHelper = new HttpRequestHelper();
-
-
         userGroupSingleton = UserGroupSingleton.getInstance();
 
         final EditText userNameInput = (EditText) findViewById(R.id.userNameInput);
@@ -47,13 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 String userName = userNameInput.getText().toString();
 
                 if (!userName.equals("")) {
-                    userGroupSingleton.setCurrentUser(new User(userName));
-                    // TODO Create user -- userId
-
-//                    socketSingleton.emit("Join group", userNameInput.getText().toString());
-                    // Do http request, returns a userId
+                    String userId = HttpRequestHelper.createUser(MainActivity.this, userName);
+                    userGroupSingleton.setCurrentUser(new User(userId, userName));
 
                     Intent intent = new Intent(MainActivity.this, JoinGroup.class)
+                            .putExtra("userId", userId)
                             .putExtra("name", userName);
                     startActivity(intent);
                 } else {
@@ -65,31 +60,32 @@ public class MainActivity extends AppCompatActivity {
         final Button addGroupButton = (Button) findViewById(R.id.addGroupButton);
         addGroupButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                String groupOwnerName = groupOwnerInput.getText().toString();
+                String groupName = groupNameInput.getText().toString();
 
-                requestHelper.sendRequest(MainActivity.this, null);
-//                String groupOwnerName = groupOwnerInput.getText().toString();
-//                String groupName = groupNameInput.getText().toString();
-//
-//
-//                if (!groupOwnerName.equals("")) {
-//                    if (!groupName.equals("")) {
-//                        User groupOwner = new User(groupOwnerName);
-//                        userGroupSingleton.setCurrentUser(groupOwner);
-//                        userGroupSingleton.setCurrentGroup(new Group(groupName, groupOwner));
-//
-//                        Intent intent = new Intent(MainActivity.this, CreateGroupActivity.class)
-//                                .putExtra("groupowner", groupOwnerName)
-//                                .putExtra("groupname", groupName);
-//                        startActivity(intent);
-////                socketSingleton.emit("Create group", groupName.toString());
-//                        // TODO Create group -- groupId, userId
-//
-//                    } else {
-//                        createMissingDataDialog("groupname");
-//                    }
-//                } else {
-//                    createMissingDataDialog("groupowner");
-//                }
+
+                if (!groupOwnerName.equals("")) {
+                    if (!groupName.equals("")) {
+                        CreateGroupResponseJSON createGroupResponseJSON = HttpRequestHelper.createGroup(MainActivity.this, groupName, groupOwnerName);
+
+                        User groupOwner = new User(groupOwnerName);
+                        userGroupSingleton.setCurrentUser(groupOwner);
+                        userGroupSingleton.setCurrentGroup(new Group(groupName, groupOwner));
+
+                        String groupId = "aaaaa";
+                        String userId = "u1";
+                        Intent intent = new Intent(MainActivity.this, CreateGroupActivity.class)
+                                .putExtra("groupId", groupId)
+                                .putExtra("userId", userId)
+                                .putExtra("groupowner", groupOwnerName)
+                                .putExtra("groupname", groupName);
+                        startActivity(intent);
+                    } else {
+                        createMissingDataDialog("groupname");
+                    }
+                } else {
+                    createMissingDataDialog("groupowner");
+                }
             }
         });
 

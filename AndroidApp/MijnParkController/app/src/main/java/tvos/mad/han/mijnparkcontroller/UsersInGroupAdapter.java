@@ -67,4 +67,8 @@ public class UsersInGroupAdapter extends BaseAdapter {
         userList.add(user);
         notifyDataSetChanged();
     }
+
+    public boolean containsUser(User user){
+        return userList.contains(user);
+    }
 }
