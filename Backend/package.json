@@ -11,6 +11,7 @@
     "express": "^4.12.3",
     "express-session": "^1.14.2",
     "mongoose": "^4.6.8",
-    "sha1": "^1.1.1"
+    "sha1": "^1.1.1",
+    "socket.io": "^1.7.1"
   }
 }
