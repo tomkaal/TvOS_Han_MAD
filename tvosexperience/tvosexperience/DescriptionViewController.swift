@@ -15,8 +15,20 @@ class DescriptionViewController: UIViewController {
     
     var socket = SocketIOManager.sharedInstance.socket
     
+    var descriptionTxt: String? {
+        didSet {
+            labelDescription.text = descriptionTxt
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        DispatchQueue.global(qos: .userInitiated).async {
+            let tvDescription = BackendApi().getTvDescription()
+            DispatchQueue.main.async {
+                self.descriptionTxt = tvDescription
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
