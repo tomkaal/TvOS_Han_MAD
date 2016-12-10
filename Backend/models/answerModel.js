@@ -6,6 +6,6 @@ var answerSchema = new Schema({
     question: {type: Schema.Types.ObjectId, ref: 'Question'}
 });
 
-var Question = mongoose.model('Answer', answerSchema, 'answers');
+var Answer = mongoose.model('Answer', answerSchema, 'answers');
 
-module.exports = Question;
+module.exports = Answer;
