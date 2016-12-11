@@ -9,6 +9,6 @@ router.route('/team')
     .post(controller.createTeams);
 
 router.route('/team/score/:teamId')
-    .get(controller.totalscore);
+    .get(controller.score);
 
 module.exports = router;
