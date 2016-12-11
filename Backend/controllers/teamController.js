@@ -76,7 +76,7 @@ exports.score = function (req, res) {
                 if(question.correct == true) {
                     totalScore += question.score;
                 }
-                questionCallback(); //tells the asyncEach function for teams that the this iteration is done
+                questionCallback();
             });
 
         // team.questions.forEach(function(question) {
