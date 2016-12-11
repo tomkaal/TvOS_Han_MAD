@@ -62,20 +62,31 @@ exports.createTeams = function (req, res) {
         });
 };
 
-exports.totalscore = function (req, res) {
+exports.score = function (req, res) {
     var teamId = req.params.teamId;
     var totalScore = 0;
 
     Team.findOne({ _id: teamId}, function(err, team) {
         team.populate('questions');
-        team.questions.forEach(function(question) {
-            if(question == null) {
-                return;
-            }
-            if(question.correct == true) {
-                totalScore += question.score;
-            }
-        });
+        asyncEach(team.questions,
+            function(question, questionCallback) {
+                if(question == null) {
+                    return;
+                }
+                if(question.correct == true) {
+                    totalScore += question.score;
+                }
+                questionCallback(); //tells the asyncEach function for teams that the this iteration is done
+            });
+
+        // team.questions.forEach(function(question) {
+        //     if(question == null) {
+        //         return;
+        //     }
+        //     if(question.correct == true) {
+        //         totalScore += question.score;
+        //     }
+        // });
         return(res.json({doc: totalScore}));
     });
 };
