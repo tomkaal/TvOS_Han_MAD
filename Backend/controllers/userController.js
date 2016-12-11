@@ -7,6 +7,7 @@ var Answer = mongoose.model('Answer');
 var Team = mongoose.model('Team');
 var Question = mongoose.model('Question');
 var Quiz = mongoose.model('Quiz');
+var asyncEach = require('async/each');
 
 exports.createOne = function (req, res) {
     var doc = new User(req.body);
@@ -40,9 +41,10 @@ exports.answer = function (req, res) {
     // The quiz has the question with the correct answer
     Quiz.findOne({ _id: quizId}, function(err, quiz){
         // Find the question with the correct answer
-        Question.findOne($and [{ _id: questionId}, {quiz: quiz}], function (err, currentQuestion){
+        Question.findOne({ _id: questionId, quiz: quiz}, function (err, currentQuestion){
             // Find the answer model the user has given
-            Answer.findOne($and [{ _id: answerId}, {quiz: quiz}], function (err, currentAnswer){
+            Answer.findOne({ _id: answerId, quiz: quiz}, function (err, currentAnswer){
+                console.log(currentAnswer, currentQuestion, quiz);
                 // Check if the answer the user has given is the correct answer
                 if(currentQuestion.correctAnswer == currentAnswer) {
                     correct = true;
@@ -53,18 +55,37 @@ exports.answer = function (req, res) {
                     // Find the team, the user belongs to.
                     Team.findById(currentUser.team._id, function (err, currentTeam){
                         currentTeam.populate('users');
+
                         // Loop through each user, to get all questions and add the most frequent question to the team
-                        currentTeam.users.forEach(function(teamUser) {
-                            teamUser.populate('questions');
-                            if(!teamUser.questions.contains(currentQuestion)) {
-                                allUsersAnswered = false;
-                            }
-                            teamUser.questions.forEach(function (teamUserQuestion) {
-                                if (teamUserQuestion == currentQuestion) {
-                                    userQuestions.push(teamUserQuestion);
+                        asyncEach(currentTeam.users,
+                            function(teamUser, teamUserCallback) {
+                                teamUser.populate('questions');
+                                if(!teamUser.questions.contains(currentQuestion)) {
+                                    allUsersAnswered = false;
                                 }
+                                asyncEach(teamUser.questions,
+                                    function(teamUserQuestion, teamUserQuestionCallback) {
+                                        if (teamUserQuestion == currentQuestion) {
+                                            userQuestions.push(teamUserQuestion);
+                                        }
+                                        teamUserQuestionCallback();
+                                    });
+                                teamUserCallback();
                             });
-                        });
+                        // oude versie niet async
+                        // currentTeam.users.forEach(function(teamUser) {
+                        //     teamUser.populate('questions');
+                        //     if(!teamUser.questions.contains(currentQuestion)) {
+                        //         allUsersAnswered = false;
+                        //     }
+                        //
+                        //     async maken
+                        //     teamUser.questions.forEach(function (teamUserQuestion) {
+                        //         if (teamUserQuestion == currentQuestion) {
+                        //             userQuestions.push(teamUserQuestion);
+                        //         }
+                        //     });
+                        // });
 
                         if(allUsersAnswered) {
                             // http://stackoverflow.com/questions/3783950/get-the-item-that-appears-the-most-times-in-an-array
