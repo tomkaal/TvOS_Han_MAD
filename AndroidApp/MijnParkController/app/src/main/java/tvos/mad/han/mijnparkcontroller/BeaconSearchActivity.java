@@ -3,6 +3,7 @@ package tvos.mad.han.mijnparkcontroller;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -39,16 +40,26 @@ public class BeaconSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beacon_search);
 
-        beaconManager = new BeaconManager(this);
         linearLayout = (LinearLayout) findViewById(R.id.testLayoutToChange);
         textView = (TextView) findViewById(R.id.colorTextView);
         userGroupSingleton = UserGroupSingleton.getInstance();
 
         addSocketListeners();
 
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                sendNotifyTv();
+            }
+        }, 3000);
+
+        beaconManager = new BeaconManager(this);
+
         final ArrayList<CostumBeacon> beaconList = new ArrayList<CostumBeacon>();
         beaconList.add(new CostumBeacon(13348, 21514, "Yellow"));
         beaconList.add(new CostumBeacon(15803, 26551, "Candy"));
+
+
 
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
             @Override
@@ -101,6 +112,7 @@ public class BeaconSearchActivity extends AppCompatActivity {
         region = new Region("ranged region", UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), null, null);
 
 
+
     }
 
     private void addSocketListeners(){
@@ -109,17 +121,19 @@ public class BeaconSearchActivity extends AppCompatActivity {
         socketSingleton.on("tv_notified", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                String message = (String) args[0];
+                String tvResponseObjectString = (String) args[0];
                 Log.v("TV_Notification", "Tv Notified");
+                Log.v("TV_Notification", tvResponseObjectString);
                 Intent intent = new Intent(BeaconSearchActivity.this, QuizActivity.class);
+                intent.putExtra("tvResponseObjectString", tvResponseObjectString);
                 startActivity(intent);
             }
         });
     }
 
     private void sendNotifyTv(){
-//        String teamId = userGrotv_upSingleton.getCurrentTeam().getTeamId();
-        String teamId = "fakeTeamId";
+        String teamId = userGroupSingleton.getCurrentTeam().getTeamId();
+//        String teamId = "fakeTeamId";
         Log.v("Emit event", "Emit notify_tv with teamId");
         socketSingleton.emit("notify_tv", teamId);
 
