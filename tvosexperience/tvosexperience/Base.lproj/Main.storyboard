@@ -70,7 +70,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A: Dog" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blV-bD-lET">
-                                <rect key="frame" x="494" y="297" width="401" height="128"/>
+                                <rect key="frame" x="494" y="252" width="401" height="128"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="401" id="1qH-xn-z8R"/>
@@ -81,7 +81,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C: Cow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzh-Sg-gjM">
-                                <rect key="frame" x="494" y="508" width="401" height="128"/>
+                                <rect key="frame" x="494" y="463" width="401" height="128"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="uVd-ch-Jfy"/>
@@ -91,7 +91,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B: Cat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFl-US-egU">
-                                <rect key="frame" x="1026" y="297" width="401" height="128"/>
+                                <rect key="frame" x="1026" y="252" width="401" height="128"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="401" id="ctW-MR-dfs"/>
@@ -101,26 +101,36 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D: Tiger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLe-57-F82">
-                                <rect key="frame" x="1026" y="508" width="401" height="128"/>
+                                <rect key="frame" x="1026" y="463" width="401" height="128"/>
                                 <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Groep: Scholieren Team: Brandweermannen Teamleden: Henk, Jan, Piet, Klaas" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0J-d0-e2U">
+                                <rect key="frame" x="494" y="643" width="933" height="378"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="F0J-d0-e2U" firstAttribute="top" secondItem="Uzh-Sg-gjM" secondAttribute="bottom" constant="52" id="0Jm-HJ-tV7"/>
                             <constraint firstItem="Uzh-Sg-gjM" firstAttribute="top" secondItem="blV-bD-lET" secondAttribute="bottom" constant="83" id="0TH-Zs-B8r"/>
                             <constraint firstItem="blV-bD-lET" firstAttribute="baseline" secondItem="hFl-US-egU" secondAttribute="baseline" id="0kd-Bn-3Yv"/>
+                            <constraint firstItem="YBg-Pj-Gz6" firstAttribute="top" secondItem="F0J-d0-e2U" secondAttribute="bottom" constant="59" id="1Yn-LR-aVi"/>
                             <constraint firstItem="bGH-7F-KqA" firstAttribute="top" secondItem="a0c-TX-x2b" secondAttribute="topMargin" constant="46" id="3dK-dx-02C"/>
-                            <constraint firstItem="YBg-Pj-Gz6" firstAttribute="top" secondItem="Uzh-Sg-gjM" secondAttribute="bottom" constant="444" id="463-SH-Feb"/>
+                            <constraint firstItem="YBg-Pj-Gz6" firstAttribute="top" secondItem="Uzh-Sg-gjM" secondAttribute="bottom" constant="489" id="463-SH-Feb"/>
                             <constraint firstItem="blV-bD-lET" firstAttribute="leading" secondItem="a0c-TX-x2b" secondAttribute="leading" constant="494" id="G9w-Yf-wdc"/>
+                            <constraint firstItem="F0J-d0-e2U" firstAttribute="leading" secondItem="a0c-TX-x2b" secondAttribute="leadingMargin" constant="474" id="Hnc-cg-gz0"/>
                             <constraint firstItem="Uzh-Sg-gjM" firstAttribute="firstBaseline" secondItem="nLe-57-F82" secondAttribute="firstBaseline" id="MKl-q1-WZI"/>
                             <constraint firstItem="blV-bD-lET" firstAttribute="leading" secondItem="Uzh-Sg-gjM" secondAttribute="leading" id="VQz-BJ-cGP"/>
                             <constraint firstItem="hFl-US-egU" firstAttribute="trailing" secondItem="nLe-57-F82" secondAttribute="trailing" id="ZNO-Ie-W76"/>
                             <constraint firstItem="hFl-US-egU" firstAttribute="leading" secondItem="nLe-57-F82" secondAttribute="leading" id="Zc3-SV-9Ve"/>
                             <constraint firstItem="blV-bD-lET" firstAttribute="firstBaseline" secondItem="hFl-US-egU" secondAttribute="firstBaseline" id="Zkr-VW-V12"/>
-                            <constraint firstItem="blV-bD-lET" firstAttribute="top" secondItem="bGH-7F-KqA" secondAttribute="bottom" constant="53" id="iGo-DS-IG9"/>
+                            <constraint firstItem="blV-bD-lET" firstAttribute="top" secondItem="bGH-7F-KqA" secondAttribute="bottom" constant="8" id="iGo-DS-IG9"/>
                             <constraint firstItem="bGH-7F-KqA" firstAttribute="leading" secondItem="a0c-TX-x2b" secondAttribute="leadingMargin" id="jN4-kL-gRe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="F0J-d0-e2U" secondAttribute="trailing" constant="473" id="nKL-cG-86s"/>
                             <constraint firstItem="blV-bD-lET" firstAttribute="trailing" secondItem="Uzh-Sg-gjM" secondAttribute="trailing" id="tm9-IR-DCn"/>
                             <constraint firstAttribute="trailing" secondItem="hFl-US-egU" secondAttribute="trailing" constant="493" id="u6C-9Y-U0F"/>
                             <constraint firstItem="Uzh-Sg-gjM" firstAttribute="baseline" secondItem="nLe-57-F82" secondAttribute="baseline" id="vZR-1z-KEO"/>
@@ -128,7 +138,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="labelAnswerA" destination="blV-bD-lET" id="RC7-43-MCf"/>
+                        <outlet property="labelAnswerB" destination="hFl-US-egU" id="gFx-yj-xNm"/>
+                        <outlet property="labelAnswerC" destination="Uzh-Sg-gjM" id="aTr-5o-1sM"/>
+                        <outlet property="labelAnswerD" destination="nLe-57-F82" id="vGW-vm-61R"/>
                         <outlet property="labelQuestion" destination="bGH-7F-KqA" id="qaz-Y6-uKb"/>
+                        <outlet property="labelTeamInformation" destination="F0J-d0-e2U" id="74I-me-FrZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uR6-Yt-vDk" userLabel="First Responder" sceneMemberID="firstResponder"/>

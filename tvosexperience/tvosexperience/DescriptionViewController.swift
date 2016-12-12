@@ -46,7 +46,8 @@ class DescriptionViewController: UIViewController {
     
     func addHandlers() {
         socket.on("connect") {data, ack in
-            print("Kaas: socket connected")
+            //Join tv room on server
+            self.socket.emit("tvJoinRoom", "")
         }
         
         socket.on("chat") { [weak self] data, ack in

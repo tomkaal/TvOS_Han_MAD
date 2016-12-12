@@ -11,11 +11,27 @@ import UIKit
 class QuestionViewController: UIViewController {
 
     @IBOutlet weak var labelQuestion: UILabel!
+    @IBOutlet weak var labelAnswerA: UILabel!
+    @IBOutlet weak var labelAnswerB: UILabel!
+    @IBOutlet weak var labelAnswerC: UILabel!
+    @IBOutlet weak var labelAnswerD: UILabel!
+    @IBOutlet weak var labelTeamInformation: UILabel!
     
     var socket = SocketIOManager.sharedInstance.socket
+    var question: Question? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.question = BackendApi().getQuestion()
+            DispatchQueue.main.async {
+                self.labelQuestion.text = self.question?.text
+                self.labelAnswerA.text = "A: " + (self.question?.answers?[0].text)!
+                self.labelAnswerB.text = "B: " + (self.question?.answers?[1].text)!
+                self.labelAnswerC.text = "C: " + (self.question?.answers?[2].text)!
+                self.labelAnswerD.text = "D: " + (self.question?.answers?[3].text)!
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -27,21 +43,21 @@ class QuestionViewController: UIViewController {
     }
 
     func removeHandlers() {
-        socket.off("chat")
-        socket.off("connect")
+//        socket.off("chat")
+//        socket.off("connect")
     }
     
     func addHandlers() {
-        socket.on("connect") {data, ack in
-            print("Kaas:Ham socket connected")
-        }
-        
-        socket.on("chat") { [weak self] data, ack in
-            if let value = data.first as? String {
-                print("Kaas:Ham \(value)")
-                self?.labelQuestion.text = value
-            }
-        }
+//        socket.on("connect") {data, ack in
+//            print("Kaas:Ham socket connected")
+//        }
+//        
+//        socket.on("chat") { [weak self] data, ack in
+//            if let value = data.first as? String {
+//                print("Kaas:Ham \(value)")
+//                self?.labelQuestion.text = value
+//            }
+//        }
     }
     
     /*
