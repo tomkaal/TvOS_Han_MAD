@@ -244,7 +244,42 @@ public class CreateTeamActivity extends AppCompatActivity {
         return teamsJSONObject;
     }
 
-    private void createTeam() {
+    private JSONObject generateTeamSocketJSONObject() {
+        JSONObject teamsJSONObject = new JSONObject();
+
+        ArrayList<Team> team = userGroupSingleton.getCurrentGroup().getTeams();
+
+        try {
+            teamsJSONObject.put("groupId", userGroupSingleton.getCurrentGroup().getGroupId());
+            Log.v("teams", userGroupSingleton.getCurrentGroup().getGroupId());
+            JSONArray teamArray = new JSONArray();
+
+            for (int i = 0; i < team.size(); i++) {
+                JSONObject teamObject = new JSONObject();
+                JSONArray userArray = new JSONArray();
+                teamObject.put("teamId", team.get(i).getTeamId());
+                teamObject.put("teamName", team.get(i).getTeamName());
+                for (int j = 0; j < team.get(i).getTeamMembers().size(); j++) {
+                    JSONObject userObject = new JSONObject();
+                    String userId = team.get(i).getTeamMembers().get(j).getUserId();
+                    String userName = team.get(i).getTeamMembers().get(j).getUserName();
+                    userObject.put("userId", userId);
+                    userObject.put("userName", userName);
+                    userArray.put(userObject);
+                }
+                teamObject.put("users", userArray);
+                teamArray.put(teamObject);
+            }
+            teamsJSONObject.put("teams", teamArray);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return teamsJSONObject;
+    }
+
+    private void createTeam() {         // START GAME
 //        JSONObject jsonObject = setTeamsOfGroup();
         JSONObject jsonObject = generateTeamJSONObject();
 
@@ -286,15 +321,35 @@ public class CreateTeamActivity extends AppCompatActivity {
     }
 
     private void handleCreateTeamResponse(JSONObject response) {
+        try {
+            JSONObject jsonDoc = response.getJSONObject("doc");
+            JSONArray jsonTeamArray = jsonDoc.getJSONArray("teams");
+
+            for (Team team : userGroupSingleton.getCurrentGroup().getTeams()) {
+                for (int i = 0; i < jsonTeamArray.length(); i++) {
+                    JSONObject jsonTeamObject = (JSONObject) jsonTeamArray.get(i);
+                    String teamId = jsonTeamObject.getString("teamId");
+                    String teamName = jsonTeamObject.getString("teamName");
+
+                    if (team.getTeamName().equals(teamName))
+                        team.setTeamId(teamId);
+                }
+            }
+        } catch (JSONException ignored) {
+        }
+
+        for (Team team : userGroupSingleton.getCurrentGroup().getTeams()) {
+            Log.d("ASDF", "teamName: " + team.getTeamName() +
+                    "\nteamID: " + team.getTeamId());
+        }
 //        userGroupSingleton.setCurrentTeam(locateGroupOwnerTeam());
 
-        Log.v("teams", generateTeamJSONObject().toString());
-        socketSingleton.emit("teams_created_from_owner", generateTeamJSONObject().toString());
+//        Log.v("teams", generateTeamJSONObject().toString());
+        socketSingleton.emit("teams_created_from_owner", generateTeamSocketJSONObject().toString());
 
         Intent intent = new Intent(CreateTeamActivity.this, GroupOverviewActivity.class);
         startActivity(intent);
     }
-
 
 //    private Team locateGroupOwnerTeam() {
 //        return null;
