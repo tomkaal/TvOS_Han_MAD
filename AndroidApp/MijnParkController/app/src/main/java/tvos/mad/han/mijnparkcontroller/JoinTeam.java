@@ -155,6 +155,7 @@ public class JoinTeam extends AppCompatActivity {
 //                    String userId = team.getTeamMembers().get(i).getUserId();
 //                    User user = new User(userId, userName);
 //                    team.addTeamMember(user);
+                    Log.v("userNameShit", usersJSONArray.getJSONObject(j).toString());
                     String userName = usersJSONArray.getJSONObject(j).getString("id");
 
                     usersString += userName + "\n";
@@ -270,7 +271,7 @@ public class JoinTeam extends AppCompatActivity {
 //            addTeamToList("Team-" + teamChar, usersString);
 //        }
 
-
+        Log.v("Teamlist", teamList.toString());
         SimpleAdapter adapter = new SimpleAdapter(this, teamList,
                 android.R.layout.simple_list_item_2,
                 new String[]{TEAM_MAP_STRING, TEAMMEMBER_MAP_STRING},
