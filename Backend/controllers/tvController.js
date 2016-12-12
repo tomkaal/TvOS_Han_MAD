@@ -58,14 +58,13 @@ exports.retrieveQuestion = function (req, res) {
                     quiz: question.quiz,
                     text: question.text,
                     score: question.score,
+                    correctAnswer: question.correctAnswer,
                     answers: []
                 };
 
                 questionDoc.answers = question.answers;
                 questionDoc.answers.push(question.correctAnswer);
                 questionDoc.answers = shuffle(questionDoc.answers);
-
-                console.log(questionDoc);
 
                 return res.json({
                     doc: questionDoc,
