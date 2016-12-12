@@ -1,8 +1,10 @@
 package tvos.mad.han.mijnparkcontroller;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,17 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Random;
+
+import io.socket.emitter.Emitter;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -30,15 +27,24 @@ public class QuizActivity extends AppCompatActivity {
     private RelativeLayout answerLayout;
     private LinearLayout quizLayout;
 
+    private UserGroupSingleton userGroupSingleton;
+    private SocketSingleton socketSingleton;
+
+    private String questionId;
+
     private TextView quizNumberTextView;
     private TextView yourAnswerTextView;
     private TextView correctAnswerTextView;
+    private String answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        userGroupSingleton = UserGroupSingleton.getInstance();
+
+        addSocketListeners();
 
         quizNumberTextView = (TextView) findViewById(R.id.txt_quizanswer_title);
         yourAnswerTextView = (TextView) findViewById(R.id.txt_youranswer);
@@ -58,7 +64,8 @@ public class QuizActivity extends AppCompatActivity {
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                answerQuestion(String.valueOf(((Button) v).getText()));
+                answer = String.valueOf(((Button) v).getText());
+                createConfirmationDialog();
             }
         };
 
@@ -68,24 +75,46 @@ public class QuizActivity extends AppCompatActivity {
         buttonD.setOnClickListener(clickListener);
     }
 
-//    public static boolean answerQuestion (Context context, String answerId){
-//        JSONObject jsonObject = sendRequest(context, "/question/answer/" + answerId, Request.Method.POST);
-//        if (jsonObject != null)
-//            return true;
-//        else
-//            return false;
-//    }
+    private void createConfirmationDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(QuizActivity.this).create();
+        alertDialog.setTitle(getString(R.string.confirm_group_title));
 
-    private void answerQuestion(final String answer) {
+        alertDialog.setMessage(getString(R.string.confirm_group_message));
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.dialog_button_yes),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        answerQuestion();
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.dialog_button_no),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void answerQuestion() {
         Log.d("ASDF", "Answer: " + answer);
 
-        progDialog = ProgressDialog.show(this, "Quiz beantwoord...", "Wacht op de anderen", true, false);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("questionId", questionId);
+            jsonObject.put("answerId", answer);
+            jsonObject.put("userId", userGroupSingleton.getCurrentUser().getUserId());
+        } catch (JSONException ignored) {
+        }
+
+        progDialog = ProgressDialog.show(this, "Antwoord gegeven", "Verzenden van antwoord...", true, false);
 
 //        RequestQueue queue = Volley.newRequestQueue(this);
 //
 //        final String requestBody = jsonObject.toString();
 //
-//        String BASE_URL = MainActivity.API_URL + "/question/answer/";
+//        String BASE_URL = MainActivity.API_URL + "/user/answer/";
 //
 //        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, BASE_URL, null, new Response.Listener<JSONObject>() {
 //            @Override
@@ -121,21 +150,78 @@ public class QuizActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                handleAnswerQuestionResponse(answer, null);
+                handleAnswerQuestionResponse(null);
 
             }
         }, 3000);
     }
 
-    private void handleAnswerQuestionResponse(String answer, JSONObject response) {
+    private void handleAnswerQuestionResponse(JSONObject response) {
+        Random random = new Random();
+
+        boolean allUsersAnswered = false;
+        try {
+            JSONObject jsonBoolean = response.getJSONObject("doc");
+            allUsersAnswered = jsonBoolean.getBoolean("allUsersAnswered");
+        } catch (Exception ignored) {
+        }
+
+        allUsersAnswered = random.nextBoolean();
+
+        if (!allUsersAnswered) {
+            progDialog.setMessage("Wachten op andere spelers...");
+
+            // TODO remove when sockets are implemented
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    handleAllUsersAnswered();
+                }
+            }, 3000);
+        } else {
+            socketSingleton.emit("all_users_answered", userGroupSingleton.getCurrentTeam().getTeamId());
+
+            // TODO remove when sockets are implemented
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    handleAllUsersAnswered();
+                }
+            }, 3000);
+        }
+    }
+
+    private void addSocketListeners() {
+        socketSingleton = SocketSingleton.getInstance();
+
+        socketSingleton.on("all_users_answered", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                handleAllUsersAnswered();
+            }
+        });
+
+        socketSingleton.on("answer_received", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                handleAnswerReceived();
+            }
+        });
+    }
+
+    private void handleAnswerReceived() {
+
+    }
+
+    private void handleAllUsersAnswered() {
         Random random = new Random();
         final String randomChar = String.valueOf((char) (random.nextInt(68 - 65) + 65));
         Log.d("ASDF", "randomChar: " + randomChar);
 
         if (answer.equals(randomChar)) {
-            setScreenCorrectAnswer(answer);
+            setScreenCorrectAnswer();
         } else {
-            setScreenWrongAnswer(answer, randomChar);
+            setScreenWrongAnswer(randomChar);
         }
 
         answerLayout.setVisibility(View.VISIBLE);
@@ -152,13 +238,13 @@ public class QuizActivity extends AppCompatActivity {
         }, 5000);
     }
 
-    private void setScreenWrongAnswer(String yourAnswer, String correctAnswer) {
-        yourAnswerTextView.setText("Uw antwoord: " + yourAnswer);
+    private void setScreenWrongAnswer(String correctAnswer) {
+        yourAnswerTextView.setText("Uw antwoord: " + answer);
         correctAnswerTextView.setText("Het antwoord was: " + correctAnswer);
         answerLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
     }
 
-    private void setScreenCorrectAnswer(String answer) {
+    private void setScreenCorrectAnswer() {
         yourAnswerTextView.setText("Uw antwoord: " + answer);
         correctAnswerTextView.setText("U heeft correct geantwoord");
         answerLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
