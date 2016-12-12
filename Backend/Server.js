@@ -87,7 +87,7 @@ io.on('connection', function (socket) {
       
       socket.on('tvJoinRoom', function(data) {
                 console.log('tv joined room!');
-                socket.join('tv');
+                socket.join(getTvRoomName());
         });
       
     socket.on('add_user_to_group', function (userObjectString) {
@@ -126,7 +126,9 @@ io.on('connection', function (socket) {
         var responseObject = {
             userName: userName,
             userId: userId
-        }
+        };
+
+        console.log(responseObject);
         io.in(generalGroupName).emit("user_list_changed", responseObject);// aan iedereen in de groep
     });
 
@@ -182,6 +184,14 @@ io.on('connection', function (socket) {
         var groupId = teamObject.groupId;
         var teamArray = teamObject.teams;
 
+        for ( var i = 0; i < teamArray.length; i++ ){
+            for ( var j = 0; i < teamArray[i].users.length; j++) {
+                var userId = teamArray[i].users[j];
+                var userSocket = io.sockets.connected[socketIdList[userId]];
+                userSocket.join(getTeamName(teamArray[i].teamId));
+            }
+        }
+
         console.log("teams created");
         console.log(groupId);
         var acceptedGroupName = getAcceptedGroupName(groupId, getGroupName(groupId));
@@ -190,7 +200,30 @@ io.on('connection', function (socket) {
     });
 
 
+    socket.on('notify_tv', function (teamId) {
+        io.in(getTvRoomName()).emit("team_nearby", teamId);// naar tv
+    });
+
+    socket.on('tv_is_ready', function (tvResponseObject) {
+        var tvResponse = JSON.parse(tvResponseObject);// teamId, questionId, answerIds
+        var teamId = tvResponse.teamId;
+        io.in(getTeamName(teamId)).emit("tv_notified", tvResponseObject);// aan iedereen in het team
+    });
+
+    socket.on('all_user_answered', function (object) {
+        var answerObject = JSON.parse(object);
+        var teamId = answerObject.teamId;
+        var questionId = answerObject.questionId;
+        io.in(getTvRoomName()).emit("team_has_answered", {teamId: teamId, questionId: questionId});// aan iedereen in het team
+        io.in(getTeamName(teamId)).emit("all_users_answered");// aan iedereen in het team
+    });
+
+        //team id meegeven aan apple tv --> kaas
 });
+
+function getTvRoomName(){
+    return "tv_room";
+}
 
 function getGeneralGroupName(groupId, groupName) {
     return "general_" + groupName + "_" + groupId;
@@ -207,6 +240,10 @@ function getGroupName(groupId){
         }
     }
     return "Not found";
+}
+
+function getTeamName(teamId){
+    return "team_" + teamId;
 }
 
 function generateNewGroup(groupId, userId, groupName, userName) {

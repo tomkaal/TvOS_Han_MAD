@@ -76,27 +76,6 @@ public class GroupOverviewActivity extends AppCompatActivity {
         ArrayList<Team> teams = userGroupSingleton.getCurrentGroup().getTeams();
         teamList = new ArrayList<>();
 
-//        ArrayList<User> users = userGroupSingleton.getCurrentGroup().getTeams().get(0).getTeamMembers();
-//        ArrayList<String> userStringList = new ArrayList<>();
-//
-//        for (User user : users) {
-//            userStringList.add(user.getUserName());
-//        }
-//
-//        int usersInTeam = 4;
-//
-//        for (int i = 1; i <= 3; i++) {
-//            String usersString = "";
-//
-//            for (int j = 0; j < usersInTeam; j++) {
-//                usersString += userStringList.get(0) + "\n";
-//                userStringList.remove(0);
-//            }
-//
-//            char teamChar = (char) (64 + i);
-//            addTeamToList("Team-" + teamChar, 0, usersString);
-//        }
-//        TODO implement when sockets work and teams can be implemented
         for (Team team : teams) {
             String usersString = "";
 
