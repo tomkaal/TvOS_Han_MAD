@@ -177,6 +177,10 @@ io.on('connection', function (socket) {
         var groupId = teamObject.groupId;
         var teamArray = teamObject.teams;
 
+        for(var i = 0; i < teamArray.length; i++ ){
+            
+        }
+
         console.log("teams created");
         console.log(groupId);
         var acceptedGroupName = getAcceptedGroupName(groupId, getGroupName(groupId));
