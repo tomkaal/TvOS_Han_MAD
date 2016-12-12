@@ -38,7 +38,6 @@ public class JoinTeam extends AppCompatActivity {
     private TextView statusTextView;
     private TextView joinedGroupTextView;
     private TextView groupLeaderTextView;
-    private TextView joinedTeamTextView;
 
     private ArrayList<Map<String, String>> teamList;
     private ArrayList<String> userList = new ArrayList<String>();
@@ -150,22 +149,16 @@ public class JoinTeam extends AppCompatActivity {
                 JSONArray usersJSONArray = teamsArray.getJSONObject(i).getJSONArray("users");
                 Team team = new Team(teamId, teamName);
 
-                String usersInTeamString = "";
-
                 for (int j = 0; j < usersJSONArray.length(); j++) {
                     JSONObject userObject = usersJSONArray.getJSONObject(j);
                     String userId = userObject.getString("userId");
                     String userName = userObject.getString("userName");
                     User user = new User(userId, userName);
                     team.addTeamMember(user);
-                    usersInTeamString += userName + "\n";
-
                     if (userGroupSingleton.getCurrentUser().getUserName().equals(userName))
                         userGroupSingleton.setCurrentTeam(team);
-
                 }
                 group.addTeam(team);
-                addTeamToList(teamName, usersInTeamString);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -217,85 +210,8 @@ public class JoinTeam extends AppCompatActivity {
         Group group = new Group(groupName, owner);
         userGroupSingleton.setCurrentGroup(group);
 
-//        ArrayList<String> values = new ArrayList<>();
-//        for (int i = 1; i <= 12; i++) {
-//            String username = "User " + i;
-//            group.addUserToGroup(new User(username));
-//            values.add(username);
-//        }
-
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, userList);
         groupListView.setAdapter(adapter);
-
-        // TODO remove when sockets are implemented
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            public void run() {
-//                // Actions to do after 10 seconds
-//                updateScreenTeamJoined();
-//            }
-//        }, 3000);
-    }
-
-    // Use with sockets
-    private void updateScreenTeamJoined() {
-        statusTextView.setText(getString(R.string.status_joined_group));
-        joinedTeamTextView = (TextView) findViewById(R.id.joinedTeamTextView);
-
-        joinedTeamTextView.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.GONE);
-
-        teamListView.setVisibility(View.VISIBLE);
-        groupListView.setVisibility(View.GONE);
-
-//        ArrayList<String> userStringList = new ArrayList<>();
-//        userStringList.add(userGroupSingleton.getCurrentUser().getUserName());
-
-//        ArrayList<User> users = userGroupSingleton.getCurrentGroup().getTeams().get(0).getTeamMembers();
-
-//        for (User user : users) {
-//            userStringList.add(user.getUserName());
-//        }
-//
-//        int usersInTeam = 4;
-//
-//        for (int i = 1; i <= 3; i++) {
-//            String usersString = "";
-//
-//            for (int j = 0; j < usersInTeam; j++) {
-//                usersString += userStringList.get(0) + "\n";
-//                userStringList.remove(0);
-//            }
-//
-//            char teamChar = (char) (64 + i);
-//            addTeamToList("Team-" + teamChar, usersString);
-//        }
-
-        Log.v("Teamlist", teamList.toString());
-        SimpleAdapter adapter = new SimpleAdapter(this, teamList,
-                android.R.layout.simple_list_item_2,
-                new String[]{TEAM_MAP_STRING, TEAMMEMBER_MAP_STRING},
-                new int[]{android.R.id.text1,
-                        android.R.id.text2});
-        teamListView.setAdapter(adapter);
-
-        Button continueButton = (Button) findViewById(R.id.btn_continue);
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                userGroupSingleton.getCurrentGroup().removeInitTeam();
-                Intent intent = new Intent(JoinTeam.this, GroupOverviewActivity.class);
-                startActivity(intent);
-            }
-        });
-        continueButton.setVisibility(View.VISIBLE);
-    }
-
-    private void addTeamToList(String teamName, String usersString) {
-        Map<String, String> teamMap = new HashMap<>(2);
-        teamMap.put(TEAM_MAP_STRING, teamName);
-        teamMap.put(TEAMMEMBER_MAP_STRING, usersString);
-        teamList.add(teamMap);
     }
 }

@@ -230,7 +230,6 @@ public class CreateTeamActivity extends AppCompatActivity {
                     String userId = team.get(i).getTeamMembers().get(j).getUserId();
                     userIdObject.put("id", userId);
                     userArray.put(userIdObject);
-
                 }
                 teamObject.put("users", userArray);
                 teamArray.put(teamObject);
@@ -280,7 +279,6 @@ public class CreateTeamActivity extends AppCompatActivity {
     }
 
     private void createTeam() {         // START GAME
-//        JSONObject jsonObject = setTeamsOfGroup();
         JSONObject jsonObject = generateTeamJSONObject();
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -342,18 +340,26 @@ public class CreateTeamActivity extends AppCompatActivity {
             Log.d("ASDF", "teamName: " + team.getTeamName() +
                     "\nteamID: " + team.getTeamId());
         }
-//        userGroupSingleton.setCurrentTeam(locateGroupOwnerTeam());
+        userGroupSingleton.setCurrentTeam(locateGroupOwnerTeam());
 
-//        Log.v("teams", generateTeamJSONObject().toString());
         socketSingleton.emit("teams_created_from_owner", generateTeamSocketJSONObject().toString());
 
         Intent intent = new Intent(CreateTeamActivity.this, GroupOverviewActivity.class);
         startActivity(intent);
     }
 
-//    private Team locateGroupOwnerTeam() {
-//        return null;
-//    }
+    private Team locateGroupOwnerTeam() {
+        Team loopTeam = null;
+        for (Team team : userGroupSingleton.getCurrentGroup().getTeams()) {
+            loopTeam = team;
+
+            for (User user : team.getTeamMembers()) {
+               if (userGroupSingleton.getCurrentUser().getUserName().equals(user.getUserName()))
+                   return loopTeam;
+           }
+        }
+        return loopTeam;
+    }
 
     private void setupGroupInfoText() {
         groupOwner = userGroupSingleton.getCurrentGroup().getGroupOwner().getUserName();

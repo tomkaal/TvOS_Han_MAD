@@ -11,7 +11,9 @@ import Foundation
 class Answer: BaseModel {
     var text: String
     
-    init(text: String) {
+    init(_id: String, text: String) {
         self.text = text
+        super.init()
+        self._id = _id
     }
 }
