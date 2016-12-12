@@ -1,8 +1,8 @@
 package tvos.mad.han.mijnparkcontroller;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +19,12 @@ import java.util.UUID;
 import tvos.mad.han.mijnparkcontroller.model.CostumBeacon;
 
 public class BeaconSearchActivity extends AppCompatActivity {
+
+    //// TODO implement this method
+    //    public static void setTv(Context context, String beaconId) {
+    //        sendRequest(context, "/tv/" + beaconId, Request.Method.GET);
+    //    }
+
 
     public Region region;
     public BeaconManager beaconManager;
@@ -37,9 +43,8 @@ public class BeaconSearchActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.colorTextView);
 
         final ArrayList<CostumBeacon> beaconList = new ArrayList<CostumBeacon>();
-        beaconList.add(new CostumBeacon(13348, 21514, "Yellow" ));
-        beaconList.add(new CostumBeacon(15803, 26551, "Candy" ));
-
+        beaconList.add(new CostumBeacon(13348, 21514, "Yellow"));
+        beaconList.add(new CostumBeacon(15803, 26551, "Candy"));
 
 
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
@@ -47,7 +52,7 @@ public class BeaconSearchActivity extends AppCompatActivity {
             public void onBeaconsDiscovered(Region region, List<Beacon> list) {
                 if (!list.isEmpty()) {
                     boolean isSet = false;
-                    for (int i = 0; i < list.size(); i ++){
+                    for (int i = 0; i < list.size(); i++) {
                         int major = list.get(i).getMajor();
                         int minor = list.get(i).getMinor();
                         String beaconKey = String.format("%d:%d", major, minor);
@@ -71,9 +76,9 @@ public class BeaconSearchActivity extends AppCompatActivity {
 //                        }
                         Log.v("beacons", beaconKey);
 
-                        for (int beaconCount = 0; beaconCount < beaconList.size(); beaconCount ++){
+                        for (int beaconCount = 0; beaconCount < beaconList.size(); beaconCount++) {
 
-                            if(major == beaconList.get(beaconCount).major && minor == beaconList.get(beaconCount).minor){
+                            if (major == beaconList.get(beaconCount).major && minor == beaconList.get(beaconCount).minor) {
                                 linearLayout.setBackgroundColor(Color.parseColor(getColorCode(beaconList.get(beaconCount).beaconName)));
                                 textView.setText(beaconList.get(beaconCount).beaconName);
                             }
@@ -89,11 +94,14 @@ public class BeaconSearchActivity extends AppCompatActivity {
 
     }
 
-    private String getColorCode(String colorName){
-        switch (colorName){
-            case "Yellow": return "yellow";
-            case "Candy": return "#FFBAD2";
-            default: return "white";
+    private String getColorCode(String colorName) {
+        switch (colorName) {
+            case "Yellow":
+                return "yellow";
+            case "Candy":
+                return "#FFBAD2";
+            default:
+                return "white";
         }
 
     }
