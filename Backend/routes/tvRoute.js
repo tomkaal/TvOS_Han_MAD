@@ -8,6 +8,9 @@ var controller = require('../controllers/tvController');
 router.route('/tv/:beaconId')
     .get(controller.retrieveOne);
 
+router.route('/tv/:beaconId/question')
+    .get(controller.retrieveQuestion);
+
 router.route('/tv')
     .post(controller.createOne);
 
