@@ -85,6 +85,11 @@ io.on('connection', function (socket) {
                 console.log(val);
       });
       
+      socket.on('tvJoinRoom', function(data) {
+                console.log('tv joined room!');
+                socket.join('tv');
+        });
+      
     socket.on('add_user_to_group', function (userObjectString) {
         var userObject = JSON.parse(userObjectString);
 

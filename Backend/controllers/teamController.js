@@ -32,6 +32,7 @@ exports.createTeams = function (req, res) {
             newTeam.save(function (err) {
                 if (err) { return sendErr(res, err); }
                 var docTeam  = {
+                    teamName: newTeam.name,
                     teamId: newTeam._id,
                     users: []
                 };
