@@ -61,32 +61,32 @@ exports.createTeams = function (req, res) {
             });
         });
 };
-// Check if all answers are asked
-exports.getScore = function (req, res) {
-    var teamId = req.body.teamId;
-    var correctCount = 0;
-    var wrongCount = 0;
 
-    Team.find({ _id: teamId}).
-    populate('users').
-    exec(function (err, team) {
-        team.users.forEach(function(teamUser) {
-            teamUser.populate('questions');
-            teamUser.questions.forEach(function(answeredQuestion) {
-                if(answeredQuestion == null) {
+exports.score = function (req, res) {
+    var teamId = req.params.teamId;
+    var totalScore = 0;
+
+    Team.findOne({ _id: teamId}, function(err, team) {
+        team.populate('questions');
+        asyncEach(team.questions,
+            function(question, questionCallback) {
+                if(question == null) {
                     return;
                 }
-                if(answeredQuestion.correct == true) {
-                    correctCount += 1;
-                } else if(answeredQuestion.correct == false) {
-                    wrongCount += 1;
+                if(question.correct == true) {
+                    totalScore += question.score;
                 }
+                questionCallback();
             });
-            if(correctCount >= wrongCount) {
-                return res.status(200)
-            } else if(wrongCount < correctCount){
-                return res.status(400)
-            }
-        });
+
+        // team.questions.forEach(function(question) {
+        //     if(question == null) {
+        //         return;
+        //     }
+        //     if(question.correct == true) {
+        //         totalScore += question.score;
+        //     }
+        // });
+        return(res.json({doc: totalScore}));
     });
 };

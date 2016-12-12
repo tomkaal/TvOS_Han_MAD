@@ -3,7 +3,7 @@ var router = express.Router();
 
 var controller = require('../controllers/questionController');
 
-router.route('/question/answer/:answerId')
-    .post(controller.answer);
+// router.route('/question/answer/:answerId')
+//     .post(controller.answer);
 
 module.exports = router;

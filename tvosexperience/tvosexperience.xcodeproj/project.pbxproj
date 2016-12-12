@@ -16,6 +16,14 @@
 		4244694F1DFAA9FF00C7F748 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244694E1DFAA9FF00C7F748 /* SwiftyJSON.swift */; };
 		424469511DFAB7AF00C7F748 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424469501DFAB7AF00C7F748 /* SocketIOManager.swift */; };
 		424469531DFABD7600C7F748 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424469521DFABD7600C7F748 /* QuestionViewController.swift */; };
+		4244695C1DFACDD600C7F748 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424469551DFACDD600C7F748 /* Answer.swift */; };
+		4244695D1DFACDD600C7F748 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424469561DFACDD600C7F748 /* BaseModel.swift */; };
+		4244695E1DFACDD600C7F748 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424469571DFACDD600C7F748 /* Group.swift */; };
+		4244695F1DFACDD600C7F748 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424469581DFACDD600C7F748 /* Question.swift */; };
+		424469601DFACDD600C7F748 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424469591DFACDD600C7F748 /* Team.swift */; };
+		424469611DFACDD600C7F748 /* Tv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244695A1DFACDD600C7F748 /* Tv.swift */; };
+		424469621DFACDD600C7F748 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244695B1DFACDD600C7F748 /* User.swift */; };
+		424469641DFACE3A00C7F748 /* BackendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424469631DFACE3A00C7F748 /* BackendApi.swift */; };
 		68E24199DFD6E342F4C4A726 /* Pods_tvosexperienceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AC40ECF1DBC643291454BC /* Pods_tvosexperienceUITests.framework */; };
 		81B5AF66800A308EDD94882B /* Pods_tvosexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F7AF147B1243110FE2ABF1C /* Pods_tvosexperience.framework */; };
 		C2D74159EB413B2F01107BBD /* Pods_tvosexperienceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070F7FB396668FD9685CFA0F /* Pods_tvosexperienceTests.framework */; };
@@ -56,6 +64,14 @@
 		4244694E1DFAA9FF00C7F748 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		424469501DFAB7AF00C7F748 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		424469521DFABD7600C7F748 /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		424469551DFACDD600C7F748 /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		424469561DFACDD600C7F748 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		424469571DFACDD600C7F748 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		424469581DFACDD600C7F748 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		424469591DFACDD600C7F748 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		4244695A1DFACDD600C7F748 /* Tv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tv.swift; sourceTree = "<group>"; };
+		4244695B1DFACDD600C7F748 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		424469631DFACE3A00C7F748 /* BackendApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendApi.swift; sourceTree = "<group>"; };
 		6C83D7BBBDF96EBF6B1F4151 /* Pods-tvosexperienceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvosexperienceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tvosexperienceTests/Pods-tvosexperienceTests.release.xcconfig"; sourceTree = "<group>"; };
 		7F7AF147B1243110FE2ABF1C /* Pods_tvosexperience.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvosexperience.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3AC40ECF1DBC643291454BC /* Pods_tvosexperienceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvosexperienceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,7 +147,9 @@
 		4217174A1DFAA7E200430495 /* tvosexperience */ = {
 			isa = PBXGroup;
 			children = (
+				424469541DFACDBE00C7F748 /* Models */,
 				4244694D1DFAA9F400C7F748 /* JSON */,
+				424469631DFACE3A00C7F748 /* BackendApi.swift */,
 				4217174B1DFAA7E200430495 /* AppDelegate.swift */,
 				4217174D1DFAA7E200430495 /* DescriptionViewController.swift */,
 				424469521DFABD7600C7F748 /* QuestionViewController.swift */,
@@ -167,6 +185,20 @@
 				4244694E1DFAA9FF00C7F748 /* SwiftyJSON.swift */,
 			);
 			name = JSON;
+			sourceTree = "<group>";
+		};
+		424469541DFACDBE00C7F748 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				424469551DFACDD600C7F748 /* Answer.swift */,
+				424469561DFACDD600C7F748 /* BaseModel.swift */,
+				424469571DFACDD600C7F748 /* Group.swift */,
+				424469581DFACDD600C7F748 /* Question.swift */,
+				424469591DFACDD600C7F748 /* Team.swift */,
+				4244695A1DFACDD600C7F748 /* Tv.swift */,
+				4244695B1DFACDD600C7F748 /* User.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		429A947E0850C23CB67B6399 /* Frameworks */ = {
@@ -461,8 +493,16 @@
 			files = (
 				424469511DFAB7AF00C7F748 /* SocketIOManager.swift in Sources */,
 				424469531DFABD7600C7F748 /* QuestionViewController.swift in Sources */,
+				424469611DFACDD600C7F748 /* Tv.swift in Sources */,
+				4244695D1DFACDD600C7F748 /* BaseModel.swift in Sources */,
+				424469641DFACE3A00C7F748 /* BackendApi.swift in Sources */,
+				4244695F1DFACDD600C7F748 /* Question.swift in Sources */,
+				4244695E1DFACDD600C7F748 /* Group.swift in Sources */,
 				4244694F1DFAA9FF00C7F748 /* SwiftyJSON.swift in Sources */,
+				4244695C1DFACDD600C7F748 /* Answer.swift in Sources */,
+				424469621DFACDD600C7F748 /* User.swift in Sources */,
 				4217174E1DFAA7E200430495 /* DescriptionViewController.swift in Sources */,
+				424469601DFACDD600C7F748 /* Team.swift in Sources */,
 				4217174C1DFAA7E200430495 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

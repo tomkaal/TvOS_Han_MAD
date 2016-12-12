@@ -63,6 +63,9 @@ route_files.forEach(function (file) {
     app.use('/api', route);                             // This is our route middleware
 });
 
+app.get('/', function (req, res) {
+    res.sendfile('index.html');
+});
 
 app.all('*', function (req, res) { // Catch all for unmatched routes
     res.status(404)        // HTTP status 404: NotFound
@@ -73,9 +76,15 @@ var groups = [];
 var teams = [];
 var socketIdList = [];
 
+
 io.on('connection', function (socket) {
     console.log("socket connected");
 
+      socket.on('chat', function (val) {
+                io.emit('chat', val);
+                console.log(val);
+      });
+      
     socket.on('add_user_to_group', function (userObjectString) {
         var userObject = JSON.parse(userObjectString);
 

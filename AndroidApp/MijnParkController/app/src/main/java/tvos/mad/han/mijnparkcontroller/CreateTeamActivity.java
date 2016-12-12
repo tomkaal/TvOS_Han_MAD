@@ -12,13 +12,20 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import tvos.mad.han.mijnparkcontroller.model.Group;
 import tvos.mad.han.mijnparkcontroller.model.Team;
 import tvos.mad.han.mijnparkcontroller.model.User;
 
@@ -182,14 +189,7 @@ public class CreateTeamActivity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                userGroupSingleton.setCurrentTeam(locateGroupOwnerTeam());
-                userGroupSingleton.getCurrentGroup().removeInitTeam();
-
-                Log.v("teams", generateTeamJSONObject().toString());
-                socketSingleton.emit("teams_created_from_owner", generateTeamJSONObject().toString());
-
-                Intent intent = new Intent(CreateTeamActivity.this, GroupOverviewActivity.class);
-                startActivity(intent);
+                createTeam();
             }
         });
 
@@ -210,6 +210,8 @@ public class CreateTeamActivity extends AppCompatActivity {
     }
 
     private JSONObject generateTeamJSONObject() {
+        userGroupSingleton.getCurrentGroup().removeInitTeam();
+
         JSONObject teamsJSONObject = new JSONObject();
 
         ArrayList<Team> team = userGroupSingleton.getCurrentGroup().getTeams();
@@ -223,7 +225,7 @@ public class CreateTeamActivity extends AppCompatActivity {
                 JSONObject teamObject = new JSONObject();
                 JSONArray userArray = new JSONArray();
                 teamObject.put("name", team.get(i).getTeamName());
-                for (int j = 0; j < team.get(i).getTeamMembers().size(); j ++){
+                for (int j = 0; j < team.get(i).getTeamMembers().size(); j++) {
                     JSONObject userIdObject = new JSONObject();
                     String userId = team.get(i).getTeamMembers().get(j).getUserId();
                     userIdObject.put("id", userId);
@@ -240,6 +242,57 @@ public class CreateTeamActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return teamsJSONObject;
+    }
+
+    private void createTeam() {
+//        JSONObject jsonObject = setTeamsOfGroup();
+        JSONObject jsonObject = generateTeamJSONObject();
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        final String requestBody = jsonObject.toString();
+
+        String BASE_URL = MainActivity.API_URL + "/team";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, BASE_URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("ASDF", "response: " + response);
+                handleCreateTeamResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("ASDF", "Error fetching JSON data " + error.getMessage());
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return String.format("application/json; charset=utf-8");
+            }
+
+            @Override
+            public byte[] getBody() {
+                try {
+                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    Log.e("ASDF", "Unsupported Encoding while trying to get the bytes of %s using %s" +
+                            requestBody + "utf-8");
+                    return null;
+                }
+            }
+        };
+        queue.add(jsonObjectRequest);
+    }
+
+    private void handleCreateTeamResponse(JSONObject response) {
+//        userGroupSingleton.setCurrentTeam(locateGroupOwnerTeam());
+
+        Log.v("teams", generateTeamJSONObject().toString());
+        socketSingleton.emit("teams_created_from_owner", generateTeamJSONObject().toString());
+
+        Intent intent = new Intent(CreateTeamActivity.this, GroupOverviewActivity.class);
+        startActivity(intent);
     }
 
 
