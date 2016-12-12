@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var userSchema = new Schema({
     name: {type: String},
     team: {type: Schema.Types.ObjectId, ref: 'Team'},
-    questions: [{question: {type: Schema.Types.ObjectId, ref: 'Question'}, correct: Boolean}]
+    questions: [{_id:false, question: {type: Schema.Types.ObjectId, ref: 'Question'}, correct: Boolean}]
 });
 
 var User = mongoose.model('User', userSchema, 'users');
