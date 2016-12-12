@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by DDulos on 22-Nov-16.
  */
 public class Team {
+    private String teamId;
     private String teamName;
     private ArrayList<User> teamMembers;
     private int teamPoints;
@@ -14,6 +15,13 @@ public class Team {
         this.teamName = teamName;
         teamMembers = new ArrayList<>();
 
+        teamPoints = 0;
+    }
+
+    public Team(String teamId, String teamName) {
+        this.teamId = teamId;
+        this.teamName = teamName;
+        teamMembers = new ArrayList<>();
         teamPoints = 0;
     }
 
@@ -43,5 +51,13 @@ public class Team {
 
     public void setTeamPoints(int teamPoints) {
         this.teamPoints = teamPoints;
+    }
+
+    public String getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
     }
 }

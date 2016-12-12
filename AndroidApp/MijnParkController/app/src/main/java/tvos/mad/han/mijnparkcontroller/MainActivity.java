@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
         userGroupSingleton.setCurrentUser(new User(userId, userName));
         Intent intent = new Intent(MainActivity.this, JoinGroup.class)
                 .putExtra("userId", userId)
-                .putExtra("name", userName);
+                .putExtra("userName", userName);
         startActivity(intent);
     }
 

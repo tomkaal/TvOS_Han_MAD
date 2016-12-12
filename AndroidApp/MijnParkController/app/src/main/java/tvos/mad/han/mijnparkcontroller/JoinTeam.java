@@ -2,8 +2,6 @@ package tvos.mad.han.mijnparkcontroller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +43,7 @@ public class JoinTeam extends AppCompatActivity {
     private ArrayList<Map<String, String>> teamList;
     private ArrayList<String> userList = new ArrayList<String>();
 
-//    private SimpleAdapter adapter;
+    //    private SimpleAdapter adapter;
     private ArrayAdapter<String> adapter;
 
     private String userName;
@@ -85,7 +83,7 @@ public class JoinTeam extends AppCompatActivity {
         groupListView = (ListView) findViewById(R.id.groupListView);
         teamListView = (ListView) findViewById(R.id.teamListView);
         addUserToGroup(userName, userId, groupId, group);
-        socketSingleton.emit("get_users_in_group", getIntent().getExtras().getString("groupId") );
+        socketSingleton.emit("get_users_in_group", getIntent().getExtras().getString("groupId"));
 
         setUserListScreen();
 
@@ -115,7 +113,9 @@ public class JoinTeam extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        updateScreenTeamJoined();
+                        Intent intent = new Intent(JoinTeam.this, GroupOverviewActivity.class);
+                        startActivity(intent);
+//                        updateScreenTeamJoined();
                     }
                 });
             }
@@ -125,7 +125,7 @@ public class JoinTeam extends AppCompatActivity {
             @Override
             public void call(Object... args) {
                 Log.v("response", "group denied");
-                if(!isAcceptedInGroup){
+                if (!isAcceptedInGroup) {
                     Intent intent = new Intent(JoinTeam.this, JoinGroup.class)
                             .putExtra("userName", userName)
                             .putExtra("userId", userId);
@@ -135,43 +135,44 @@ public class JoinTeam extends AppCompatActivity {
         });
     }
 
-    private void setCreatedTeams(JSONObject teamObject){
+    private void setCreatedTeams(JSONObject socketResponseObject) {
         try {
-            String groupId = (String) teamObject.get("groupId");
-            String groupName = userGroupSingleton.getCurrentGroup().getGroupName();
-//            ArrayList<Team> teamsArray = (ArrayList<Team>) teamObject.get("teams");
-            JSONArray teamsArray = (JSONArray) teamObject.get("teams");
+            userGroupSingleton.getCurrentGroup().removeInitTeam();
+            Group group = userGroupSingleton.getCurrentGroup();
+            group.setGroupId((String) socketResponseObject.get("groupId"));
+            JSONArray teamsArray = (JSONArray) socketResponseObject.get("teams");
 
             for (int i = 0; i < teamsArray.length(); i++) {
+                JSONObject teamObject = teamsArray.getJSONObject(i);
+                String teamId = teamObject.getString("teamId");
+                String teamName = teamObject.getString("teamName");
 
-                String teamName = teamsArray.getJSONObject(i).getString("name");
                 JSONArray usersJSONArray = teamsArray.getJSONObject(i).getJSONArray("users");
+                Team team = new Team(teamId, teamName);
 
-                String usersString = "";
-                Team team = new Team(teamName);
+                String usersInTeamString = "";
 
-                for (int j = 0; j < usersJSONArray.length(); j ++){
-//                    String userName = team.getTeamMembers().get(i).getUserName();
-//                    String userId = team.getTeamMembers().get(i).getUserId();
-//                    User user = new User(userId, userName);
-//                    team.addTeamMember(user);
-                    Log.v("userNameShit", usersJSONArray.getJSONObject(j).toString());
-                    String userName = usersJSONArray.getJSONObject(j).getString("id");
+                for (int j = 0; j < usersJSONArray.length(); j++) {
+                    JSONObject userObject = usersJSONArray.getJSONObject(j);
+                    String userId = userObject.getString("userId");
+                    String userName = userObject.getString("userName");
+                    User user = new User(userId, userName);
+                    team.addTeamMember(user);
+                    usersInTeamString += userName + "\n";
 
-                    usersString += userName + "\n";
+                    if (userGroupSingleton.getCurrentUser().getUserName().equals(userName))
+                        userGroupSingleton.setCurrentTeam(team);
 
                 }
-                addTeamToList(teamName, usersString);
-
+                group.addTeam(team);
+                addTeamToList(teamName, usersInTeamString);
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        userGroupSingleton.setCurrentTeam(new Team("A"));
     }
 
-    private void addUserToGroup(String userName, String userId, String groupId, String groupName){
+    private void addUserToGroup(String userName, String userId, String groupId, String groupName) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userId", userId);
@@ -185,9 +186,9 @@ public class JoinTeam extends AppCompatActivity {
 
     }
 
-    private void updateScreenWithUsers(JSONArray listOfUsers){
+    private void updateScreenWithUsers(JSONArray listOfUsers) {
         userList.clear();
-        for (int i = 0; i < listOfUsers.length(); i++){
+        for (int i = 0; i < listOfUsers.length(); i++) {
             try {
                 JSONObject curObj = listOfUsers.getJSONObject(i);
                 String receivedUserName = (String) curObj.get("userName");
