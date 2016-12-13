@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String API_URL =  "http://10.0.2.2:3000/api";
 
-    /*
+    /**
      * URL backend:
      * <ipadres>:3000/api/<route> - 10.0.2.2 voor android emulator (http://stackoverflow.com/questions/5495534/java-net-connectexception-localhost-127-0-0-18080-connection-refused)
      *      Routes:
@@ -56,7 +56,15 @@ public class MainActivity extends AppCompatActivity {
      *              /user/answer                (answer question)   POST
      *
      *
-     * attributes start with '/:'
+     * attributes in url start with '/:'
+     *
+     * JSON response example:
+     * {
+	 *   "doc": {		        // Container
+	 *		  "key": "value"    // inside container attributes
+	 *   },
+	 *   "err": null		    // Error handling
+     * }
      */
 
     private UserGroupSingleton userGroupSingleton;

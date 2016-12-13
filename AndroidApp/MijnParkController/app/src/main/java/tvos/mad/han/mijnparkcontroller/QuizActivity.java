@@ -2,6 +2,7 @@ package tvos.mad.han.mijnparkcontroller;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,6 +38,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView yourAnswerTextView;
     private TextView correctAnswerTextView;
     private String answer;
+    private JSONArray answerIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,17 @@ public class QuizActivity extends AppCompatActivity {
 
         quizLayout.setVisibility(View.VISIBLE);
         answerLayout.setVisibility(View.GONE);
+
+        Intent intent = getIntent();
+        String tvResponseObjectString = intent.getStringExtra("tvResponseObjectString");
+        try {
+            JSONObject tvResponseObject = new JSONObject(tvResponseObjectString);
+            questionId = tvResponseObject.getString("questionId");
+            answerIds = tvResponseObject.getJSONArray("answerIds");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         Button buttonA = (Button) findViewById(R.id.btn_answer_a);
         Button buttonB = (Button) findViewById(R.id.btn_answer_b);
@@ -77,9 +91,9 @@ public class QuizActivity extends AppCompatActivity {
 
     private void createConfirmationDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(QuizActivity.this).create();
-        alertDialog.setTitle(getString(R.string.confirm_group_title));
+        alertDialog.setTitle("Antwoord opsturen?");
 
-        alertDialog.setMessage(getString(R.string.confirm_group_message));
+        alertDialog.setMessage(getString(R.string.confirm_message));
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.dialog_button_yes),
                 new DialogInterface.OnClickListener() {
@@ -103,7 +117,7 @@ public class QuizActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("questionId", questionId);
-            jsonObject.put("answerId", answer);
+            jsonObject.put("answerId", getAnswer(answer));
             jsonObject.put("userId", userGroupSingleton.getCurrentUser().getUserId());
         } catch (JSONException ignored) {
         }
@@ -146,14 +160,33 @@ public class QuizActivity extends AppCompatActivity {
 //        };
 //        queue.add(jsonObjectRequest);
 
-        // TODO remove when sockets are implemented
+        // TODO remove when API is implemented
+        final JSONObject response = new JSONObject();
+        final JSONObject doc = new JSONObject();
+        try {
+            doc.put("allUsersAnswered", true);
+            response.put("doc", doc);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                handleAnswerQuestionResponse(null);
+                handleAnswerQuestionResponse(response);
 
             }
         }, 3000);
+    }
+
+    private String getAnswer(String answer) throws JSONException {
+        switch (answer){
+            case "A": return answerIds.getString(0);
+            case "B": return answerIds.getString(1);
+            case "C": return answerIds.getString(2);
+            case "D": return answerIds.getString(3);
+            default: return answerIds.getString(0);
+        }
     }
 
     private void handleAnswerQuestionResponse(JSONObject response) {
@@ -166,28 +199,35 @@ public class QuizActivity extends AppCompatActivity {
         } catch (Exception ignored) {
         }
 
-        allUsersAnswered = random.nextBoolean();
+//        allUsersAnswered = random.nextBoolean();
 
         if (!allUsersAnswered) {
             progDialog.setMessage("Wachten op andere spelers...");
 
             // TODO remove when sockets are implemented
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    handleAllUsersAnswered();
-                }
-            }, 3000);
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                public void run() {
+//                    handleAllUsersAnswered();
+//                }
+//            }, 3000);
         } else {
-            socketSingleton.emit("all_users_answered", userGroupSingleton.getCurrentTeam().getTeamId());
+            JSONObject responseObject = new JSONObject();
+            try {
+                responseObject.put("teamId",userGroupSingleton.getCurrentTeam().getTeamId());
+                responseObject.put("questionId", questionId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-            // TODO remove when sockets are implemented
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    handleAllUsersAnswered();
-                }
-            }, 3000);
+            socketSingleton.emit("all_users_answered", responseObject.toString());
+
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                public void run() {
+//                    handleAllUsersAnswered();
+//                }
+//            }, 3000);
         }
     }
 
@@ -197,14 +237,24 @@ public class QuizActivity extends AppCompatActivity {
         socketSingleton.on("all_users_answered", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                handleAllUsersAnswered();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        handleAllUsersAnswered();
+                    }
+                });
             }
         });
 
         socketSingleton.on("answer_received", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                handleAnswerReceived();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        handleAnswerReceived();
+                    }
+                });
             }
         });
     }
@@ -214,15 +264,17 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void handleAllUsersAnswered() {
-        Random random = new Random();
-        final String randomChar = String.valueOf((char) (random.nextInt(68 - 65) + 65));
-        Log.d("ASDF", "randomChar: " + randomChar);
+//        Random random = new Random();
+//        final String randomChar = String.valueOf((char) (random.nextInt(68 - 65) + 65));
+//        Log.d("ASDF", "randomChar: " + randomChar);
 
-        if (answer.equals(randomChar)) {
-            setScreenCorrectAnswer();
-        } else {
-            setScreenWrongAnswer(randomChar);
-        }
+//        if (answer.equals(randomChar)) {
+//            setScreenCorrectAnswer();
+//        } else {
+//            setScreenWrongAnswer(randomChar);
+//        }
+
+        setScreenAnswer(answer);
 
         answerLayout.setVisibility(View.VISIBLE);
         quizLayout.setVisibility(View.GONE);
@@ -236,6 +288,12 @@ public class QuizActivity extends AppCompatActivity {
                 finish();
             }
         }, 5000);
+    }
+
+    private void setScreenAnswer(String answer) {
+        yourAnswerTextView.setText("Uw antwoord: " + answer);
+        correctAnswerTextView.setText("Check het antwoord op het scherm!");
+        answerLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
     }
 
     private void setScreenWrongAnswer(String correctAnswer) {

@@ -11,9 +11,13 @@
     <string name="missing_groupowner_message">Groepsleider moet ingevuld zijn</string>
     <string name="missing_groupname_message">Groepsnaam moet ingevuld zijn</string>
     <string name="misc_error_message">Er is iets misgegaan</string>
+    <string name="empty_group_message">Er moet minstens één persoon in de groep zitten</string>
+    <string name="users_in_init_team_message">Alle groepsleden moeten in een team zijn ingedeeld</string>
+
 
     <string name="confirm_group_title">Groep aanmaken voltooien</string>
-    <string name="confirm_group_message">Wilt u verder gaan?</string>
+    <string name="confirm_team_title">Team aanmaken voltooien</string>
+    <string name="confirm_message">Wilt u verder gaan?</string>
 
     <string name="dialog_button_ok">OK</string>
     <string name="dialog_button_yes">Ja</string>

@@ -1,7 +1,9 @@
 package tvos.mad.han.mijnparkcontroller;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -189,7 +191,10 @@ public class CreateTeamActivity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createTeam();
+                if (usersInGroupAdapter.getCount() != 0)
+                    createUsersInInitTeamDialog();
+                else
+                    createConfirmationDialog();
             }
         });
 
@@ -207,6 +212,43 @@ public class CreateTeamActivity extends AppCompatActivity {
                 removeTeam();
             }
         });
+    }
+
+    private void createUsersInInitTeamDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(CreateTeamActivity.this).create();
+        alertDialog.setTitle("Alert");
+
+        alertDialog.setMessage(getString(R.string.users_in_init_team_message));
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void createConfirmationDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(CreateTeamActivity.this).create();
+        alertDialog.setTitle(getString(R.string.confirm_group_title));
+
+        alertDialog.setMessage(getString(R.string.confirm_message));
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.dialog_button_yes),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        createTeam();
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.dialog_button_no),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     private JSONObject generateTeamJSONObject() {
@@ -354,9 +396,9 @@ public class CreateTeamActivity extends AppCompatActivity {
             loopTeam = team;
 
             for (User user : team.getTeamMembers()) {
-               if (userGroupSingleton.getCurrentUser().getUserName().equals(user.getUserName()))
-                   return loopTeam;
-           }
+                if (userGroupSingleton.getCurrentUser().getUserName().equals(user.getUserName()))
+                    return loopTeam;
+            }
         }
         return loopTeam;
     }

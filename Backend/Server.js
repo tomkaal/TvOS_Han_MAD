@@ -185,10 +185,14 @@ io.on('connection', function (socket) {
         var teamArray = teamObject.teams;
 
         for ( var i = 0; i < teamArray.length; i++ ){
-            for ( var j = 0; i < teamArray[i].users.length; j++) {
-                var userId = teamArray[i].users[j];
+            for ( var j = 0; j < teamArray[i].users.length; j++) {
+
+                var userId = teamArray[i].users[j].userId;
+                console.log(userId);
+                console.log(io.sockets.connected);
                 var userSocket = io.sockets.connected[socketIdList[userId]];
-                userSocket.join(getTeamName(teamArray[i].teamId));
+                console.log(userSocket);
+                userSocket.join(getTeamRoomName(teamArray[i].teamId));
             }
         }
 
@@ -202,20 +206,31 @@ io.on('connection', function (socket) {
 
     socket.on('notify_tv', function (teamId) {
         io.in(getTvRoomName()).emit("team_nearby", teamId);// naar tv
+
+        //--------------test----------//
+        var tvResponseObject = "{"+
+            "\"teamId\": \"" + teamId + "\","+
+            "\"questionId\": \"hd94hr743hr93h4\","+
+            "\"answerIds\": [ \"1111111111111\", \"2222222222222\", \"3333333333333\", \"4444444444444\"]}";
+        console.log(tvResponseObject)
+        io.in(getTeamRoomName(teamId)).emit("tv_notified", tvResponseObject);// aan iedereen in het team
+
+        //--------------test----------//
+
     });
 
     socket.on('tv_is_ready', function (tvResponseObject) {
         var tvResponse = JSON.parse(tvResponseObject);// teamId, questionId, answerIds
         var teamId = tvResponse.teamId;
-        io.in(getTeamName(teamId)).emit("tv_notified", tvResponseObject);// aan iedereen in het team
+        io.in(getTeamRoomName(teamId)).emit("tv_notified", tvResponseObject);// aan iedereen in het team
     });
 
-    socket.on('all_user_answered', function (object) {
+    socket.on('all_users_answered', function (object) {
         var answerObject = JSON.parse(object);
         var teamId = answerObject.teamId;
         var questionId = answerObject.questionId;
-        io.in(getTvRoomName()).emit("team_has_answered", {teamId: teamId, questionId: questionId});// aan iedereen in het team
-        io.in(getTeamName(teamId)).emit("all_users_answered");// aan iedereen in het team
+        io.in(getTvRoomName()).emit("team_has_answered", {teamId: teamId, questionId: questionId});// aan apple tv
+        io.in(getTeamRoomName(teamId)).emit("all_users_answered");// aan iedereen in het team
     });
 
         //team id meegeven aan apple tv --> kaas
@@ -242,7 +257,7 @@ function getGroupName(groupId){
     return "Not found";
 }
 
-function getTeamName(teamId){
+function getTeamRoomName(teamId){
     return "team_" + teamId;
 }
 
