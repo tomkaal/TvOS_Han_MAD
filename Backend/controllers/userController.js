@@ -30,81 +30,71 @@ exports.createOne = function (req, res) {
 
 
 exports.answer = function (req, res) {
-    var quizId = req.body.quizId;
     var questionId = req.body.questionId;
     var answerId = req.body.answerId;
     var userId = req.body.userId;
     var correct = false;
     var allUsersAnswered = true;
     var userQuestions = [];
+    var userIds = [];
+    var usersHaveAnswered = {};
 
-    // The quiz has the question with the correct answer
-    Quiz.findOne({ _id: quizId}, function(err, quiz){
-        // Find the question with the correct answer
-        Question.findOne({ _id: questionId, quiz: quiz}, function (err, currentQuestion){
-            // Find the answer model the user has given
-            Answer.findOne({ _id: answerId, quiz: quiz}, function (err, currentAnswer){
-                console.log(currentAnswer, currentQuestion, quiz);
-                // Check if the answer the user has given is the correct answer
-                if(currentQuestion.correctAnswer == currentAnswer) {
-                    correct = true;
-                }
-                // Search for the current user and push the question in the questionarray
-                User.findByIdAndUpdate(userId, { $push: {questions: [currentQuestion, correct]} }, function (err, currentUser) {
-                    currentUser.populate('team');
-                    // Find the team, the user belongs to.
-                    Team.findById(currentUser.team._id, function (err, currentTeam){
-                        currentTeam.populate('users');
+    // Find the question with the correct answer
+    Question.findOne({ _id: questionId}, function (err, currentQuestion){
+        // Find the answer model the user has given
+        Answer.findOne({ _id: answerId}, function (err, currentAnswer){
+            // Check if the answer the user has given is the correct answer
+            if(currentQuestion.correctAnswer == currentAnswer) {
+                correct = true;
+            }
+            // Search for the current user and push the question in the questionarray
+            User.findByIdAndUpdate(userId, { $push: {questions: {question: currentQuestion._id, correct: correct}} }).populate('team').exec(function (err, currentUser) {
+                // Find the team, the user belongs to.
+                User.find({team: currentUser.team}).exec(function (err, teamUsers){
+                    asyncEach(teamUsers, function(teamUser, teamUserCallback) {
+                        teamUser.populate('questions');
+                        userIds.push(teamUser._id);
 
-                        // Loop through each user, to get all questions and add the most frequent question to the team
-                        asyncEach(currentTeam.users,
-                            function(teamUser, teamUserCallback) {
-                                teamUser.populate('questions');
-                                if(!teamUser.questions.contains(currentQuestion)) {
-                                    allUsersAnswered = false;
-                                }
-                                asyncEach(teamUser.questions,
-                                    function(teamUserQuestion, teamUserQuestionCallback) {
-                                        if (teamUserQuestion == currentQuestion) {
-                                            userQuestions.push(teamUserQuestion);
-                                        }
-                                        teamUserQuestionCallback();
-                                    });
-                                teamUserCallback();
-                            });
-                        // oude versie niet async
-                        // currentTeam.users.forEach(function(teamUser) {
-                        //     teamUser.populate('questions');
-                        //     if(!teamUser.questions.contains(currentQuestion)) {
-                        //         allUsersAnswered = false;
-                        //     }
-                        //
-                        //     async maken
-                        //     teamUser.questions.forEach(function (teamUserQuestion) {
-                        //         if (teamUserQuestion == currentQuestion) {
-                        //             userQuestions.push(teamUserQuestion);
-                        //         }
-                        //     });
-                        // });
+                        usersHaveAnswered[teamUser._id] = false;
+                        teamUser.questions.forEach(function (teamUserQuestion) {
+                            // loopt door alle vragen van alle gebruikers heen in het team
+                            // controleren of de huidige vraag aanwezig is tussen de vragen van het team
+                            if(String(teamUserQuestion.question) == String(currentQuestion._id)){
+                                usersHaveAnswered[teamUser._id] = true;
+                            } else {
+                                usersHaveAnswered[teamUser._id] = false;
+                            }
 
+                            // push all the answers of the team members into an array
+                            userQuestions.push(teamUserQuestion);
+                        });
+                        teamUserCallback();
+                    }, function(err){
+                        for (var i = 0; i < userIds.length; i++){
+                            if (usersHaveAnswered[userIds[i]] == false) {
+                                allUsersAnswered = false;
+                            }
+                        }
                         if(allUsersAnswered) {
+                            // get the most frequent answer from the users and add it as a team answer
                             // http://stackoverflow.com/questions/3783950/get-the-item-that-appears-the-most-times-in-an-array
                             var frequency = {};  // array of frequency.
                             var max = 0;  // holds the max frequency.
-                            var result;   // holds the max frequency element.
+                            var teamQuestion;   // holds the max frequency element.
                             for (var v in userQuestions) {
                                 frequency[userQuestions[v]] = (frequency[userQuestions[v]] || 0) + 1; // increment frequency.
                                 if (frequency[userQuestions[v]] > max) { // is this frequency > max so far ?
                                     max = frequency[userQuestions[v]];  // update max.
-                                    result = userQuestions[v];          // update result.
+                                    teamQuestion = userQuestions[v];          // update result.
                                 }
                             }
-
-                            currentTeam.questions.add(result).save();
-                            return (res.json({doc: currentQuestion.score}))
+                            Team.findByIdAndUpdate(currentUser.team._id, { $push: {questions: {question: teamQuestion.question, correct: teamQuestion.correct}}}, function (err, team){
+                                return res.json({doc: {allUsersAnswered: allUsersAnswered}});
+                            });
+                        } else {
+                            return res.json({doc: {allUsersAnswered: allUsersAnswered}});
                         }
                     });
-                    return res.status(200).send();
                 });
             });
         });

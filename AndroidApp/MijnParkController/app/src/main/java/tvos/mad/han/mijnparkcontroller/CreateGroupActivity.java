@@ -12,15 +12,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-import io.socket.client.IO;
-import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import tvos.mad.han.mijnparkcontroller.model.User;
 
@@ -67,7 +63,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     }
 
-    private void createSocketConnection(){
+    private void createSocketConnection() {
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -119,7 +115,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         });
     }
 
-    private void addSocketListeners(){
+    private void addSocketListeners() {
         socketSingleton.on("user_list_changed", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -134,7 +130,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if(!userRequestsAdapter.containsUser(user) && !usersInGroupAdapter.containsUser(user)){
+                            if (!userRequestsAdapter.containsUser(user) && !usersInGroupAdapter.containsUser(user)) {
                                 userRequestsAdapter.addUser(user);
                             }
                         }
@@ -149,7 +145,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
 
-    private JSONObject createJsonUserObject(String userId, String groupId){
+    private JSONObject createJsonUserObject(String userId, String groupId) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("userId", userId);
@@ -174,10 +170,29 @@ public class CreateGroupActivity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createConfirmationDialog();
+                if (usersInGroupAdapter.getCount() == 0)
+                    createEmptyGroupDialog();
+                else
+                    createConfirmationDialog();
             }
         });
     }
+
+    private void createEmptyGroupDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(CreateGroupActivity.this).create();
+        alertDialog.setTitle("Alert");
+
+        alertDialog.setMessage(getString(R.string.empty_group_message));
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
 
     private void setupGroupInfoText() {
         groupOwner = getIntent().getExtras().getString("groupowner");
@@ -222,7 +237,6 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
 
-
     private void removeUserFromGroup(int position) {
         User user = usersInGroupAdapter.getItem(position);
         userRequestsAdapter.addUser(user);
@@ -242,7 +256,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(CreateGroupActivity.this).create();
         alertDialog.setTitle(getString(R.string.confirm_group_title));
 
-        alertDialog.setMessage(getString(R.string.confirm_group_message));
+        alertDialog.setMessage(getString(R.string.confirm_message));
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.dialog_button_yes),
                 new DialogInterface.OnClickListener() {

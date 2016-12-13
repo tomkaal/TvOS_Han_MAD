@@ -93,7 +93,7 @@ public class QuizActivity extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(QuizActivity.this).create();
         alertDialog.setTitle("Antwoord opsturen?");
 
-        alertDialog.setMessage(getString(R.string.confirm_group_message));
+        alertDialog.setMessage(getString(R.string.confirm_message));
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.dialog_button_yes),
                 new DialogInterface.OnClickListener() {
