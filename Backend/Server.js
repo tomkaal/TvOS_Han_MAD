@@ -208,12 +208,12 @@ io.on('connection', function (socket) {
         io.in(getTvRoomName()).emit("team_nearby", teamId);// naar tv
 
         //--------------test----------//
-        var tvResponseObject = "{"+
-            "\"teamId\": \"" + teamId + "\","+
-            "\"questionId\": \"hd94hr743hr93h4\","+
-            "\"answerIds\": [ \"1111111111111\", \"2222222222222\", \"3333333333333\", \"4444444444444\"]}";
-        console.log(tvResponseObject)
-        io.in(getTeamRoomName(teamId)).emit("tv_notified", tvResponseObject);// aan iedereen in het team
+        //var tvResponseObject = "{"+
+        //    "\"teamId\": \"" + teamId + "\","+
+        //    "\"questionId\": \"hd94hr743hr93h4\","+
+        //    "\"answerIds\": [ \"1111111111111\", \"2222222222222\", \"3333333333333\", \"4444444444444\"]}";
+        //console.log(tvResponseObject)
+        //io.in(getTeamRoomName(teamId)).emit("tv_notified", tvResponseObject);// aan iedereen in het team
 
         //--------------test----------//
 
@@ -222,7 +222,7 @@ io.on('connection', function (socket) {
     socket.on('tv_is_ready', function (tvResponseObject) {
         var tvResponse = JSON.parse(tvResponseObject);// teamId, questionId, answerIds
         var teamId = tvResponse.teamId;
-        io.in(getTeamRoomName(teamId)).emit("tv_notified", tvResponseObject);// aan iedereen in het team
+        io.in(getTeamRoomName(teamId)).emit("tv_notified", tvResponseObject.toString());// aan iedereen in het team
     });
 
     socket.on('all_users_answered', function (object) {
