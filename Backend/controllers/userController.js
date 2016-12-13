@@ -44,7 +44,7 @@ exports.answer = function (req, res) {
         // Find the answer model the user has given
         Answer.findOne({ _id: answerId}, function (err, currentAnswer){
             // Check if the answer the user has given is the correct answer
-            if(currentQuestion.correctAnswer == currentAnswer) {
+            if(String(currentQuestion.correctAnswer) == String(currentAnswer._id)) {
                 correct = true;
             }
             // Search for the current user and push the question in the questionarray
