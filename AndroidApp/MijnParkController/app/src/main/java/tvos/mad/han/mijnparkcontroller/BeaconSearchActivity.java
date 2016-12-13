@@ -85,7 +85,7 @@ public class BeaconSearchActivity extends AppCompatActivity {
 //                                linearLayout.setBackgroundColor(Color.parseColor("yellow"));
 //                                textView.setText("Yellow");
 //                            }
-//                        } else {
+//                        } els4e {
 //                            Log.v("beacons", beaconKey);
 //                        }
                         Log.v("beacons", beaconKey);
@@ -105,7 +105,6 @@ public class BeaconSearchActivity extends AppCompatActivity {
 
                     }
                     Log.v("beacons", "-------------------------");
-
                 }
             }
         });

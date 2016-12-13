@@ -64,9 +64,7 @@ public class QuizActivity extends AppCompatActivity {
         try {
             JSONObject tvResponseObject = new JSONObject(tvResponseObjectString);
             questionId = tvResponseObject.getString("questionId");
-            Log.v("testt", questionId);
             answerIds = tvResponseObject.getJSONArray("answerIds");
-            Log.v("testt", answerIds.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -239,14 +237,24 @@ public class QuizActivity extends AppCompatActivity {
         socketSingleton.on("all_users_answered", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                handleAllUsersAnswered();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        handleAllUsersAnswered();
+                    }
+                });
             }
         });
 
         socketSingleton.on("answer_received", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                handleAnswerReceived();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        handleAnswerReceived();
+                    }
+                });
             }
         });
     }
