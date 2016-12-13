@@ -19,7 +19,8 @@ public class SocketSingleton {
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket("http://10.0.2.2:3000");
+            mSocket = IO.socket(MainActivity.MAIN_URL);     // Socket URL
+//            mSocket = IO.socket("http://10.0.2.2:3000");  // zit nu static in mainactivity
 //            mSocket = IO.socket("http://192.168.137.1:3000"); // real testing
 
         } catch (URISyntaxException e) {

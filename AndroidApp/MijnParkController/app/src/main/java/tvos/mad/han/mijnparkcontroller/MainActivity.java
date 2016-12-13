@@ -31,11 +31,16 @@ import tvos.mad.han.mijnparkcontroller.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String API_URL =  "http://10.0.2.2:3000/api";
+
+//    public static final String MAIN_URL = "http://192.168.137.1:3000";      // real testing
+    public static final String MAIN_URL = "http://10.0.2.2:3000";          // local testing
+    public static final String API_URL = MAIN_URL + "/api";               // api call
 
     /**
      * URL backend:
-     * <ipadres>:3000/api/<route> - 10.0.2.2 voor android emulator (http://stackoverflow.com/questions/5495534/java-net-connectexception-localhost-127-0-0-18080-connection-refused)
+     * <ipadres>:3000/api/<route>
+     *     - 10.0.2.2 voor android emulator (http://stackoverflow.com/questions/5495534/java-net-connectexception-localhost-127-0-0-18080-connection-refused)
+     *     - 192.168.137.1 voor real testing
      *      Routes:
      *          Group:
      *              /group
@@ -101,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String groupOwnerName = groupOwnerInput.getText().toString();
                 String groupName = groupNameInput.getText().toString();
-
 
                 if (!groupOwnerName.equals("")) {
                     if (!groupName.equals("")) {
