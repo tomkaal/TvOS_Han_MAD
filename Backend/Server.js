@@ -230,7 +230,7 @@ io.on('connection', function (socket) {
         var answerObject = JSON.parse(object);
         var teamId = answerObject.teamId;
         var questionId = answerObject.questionId;
-        io.in(getTvRoomName()).emit("team_has_answered", {teamId: teamId, questionId: questionId});// aan apple tv
+        io.in(getTvRoomName()).emit("team_has_answered", "{\"teamId\": \""+ teamId + "\", \"questionId\": \"" +  questionId + "\"}");// aan apple tv
         io.in(getTeamRoomName(teamId)).emit("all_users_answered");// aan iedereen in het team
     });
 
