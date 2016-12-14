@@ -78,7 +78,14 @@ class QuestionViewController: UIViewController {
                 DispatchQueue.global(qos: .userInitiated).async {
                     let teamAnswerScore = BackendApi().getTeamQuestionScore(teamId: json["teamId"].stringValue, questionId: json["questionId"].stringValue)
                     DispatchQueue.main.async {
-                        self?.labelTeamInformation.text = "Gekozen antwoord: \(teamAnswerScore.answer)\n Score: \(teamAnswerScore.score)"
+                        self?.labelTeamInformation.text = "Gekozen antwoord: \(teamAnswerScore.answer!)\n Score: \(teamAnswerScore.score!)"
+                        
+                        let when = DispatchTime.now() + 5
+                        DispatchQueue.main.asyncAfter(deadline: when) {
+                            if let navController = self?.navigationController {
+                                navController.popViewController(animated: true)
+                            }
+                        }
                     }
                 }
                 
