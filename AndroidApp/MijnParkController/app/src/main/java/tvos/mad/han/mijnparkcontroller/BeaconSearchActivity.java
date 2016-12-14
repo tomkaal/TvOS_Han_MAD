@@ -14,6 +14,10 @@ import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.estimote.sdk.SystemRequirementsChecker;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -134,7 +138,15 @@ public class BeaconSearchActivity extends AppCompatActivity {
         String teamId = userGroupSingleton.getCurrentTeam().getTeamId();
 //        String teamId = "fakeTeamId";
         Log.v("Emit event", "Emit notify_tv with teamId");
-        socketSingleton.emit("notify_tv", teamId);
+        Log.v("Emit event", teamId);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("teamId", teamId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        socketSingleton.emit("notify_tv", jsonObject.toString());
 
     }
 
