@@ -18,7 +18,6 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var labelTeamInformation: UILabel!
     
     var socket = SocketIOManager.sharedInstance.socket
-    var json: JSON?
     var question: Question?
     var teamId: String?
     
@@ -56,6 +55,7 @@ class QuestionViewController: UIViewController {
     func removeHandlers() {
 //        socket.off("chat")
 //        socket.off("connect")
+        socket.off("team_has_answered")
     }
     
     func addHandlers() {
@@ -70,9 +70,19 @@ class QuestionViewController: UIViewController {
 //            }
 //        }
         socket.on("team_has_answered") { [weak self] data, ack in
-            self?.json = JSON(data.first as! String) //teamId, questionId
-            //do stuff to get score from api and show on screen
-            
+            if let value = data.first as? String {
+                let encodedString = value.data(using: .utf8)!
+                let json = JSON(data: encodedString) // teamId, questionId
+                //do stuff to get score from api and show on screen
+                
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let teamAnswerScore = BackendApi().getTeamQuestionScore(teamId: json["teamId"].stringValue, questionId: json["questionId"].stringValue)
+                    DispatchQueue.main.async {
+                        self?.labelTeamInformation.text = "Gekozen antwoord: \(teamAnswerScore.answer)\n Score: \(teamAnswerScore.score)"
+                    }
+                }
+                
+            }
         }
     }
     

@@ -11,7 +11,7 @@ import SocketIO
 
 class SocketIOManager {
     static let sharedInstance = SocketIOManager()
-    var socket = SocketIOClient(socketURL: URL(string: "http://localhost:3000")!, config: [.log(true), .forcePolling(true)])
+    var socket = SocketIOClient(socketURL: URL(string: "http://node156.tezzt.nl:3000")!, config: [.log(true), .forcePolling(true)])
     
     func establishConnection() {
         socket.connect()

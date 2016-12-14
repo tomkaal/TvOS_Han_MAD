@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHz-Nj-znd">
-                                <rect key="frame" x="20" y="364" width="1880" height="353"/>
+                                <rect key="frame" x="91" y="364" width="1728" height="353"/>
                                 <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis enim eget felis tempus consequat. Proin ac rutrum eros. Cras quis ligula sem. Vestibulum ultricies malesuada pharetra. Vivamus commodo sem diam, nec faucibus neque dignissim et. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras a sagittis nisl. Vestibulum consectetur vulputate leo ut laoreet. Donec ut placerat justo. Vestibulum eu orci vitae magna pharetra porta vitae vitae metus.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
@@ -35,8 +35,8 @@
                         <constraints>
                             <constraint firstItem="GHz-Nj-znd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="BYp-nL-hFk"/>
                             <constraint firstItem="GHz-Nj-znd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="219" id="cb5-8C-1mI"/>
-                            <constraint firstItem="GHz-Nj-znd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="i41-y0-svb"/>
-                            <constraint firstItem="GHz-Nj-znd" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="o9n-et-Di5"/>
+                            <constraint firstItem="GHz-Nj-znd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="71" id="i41-y0-svb"/>
+                            <constraint firstItem="GHz-Nj-znd" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="-81" id="o9n-et-Di5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="D8P-AT-cll">
@@ -107,7 +107,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Groep: Scholieren Team: Brandweermannen Teamleden: Henk, Jan, Piet, Klaas" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0J-d0-e2U">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0J-d0-e2U">
                                 <rect key="frame" x="494" y="643" width="933" height="378"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <nil key="textColor"/>
