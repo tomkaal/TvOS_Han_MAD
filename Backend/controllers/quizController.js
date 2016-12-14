@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
     Quiz = mongoose.model('Quiz'),
     Question = mongoose.model('Question'),
     Answer = mongoose.model('Answer'),
+    Team = mongoose.model('Team'),
     asyncEach = require('async/each'),
     asyncEachSeries = require('async/eachSeries');
 
@@ -142,4 +143,35 @@ exports.createQuizzes = function (req, res) {
             });
         }
     );
+};
+
+exports.getTeamScore = function (req, res) {
+    Team.find({_id: req.params.teamId,'questions.question': req.params.questionId}).populate("questions.question questions.answer").exec(function (err, teams){
+        if (err) { return sendErr(res, err); }
+
+        if (teams) {
+            var foundQuestion = teams[teams.length-1].questions.filter(function (teamQuestion) {
+                return String(teamQuestion.question._id) == String(req.params.questionId);
+            }).pop();
+
+            var score = 0;
+
+            if (String(foundQuestion.question.correctAnswer) == String(foundQuestion.answer._id)) {
+                score = foundQuestion.question.score;
+            }
+
+            return res.json({
+                doc: {
+                    answer: foundQuestion.answer.text,
+                    score: score
+                },
+                err: null
+            });
+        } else {
+            return res.json({
+                doc: null,
+                err: null
+            });
+        }
+    });
 };
