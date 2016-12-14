@@ -139,14 +139,14 @@ public class BeaconSearchActivity extends AppCompatActivity {
 //        String teamId = "fakeTeamId";
         Log.v("Emit event", "Emit notify_tv with teamId");
         Log.v("Emit event", teamId);
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("teamId", teamId);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        JSONObject jsonObject = new JSONObject();
+//        try {
+//            jsonObject.put("teamId", teamId);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
-        socketSingleton.emit("notify_tv", jsonObject.toString());
+        socketSingleton.emit("notify_tv", teamId);
 
     }
 

@@ -205,7 +205,8 @@ io.on('connection', function (socket) {
 
 
     socket.on('notify_tv', function (teamId) {
-        io.in(getTvRoomName()).emit("team_nearby", teamId);// naar tv
+        console.log(teamId)
+        io.in(getTvRoomName()).emit("team_nearby", "{\"teamId\": \""+ teamId + "\"} ");// naar tv
 
         //--------------test----------//
         //var tvResponseObject = "{"+

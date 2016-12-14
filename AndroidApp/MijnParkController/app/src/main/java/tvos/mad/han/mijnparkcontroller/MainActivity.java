@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 //    public static final String MAIN_URL = "http://192.168.137.1:3000";      // real testing
-//    public static final String MAIN_URL = "http://10.0.2.2:3000";          // local testing
-    public static final String MAIN_URL = "http://node156.tezzt.nl:3000";          // remote server
+    public static final String MAIN_URL = "http://10.0.2.2:3000";          // local testing
+//    public static final String MAIN_URL = "http://node156.tezzt.nl:3000";          // remote server
 
     public static final String API_URL = MAIN_URL + "/api";               // api call
 
