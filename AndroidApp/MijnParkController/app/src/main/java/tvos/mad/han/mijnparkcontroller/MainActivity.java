@@ -349,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
                 + "\ngroupname: " + groupName
         );
 
-        User groupOwner = new User(groupOwnerName);
+        User groupOwner = new User(userId, groupOwnerName);
         userGroupSingleton.setCurrentUser(groupOwner);
         userGroupSingleton.setCurrentGroup(new Group(groupName, groupOwner));
 

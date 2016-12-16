@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,10 +15,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 import io.socket.emitter.Emitter;
@@ -39,6 +48,14 @@ public class QuizActivity extends AppCompatActivity {
     private TextView correctAnswerTextView;
     private String answer;
     private JSONArray answerIds;
+
+    Handler progDialogDismissHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (progDialog != null)
+                progDialog.dismiss();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +104,8 @@ public class QuizActivity extends AppCompatActivity {
         buttonB.setOnClickListener(clickListener);
         buttonC.setOnClickListener(clickListener);
         buttonD.setOnClickListener(clickListener);
+
+
     }
 
     private void createConfirmationDialog() {
@@ -121,62 +140,63 @@ public class QuizActivity extends AppCompatActivity {
             jsonObject.put("userId", userGroupSingleton.getCurrentUser().getUserId());
         } catch (JSONException ignored) {
         }
+        Log.v("useid", userGroupSingleton.getCurrentUser().getUserId());
 
         progDialog = ProgressDialog.show(this, "Antwoord gegeven", "Verzenden van antwoord...", true, false);
 
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//
-//        final String requestBody = jsonObject.toString();
-//
-//        String BASE_URL = MainActivity.API_URL + "/user/answer/";
-//
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, BASE_URL, null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d("ASDF", "response: " + response);
-//                handleAnswerQuestionResponse(answer, response);
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e("ASDF", "Error fetching JSON data " + error.getMessage());
-//            }
-//        }) {
-//            @Override
-//            public String getBodyContentType() {
-//                return String.format("application/json; charset=utf-8");
-//            }
-//
-//            @Override
-//            public byte[] getBody() {
-//                try {
-//                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-//                } catch (UnsupportedEncodingException uee) {
-//                    Log.e("ASDF", "Unsupported Encoding while trying to get the bytes of %s using %s" +
-//                            requestBody + "utf-8");
-//                    return null;
-//                }
-//            }
-//        };
-//        queue.add(jsonObjectRequest);
+        RequestQueue queue = Volley.newRequestQueue(this);
 
-        // TODO remove when API is implemented
-        final JSONObject response = new JSONObject();
-        final JSONObject doc = new JSONObject();
-        try {
-            doc.put("allUsersAnswered", true);
-            response.put("doc", doc);
+        final String requestBody = jsonObject.toString();
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
+        String BASE_URL = MainActivity.API_URL + "/user/answer/";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, BASE_URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("ASDF", "response: " + response);
                 handleAnswerQuestionResponse(response);
-
             }
-        }, 3000);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("ASDF", "Error fetching JSON data " + error.getMessage());
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return String.format("application/json; charset=utf-8");
+            }
+
+            @Override
+            public byte[] getBody() {
+                try {
+                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    Log.e("ASDF", "Unsupported Encoding while trying to get the bytes of %s using %s" +
+                            requestBody + "utf-8");
+                    return null;
+                }
+            }
+        };
+        queue.add(jsonObjectRequest);
+
+//        // TODO remove when API is implemented
+//        final JSONObject response = new JSONObject();
+//        final JSONObject doc = new JSONObject();
+//        try {
+//            doc.put("allUsersAnswered", true);
+//            response.put("doc", doc);
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                handleAnswerQuestionResponse(response);
+//
+//            }
+//        }, 3000);
     }
 
     private String getAnswer(String answer) throws JSONException {
@@ -279,7 +299,8 @@ public class QuizActivity extends AppCompatActivity {
         answerLayout.setVisibility(View.VISIBLE);
         quizLayout.setVisibility(View.GONE);
 
-        progDialog.dismiss();
+//        progDialog.dismiss();
+        progDialogDismissHandler.sendEmptyMessage(0);
         // Actions to do after 10 seconds
 
         Handler handler = new Handler();

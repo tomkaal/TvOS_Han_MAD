@@ -50,12 +50,12 @@ public class BeaconSearchActivity extends AppCompatActivity {
 
         addSocketListeners();
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                sendNotifyTv();
-            }
-        }, 3000);
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                sendNotifyTv();
+//            }
+//        }, 3000);
 
         beaconManager = new BeaconManager(this);
 

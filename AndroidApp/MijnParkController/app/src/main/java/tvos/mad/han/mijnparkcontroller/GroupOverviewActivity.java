@@ -3,6 +3,7 @@ package tvos.mad.han.mijnparkcontroller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.socket.emitter.Emitter;
 import tvos.mad.han.mijnparkcontroller.model.Group;
 import tvos.mad.han.mijnparkcontroller.model.Team;
 import tvos.mad.han.mijnparkcontroller.model.User;
@@ -28,6 +30,8 @@ public class GroupOverviewActivity extends AppCompatActivity {
     private ListView teamListView;
     private ArrayList<Map<String, String>> teamList;
 
+    private SocketSingleton socketSingleton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +42,29 @@ public class GroupOverviewActivity extends AppCompatActivity {
         setupTextViews();
         setupListView();
 
+        addSocketListeners();
+
         Button button = (Button) findViewById(R.id.btn_continue);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GroupOverviewActivity.this, BeaconSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void addSocketListeners(){
+        socketSingleton = SocketSingleton.getInstance();
+
+        socketSingleton.on("tv_notified", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                String tvResponseObjectString = (String) args[0];
+                Log.v("TV_Notification", "Tv Notified");
+                Log.v("TV_Notification", tvResponseObjectString);
+                Intent intent = new Intent(GroupOverviewActivity.this, QuizActivity.class);
+                intent.putExtra("tvResponseObjectString", tvResponseObjectString);
                 startActivity(intent);
             }
         });
