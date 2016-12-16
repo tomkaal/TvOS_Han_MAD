@@ -4,7 +4,11 @@ var mongoose = require('mongoose'),
 var teamSchema = new Schema({
     name: {type: String},
     group: {type: Schema.Types.ObjectId, ref: 'Group'},
-    questions: [{_id:false, question: {type: Schema.Types.ObjectId, ref: 'Question'}, correct: Boolean}]
+    questions: [{
+        _id:false,
+        question: {type: Schema.Types.ObjectId, ref: 'Question'},
+        answer: {type: Schema.Types.ObjectId, ref: 'Answer'}
+    }]
 });
 
 var Team = mongoose.model('Team', teamSchema, 'teams');

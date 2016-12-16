@@ -11,7 +11,7 @@ import Foundation
 class BackendApi {
     
     private struct Api {
-        static let Url = "http://localhost:3000/api"
+        static let Url = "http://node156.tezzt.nl:3000/api"
         static let beaconId = "243sad-343fg-t5t5r-3eg6"
     }
     
@@ -72,6 +72,18 @@ class BackendApi {
         }
         
         return description
+    }
+    
+    func getTeamQuestionScore(teamId: String, questionId: String) -> (answer: String?, score: Int?) {
+        if let url = URL(string: Api.Url + "/quiz/\(teamId)/\(questionId)") {
+            if let data = try? Data(contentsOf: url) {
+                let json = JSON(data: data)
+                
+                return (json["doc"]["answer"].stringValue, json["doc"]["score"].intValue)
+            }
+        }
+        
+        return (nil, nil)
     }
     
 }

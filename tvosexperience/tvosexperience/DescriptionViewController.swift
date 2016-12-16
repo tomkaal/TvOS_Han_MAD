@@ -53,8 +53,11 @@ class DescriptionViewController: UIViewController {
         }
         
         socket.on("team_nearby") { [weak self] data, ack in
-            self?.json = JSON(data.first as! String) //teamId
-            self?.performSegue(withIdentifier: "Show question", sender: self)
+            if let value = data.first as? String {
+                let encodedString = value.data(using: .utf8)!
+                self?.json = JSON(data: encodedString)
+                self?.performSegue(withIdentifier: "Show question", sender: self)
+            }
         }
         
         socket.on("chat") { [weak self] data, ack in
@@ -79,7 +82,7 @@ class DescriptionViewController: UIViewController {
                 switch identifier {
                 case "Show question":
                     //currently test id, so things can be tested
-                    qvc.teamId = "dsdsad353erfsddsf4ds" //json?["teamId"].stringValue
+                    qvc.teamId = json?["teamId"].stringValue
                 default:
                     break
                 }
